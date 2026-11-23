@@ -3,1937 +3,859 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#081321">
-
-<title>Asterbridge Learning — Education Beyond Boundaries</title>
-<meta name="description" content="Asterbridge Learning. Thoughtful academic guidance, science education, English, examination preparation and personalized learning.">
-<link rel="canonical" href="https://asterbridge-learning.pages.dev/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b12">
+<meta name="description" content="Asterbridge Learning — academic development, tutoring and examination preparation.">
+<title>Asterbridge Learning | Think Beyond</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"
+  }
+}
+</script>
 
 <style>
 :root{
-  --bg:#081321;
-  --bg2:#0d1b2a;
-  --panel:#102033;
-  --panel2:#14263a;
-  --cream:#e9e5dc;
-  --white:#f4f3ee;
-  --muted:#98a4b2;
-  --gold:#c3a16c;
-  --gold2:#dfc28a;
-  --line:rgba(222,226,230,.12);
+  --bg:#080b12;
+  --gold:#c5a36b;
+  --gold2:#e6c98e;
+  --white:#f2f0e9;
+  --muted:#9298a4;
+  --line:rgba(255,255,255,.12);
   --serif:"Cormorant Garamond",serif;
   --sans:"Manrope",sans-serif;
-  --body:"DM Sans",sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
 }
-
-*{box-sizing:border-box;margin:0;padding:0}
-
-html{scroll-behavior:smooth}
-
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--bg)}
 body{
-  background:var(--bg);
-  color:var(--white);
-  font-family:var(--body);
-  overflow-x:hidden;
+  color:var(--white);background:var(--bg);
+  font-family:var(--sans);line-height:1.65;
+  overflow-x:hidden;font-weight:400;
 }
-
+body.loading{overflow:hidden}
 a{color:inherit;text-decoration:none}
 button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-img{max-width:100%}
+button{color:inherit}
+::selection{background:var(--gold);color:#090c11}
 
-.container{
-  width:min(1160px,88%);
-  margin-inline:auto;
+#webgl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#webgl canvas{width:100%;height:100%;display:block}
+
+.noise{
+ position:fixed;inset:0;pointer-events:none;z-index:4;opacity:.035;
+ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
 }
-
-.section{padding:110px 0}
-
-.small-label{
-  color:var(--gold);
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:2.8px;
-  display:flex;
-  align-items:center;
-  gap:12px;
+.vignette{
+ position:fixed;inset:0;z-index:2;pointer-events:none;
+ background:radial-gradient(ellipse at center,transparent 35%,rgba(4,6,10,.42) 100%);
 }
-
-.small-label:before{
-  content:"";
-  width:24px;
-  height:1px;
-  background:var(--gold);
+#loader{
+ position:fixed;inset:0;background:#080b12;z-index:100;
+ display:flex;align-items:center;justify-content:center;
+ transition:opacity .8s,visibility .8s;
 }
-
-.heading{
-  font-family:var(--serif);
-  font-weight:400;
-  font-size:clamp(38px,4.4vw,61px);
-  line-height:1.03;
-  letter-spacing:-.4px;
-}
-
-.heading em{color:var(--gold);font-weight:400}
-
-.body-copy{
-  font-size:14px;
-  color:var(--muted);
-  line-height:1.95;
-}
-
-.gold{color:var(--gold)}
-
-.fade-in{
-  opacity:0;
-  transform:translateY(22px);
-  transition:opacity .75s ease,transform .75s ease;
-}
-
-.fade-in.show{
-  opacity:1;
-  transform:none;
-}
-
-.rule{height:1px;background:var(--line)}
-
-.btn{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:16px;
-  padding:13px 19px;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1.4px;
-  transition:.3s;
-  border:1px solid var(--gold);
-  background:var(--gold);
-  color:var(--bg);
-}
-
-.btn:hover{
-  background:transparent;
-  color:var(--gold);
-}
-
-.btn.secondary{
-  border-color:var(--line);
-  background:transparent;
-  color:var(--white);
-}
-
-.btn.secondary:hover{
-  border-color:var(--gold);
-  color:var(--gold);
-}
-
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation:none!important;transition:none!important}
-}
-
-/* NAV */
+#loader.hide{opacity:0;visibility:hidden}
+.loader-inner{width:180px;text-align:center}
+.loader-name{font-family:var(--serif);font-size:24px;letter-spacing:3px}
+.loader-line{height:1px;background:rgba(255,255,255,.1);margin:20px 0;overflow:hidden}
+.loader-line:after{content:"";display:block;height:100%;width:0;background:var(--gold);animation:load 1.3s ease forwards}
+@keyframes load{to{width:100%}}
+.loader-label{font-size:9px;letter-spacing:3px;color:var(--muted)}
 
 .nav{
-  position:fixed;
-  z-index:1000;
-  top:0;
-  left:0;
-  width:100%;
-  height:76px;
-  display:flex;
-  align-items:center;
-  background:rgba(8,19,33,.76);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(255,255,255,.07);
-  transition:height .3s,background .3s;
+ position:fixed;top:0;left:0;width:100%;height:86px;
+ z-index:30;padding:0 5.4%;
+ display:flex;align-items:center;justify-content:space-between;
+ transition:background .4s,height .4s,border .4s;
 }
-
-.nav.scrolled{
-  height:65px;
-  background:rgba(8,19,33,.97);
+.nav.scrolled{height:70px;background:rgba(8,11,18,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{
+ width:35px;height:35px;border:1px solid var(--gold);
+ display:flex;align-items:center;justify-content:center;
+ font-family:var(--serif);font-size:21px;color:var(--gold);transform:rotate(45deg);
 }
+.brand-mark span{transform:rotate(-45deg)}
+.brand-text{font-size:11px;letter-spacing:2.1px;line-height:1.4}
+.brand-text small{display:block;font-size:8px;letter-spacing:3px;color:var(--muted);margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{font-size:10px;letter-spacing:1.2px;color:#d1d3d8;transition:color .3s}
+.nav-links a:hover{color:var(--gold2)}
+.nav-cta{border:1px solid rgba(197,163,107,.65);padding:11px 19px;font-size:9px;letter-spacing:1.3px;transition:.3s}
+.nav-cta:hover{background:var(--gold);color:#090b10}
+.menu-toggle{display:none;background:none;border:0;cursor:pointer;font-size:24px}
 
-.nav-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+section{position:relative;z-index:5}
+.section-label{
+ font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);
+ display:flex;align-items:center;gap:12px;
 }
+.section-label:before{content:"";width:25px;height:1px;background:var(--gold)}
+.serif{font-family:var(--serif);font-weight:400}
+.gold{color:var(--gold2)}
+.wrap{width:min(1180px,89%);margin:auto}
+.small-copy{font-size:12px;line-height:1.9;color:var(--muted)}
 
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.logo-mark{
-  width:34px;
-  height:34px;
-  border:1px solid var(--gold);
-  color:var(--gold);
-  display:grid;
-  place-items:center;
-  font-family:var(--serif);
-  font-size:23px;
-}
-
-.logo-text{display:flex;flex-direction:column;gap:2px}
-
-.logo-title{
-  font-family:var(--serif);
-  font-size:22px;
-  line-height:1;
-}
-
-.logo-sub{
-  font-size:8px;
-  letter-spacing:2.8px;
-  text-transform:uppercase;
-  color:var(--gold);
-}
-
-.nav-links{
-  display:flex;
-  align-items:center;
-  list-style:none;
-  gap:30px;
-}
-
-.nav-links a{
-  font-size:10px;
-  color:#c0cad4;
-  transition:color .2s;
-}
-
-.nav-links a:hover{color:var(--gold)}
-
-.nav-links .contact-link{
-  border:1px solid rgba(195,161,108,.65);
-  color:var(--gold);
-  padding:11px 15px;
-}
-
-.menu-toggle{
-  display:none;
-  border:0;
-  background:none;
-  color:var(--white);
-  font-size:23px;
-}
-
-/* HERO */
-
-.hero{
-  min-height:100svh;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  background:
-    radial-gradient(ellipse at 70% 45%,rgba(36,64,92,.36),transparent 55%),
-    var(--bg);
-  padding:125px 0 70px;
-}
-
-.hero-grid{
-  position:absolute;
-  inset:0;
-  opacity:.17;
-  background-image:
-    linear-gradient(to right,rgba(200,169,106,.12) 1px,transparent 1px),
-    linear-gradient(to bottom,rgba(200,169,106,.12) 1px,transparent 1px);
-  background-size:70px 70px;
-  mask-image:linear-gradient(to bottom,black,transparent 90%);
-}
-
-.hero-content{
-  display:grid;
-  grid-template-columns:1.12fr .88fr;
-  align-items:center;
-  gap:60px;
-  position:relative;
-  z-index:2;
-}
-
+.hero{height:100svh;min-height:690px;position:relative;display:flex;align-items:center}
+.hero-content{position:relative;z-index:8;width:min(1240px,89%);margin:auto;pointer-events:none}
 .hero-copy{max-width:620px}
+.hero-eyebrow{font-size:9px;letter-spacing:4px;color:var(--gold);margin-bottom:27px}
+.hero-title{font-family:var(--serif);font-weight:400;font-size:clamp(58px,7.6vw,105px);line-height:.98;letter-spacing:-1.8px}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .line span{display:inline-block;transform:translateY(115%);animation:titleIn 1.2s var(--ease) forwards}
+.hero-title .line:nth-child(2) span{animation-delay:.16s}
+@keyframes titleIn{to{transform:translateY(0)}}
+.hero-title em{font-style:italic;color:var(--gold2)}
+.hero-description{max-width:420px;font-size:13px;color:#b0b5bf;margin-top:28px;line-height:1.9;opacity:0;animation:fadeIn 1s 1s forwards}
+@keyframes fadeIn{to{opacity:1}}
+.hero-actions{display:flex;align-items:center;gap:27px;margin-top:35px;opacity:0;animation:fadeIn 1s 1.2s forwards}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:14px 22px;border:1px solid var(--gold);font-size:9px;letter-spacing:1.5px;transition:all .35s;pointer-events:auto}
+.btn-primary{background:var(--gold);color:#0a0d13}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-3px)}
+.btn-outline{color:var(--white);border-color:rgba(255,255,255,.25)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold2)}
+.hero-note{font-size:9px;color:#888f9b;letter-spacing:1px}
+.hero-bottom{position:absolute;bottom:35px;left:5.5%;right:5.5%;z-index:8;display:flex;justify-content:space-between;align-items:end}
+.hero-scroll{display:flex;gap:12px;align-items:center;font-size:8px;letter-spacing:2px;color:#a3a6ae}
+.scroll-line{height:34px;width:1px;background:linear-gradient(var(--gold),transparent)}
+.hero-index{font-size:9px;color:#8a8f99;letter-spacing:2px}
 
-.hero-copy .small-label{margin-bottom:27px}
+.intro{min-height:100vh;display:flex;align-items:center;background:linear-gradient(180,transparent,rgba(8,11,18,.9) 18%,#080b12 90%);padding:140px 0 160px}
+.intro-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:10%;align-items:start}
+.intro-left{padding-top:15px}
+.intro-heading{font-size:clamp(40px,5vw,65px);line-height:1.1;margin-top:28px}
+.intro-heading em{color:var(--gold2)}
+.intro-right{padding-top:70px}
+.intro-right p{max-width:540px;font-size:14px;color:#afb4be;line-height:2}
+.intro-right p+p{margin-top:22px}
+.intro-stats{display:flex;gap:45px;margin-top:45px;padding-top:25px;border-top:1px solid var(--line)}
+.stat-num{font-family:var(--serif);font-size:34px;color:var(--gold2)}
+.stat-label{font-size:9px;letter-spacing:1.5px;color:var(--muted);margin-top:4px}
 
-.hero-title{
-  font-family:var(--serif);
-  font-size:clamp(55px,6.5vw,88px);
-  font-weight:400;
-  line-height:.97;
-  letter-spacing:-1px;
-}
-
-.hero-title .second{
-  color:var(--gold);
-  font-style:italic;
-}
-
-.hero-title .third{
-  display:block;
-  color:#d8dce0;
-  font-size:.68em;
-  margin-top:8px;
-  letter-spacing:0;
-}
-
-.hero-description{
-  margin-top:26px;
-  max-width:440px;
-  color:#a9b5c2;
-  font-size:14px;
-  line-height:1.9;
-}
-
-.hero-actions{
-  display:flex;
-  gap:12px;
-  margin-top:29px;
-  flex-wrap:wrap;
-}
-
-.hero-meta{
-  margin-top:42px;
-  display:flex;
-  gap:25px;
-  color:#8291a3;
-  font-size:9px;
-  letter-spacing:1.4px;
-  text-transform:uppercase;
-}
-
-.hero-meta span{
-  display:flex;
-  gap:9px;
-  align-items:center;
-}
-
-.hero-meta span:before{
-  content:"";
-  width:4px;
-  height:4px;
-  background:var(--gold);
-  border-radius:50%;
-}
-
-/* HERO OBJECT */
-
-.hero-object{
-  height:460px;
-  display:grid;
-  place-items:center;
-  perspective:900px;
-  position:relative;
-}
-
-.object-wrap{
-  width:320px;
-  height:320px;
-  position:relative;
-  transform-style:preserve-3d;
-  animation:objectFloat 8s ease-in-out infinite;
-}
-
-.object-ring{
-  position:absolute;
-  inset:20px;
-  border:1px solid rgba(195,161,108,.32);
-  border-radius:50%;
-  transform:rotateX(67deg) rotateZ(-20deg);
-}
-
-.object-ring.r2{
-  inset:40px -5px;
-  transform:rotateY(67deg) rotateZ(20deg);
-  border-color:rgba(195,161,108,.19);
-}
-
-.object-ring.r3{
-  inset:0;
-  transform:rotateX(18deg) rotateZ(35deg);
-  border-color:rgba(255,255,255,.12);
-}
-
-.object-core{
-  position:absolute;
-  width:145px;
-  height:145px;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%) rotateX(12deg) rotateY(-20deg);
-  background:linear-gradient(135deg,#c6a36b,#7d6137 45%,#d5b77d);
-  box-shadow:
-    25px 25px 55px rgba(0,0,0,.45),
-    inset -20px -20px 30px rgba(0,0,0,.22),
-    inset 15px 15px 25px rgba(255,255,255,.15);
-}
-
-.object-core:before{
-  content:"A";
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  color:#132338;
-  font-family:var(--serif);
-  font-size:88px;
-}
-
-.object-core:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border:1px solid rgba(255,255,255,.18);
-}
-
-.object-shadow{
-  position:absolute;
-  bottom:25px;
-  left:50%;
-  width:180px;
-  height:35px;
-  transform:translateX(-50%);
-  background:rgba(0,0,0,.25);
-  filter:blur(20px);
-  border-radius:50%;
-}
-
-.object-caption{
-  position:absolute;
-  bottom:15px;
-  right:5px;
-  color:#8b99a9;
-  font-size:9px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-
-@keyframes objectFloat{
-  0%,100%{transform:translateY(0) rotateY(-5deg)}
-  50%{transform:translateY(-13px) rotateY(7deg)}
-}
-
-.hero-bottom{
-  position:absolute;
-  bottom:25px;
-  left:0;
-  right:0;
-  display:flex;
-  justify-content:space-between;
-  color:#748397;
-  font-size:9px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-}
-
-/* INTRO */
-
-.intro{
-  background:var(--cream);
-  color:#142438;
-  padding:100px 0;
-}
-
-.intro-grid{
-  display:grid;
-  grid-template-columns:.85fr 1.15fr;
-  gap:80px;
-  align-items:start;
-}
-
-.intro .small-label{color:#987847}
-
-.intro .heading{margin-top:23px}
-
-.intro-text{
-  color:#586777;
-  font-size:14px;
-  line-height:2;
-}
-
-.intro-text p+p{margin-top:20px}
-
-.intro-signature{
-  margin-top:36px;
-  border-top:1px solid rgba(16,32,51,.15);
-  padding-top:20px;
-  display:flex;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:12px;
-  font-size:9px;
-  color:#947849;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-}
-
-/* PINNED STORY */
-
-.story{
-  background:#0b1827;
-  padding:0;
-}
-
-.story-scroll{
-  height:300vh;
-  position:relative;
-}
-
-.story-sticky{
-  position:sticky;
-  top:0;
-  height:100svh;
-  min-height:620px;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
-}
-
-.story-bg{
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 68% 50%,rgba(43,70,99,.32),transparent 38%),
-    #0b1827;
-}
-
-.story-bg:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px);
-  background-size:100% 65px;
-}
-
-.story-layout{
-  width:min(1160px,88%);
-  margin:auto;
-  position:relative;
-  z-index:2;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:70px;
-  align-items:center;
-}
-
-.story-left .small-label{margin-bottom:25px}
-
-.story-left h2{
-  font-family:var(--serif);
-  font-size:clamp(38px,4.2vw,58px);
-  font-weight:400;
-  line-height:1.05;
-}
-
-.story-left h2 em{
-  color:var(--gold);
-  font-style:italic;
-}
-
-.story-progress{
-  display:flex;
-  gap:8px;
-  margin-top:35px;
-}
-
-.story-progress span{
-  width:36px;
-  height:2px;
-  background:rgba(255,255,255,.17);
-  transition:background .4s;
-}
-
+.story{height:360vh;position:relative}
+.story-sticky{position:sticky;top:0;height:100svh;min-height:620px;overflow:hidden;display:flex;align-items:center}
+.story-bg{position:absolute;inset:0;background:radial-gradient(circle at 60% 50%,rgba(38,47,62,.24),transparent 60%)}
+.story-grid{position:relative;z-index:7;width:89%;max-width:1180px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:8%}
+.story-left{display:flex;flex-direction:column;justify-content:center}
+.story-title{font-family:var(--serif);font-size:clamp(42px,5.4vw,74px);line-height:1.04;margin-top:25px;max-width:500px}
+.story-title em{color:var(--gold2)}
+.story-right{position:relative;min-height:330px;display:flex;align-items:center}
+.story-panel{position:absolute;max-width:410px;opacity:0;transform:translateY(40px);transition:opacity .65s,transform .8s var(--ease)}
+.story-panel.active{opacity:1;transform:translateY(0)}
+.story-panel h3{font-family:var(--serif);font-size:38px;font-weight:400;margin-bottom:15px}
+.story-panel p{font-size:12px;color:#aeb3bd;line-height:2}
+.story-number{color:var(--gold);font-size:9px;letter-spacing:3px;margin-bottom:20px}
+.story-progress{display:flex;gap:8px;margin-top:38px}
+.story-progress span{width:36px;height:2px;background:rgba(255,255,255,.16);transition:.4s}
 .story-progress span.active{background:var(--gold)}
+.story-caption{position:absolute;bottom:40px;left:5.5%;z-index:8;font-size:8px;letter-spacing:2px;color:#858b96}
 
-.story-right{
-  min-height:360px;
-  position:relative;
-  display:flex;
-  align-items:center;
+.programs{padding:150px 0 160px;background:#090d14}
+.program-head{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:end;margin-bottom:65px}
+.program-head h2{font-family:var(--serif);font-size:clamp(42px,5.4vw,70px);line-height:1.05;margin-top:25px}
+.program-head p{max-width:440px;font-size:12px;color:var(--muted);line-height:2}
+.program-experience{position:relative;min-height:460px;display:grid;grid-template-columns:1fr 1fr;align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.program-visual{position:relative;height:460px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(183,149,94,.09),transparent 60%)}
+.program-visual:before,.program-visual:after{content:"";position:absolute;border:1px solid rgba(197,163,107,.17);border-radius:50%;width:270px;height:270px;animation:orbit 28s linear infinite}
+.program-visual:after{width:350px;height:350px;animation-direction:reverse}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.program-visual svg{position:relative;z-index:2;width:180px;height:180px;transition:transform .6s}
+.program-visual:hover svg{transform:scale(1.06)}
+.program-content{padding:50px 8% 50px 0}
+.program-count{font-size:9px;letter-spacing:3px;color:var(--gold}
 }
-
-.story-panel{
-  position:absolute;
-  width:100%;
-  opacity:0;
-  transform:translateY(20px);
-  transition:opacity .6s,transform .6s;
-  pointer-events:none;
-}
-
-.story-panel.active{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.story-number{
-  font-family:var(--serif);
-  font-size:70px;
-  color:rgba(195,161,108,.22);
-  line-height:1;
-}
-
-.story-panel h3{
-  font-family:var(--serif);
-  font-size:34px;
-  font-weight:400;
-  margin:15px 0;
-}
-
-.story-panel p{
-  color:#a5b2c1;
-  max-width:410px;
-  font-size:13px;
-  line-height:1.95;
-}
-
-.story-accent{
-  margin-top:28px;
-  width:60px;
-  height:1px;
-  background:var(--gold);
-}
-
-.story-object{
-  position:absolute;
-  right:7%;
-  width:230px;
-  height:230px;
-  border:1px solid rgba(195,161,108,.2);
-  transform:rotate(45deg);
-  transition:transform .8s;
-}
-
-.story-object:before,
-.story-object:after{
-  content:"";
-  position:absolute;
-  inset:20px;
-  border:1px solid rgba(195,161,108,.15);
-}
-
-.story-object:after{
-  inset:45px;
-  background:linear-gradient(135deg,rgba(195,161,108,.12),rgba(23,40,61,.05));
-}
-
-.story-object.object-2{transform:rotate(20deg) scale(.8)}
-.story-object.object-3{transform:rotate(65deg) scale(1.1)}
-
-.story-scroll-hint{
-  position:absolute;
-  bottom:25px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:9px;
-  color:#7d8c9d;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-
-/* PROGRAMS */
-
-.programs{
-  background:#101e2e;
-}
-
-.program-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:45px;
-  margin-bottom:50px;
-}
-
-.program-header .header-copy{max-width:460px}
-
-.program-header .heading{margin-top:20px}
-
-.program-header .body-copy{max-width:390px}
-
-.program-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  border-top:1px solid var(--line);
-}
-
-.program{
-  padding:30px 28px 32px 0;
-  border-bottom:1px solid var(--line);
-  display:grid;
-  grid-template-columns:44px 1fr 30px;
-  gap:15px;
-  align-items:start;
-  transition:background .3s;
-}
-
-.program:nth-child(even){
-  padding-left:28px;
-  border-left:1px solid var(--line);
-}
-
-.program-index{
-  color:var(--gold);
-  font-family:var(--serif);
-  font-size:24px;
-}
-
-.program-content h3{
-  font-size:16px;
-  font-weight:500;
-  margin-bottom:9px;
-}
-
-.program-content p{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.85;
-}
-
-.program-arrow{
-  color:var(--gold);
-  font-size:16px;
-  transition:transform .3s;
-}
-
-.program:hover .program-arrow{transform:translate(4px,-4px)}
-
-.program:hover .program-content h3{color:var(--gold2)}
-
-.program{cursor:pointer}
-
-/* JOURNEY TIMELINE */
-
-.journey{
-  background:#081321;
-  padding:0;
-}
-
-.journey-scroll{height:240vh}
-
-.journey-sticky{
-  position:sticky;
-  top:0;
-  height:100svh;
-  min-height:620px;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
-}
-
-.journey-inner{
-  width:min(1160px,88%);
-  margin:auto;
-}
-
-.journey-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  margin-bottom:65px;
-}
-
-.journey-header .heading{margin-top:20px}
-
-.journey-header .body-copy{max-width:390px}
-
-.journey-track{
-  position:relative;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-}
-
-.journey-track:before{
-  content:"";
-  position:absolute;
-  top:17px;
-  left:0;
-  right:0;
-  height:1px;
-  background:rgba(195,161,108,.25);
-}
-
-.journey-stage{position:relative;padding:0 28px 0 0}
-
-.journey-stage:nth-child(2){padding-left:20px}
-.journey-stage:nth-child(3){padding-left:35px}
-
-.stage-dot{
-  width:35px;
-  height:35px;
-  position:relative;
-  z-index:2;
-  border:1px solid rgba(195,161,108,.5);
-  background:var(--bg);
-  display:grid;
-  place-items:center;
-  font-size:10px;
-  color:var(--gold);
-  transition:.4s;
-}
-
-.journey-stage.active .stage-dot{
-  background:var(--gold);
-  color:var(--bg);
-  box-shadow:0 0 25px rgba(195,161,108,.18);
-}
-
-.stage-title{
-  font-family:var(--serif);
-  font-size:31px;
-  font-weight:400;
-  margin-top:30px;
-}
-
-.stage-copy{
-  margin-top:13px;
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.9;
-  max-width:300px;
-  transition:opacity .4s;
-}
-
-.stage-foot{
-  color:var(--gold);
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-  font-size:9px;
-  margin-top:25px;
-}
-
-.journey-progress{
-  height:2px;
-  background:rgba(255,255,255,.1);
-  margin-top:55px;
-  position:relative;
-}
-
-.journey-progress-fill{
-  height:100%;
-  width:0;
-  background:var(--gold);
-  transition:width .15s linear;
-}
-
-/* CLOSING */
-
-.closing{
-  padding:105px 0;
-  background:#e9e5dc;
-  color:#102033;
-}
-
-.closing-grid{
-  display:grid;
-  grid-template-columns:1fr .8fr;
-  gap:70px;
-  align-items:center;
-}
-
-.closing .small-label{color:#917344}
-
-.closing h2{
-  font-family:var(--serif);
-  font-weight:400;
-  font-size:clamp(42px,4.5vw,63px);
-  line-height:1.02;
-  margin-top:24px;
-}
-
-.closing h2 em{color:#947545}
-
-.closing-text{
-  color:#637181;
-  font-size:13px;
-  line-height:1.95;
-}
-
-.closing-text p+p{margin-top:20px}
-
-.closing .btn{margin-top:28px}
-
-/* CONTACT */
-
-.contact{
-  background:#101e2e;
-}
-
-.contact-layout{
-  display:grid;
-  grid-template-columns:.8fr 1.2fr;
-  gap:75px;
-}
-
-.contact-copy .heading{margin-top:24px}
-
-.contact-copy p{
-  margin-top:20px;
-  max-width:380px;
-}
-
-.contact-detail{
-  margin-top:38px;
-  padding-top:20px;
-  border-top:1px solid var(--line);
-  color:#7f90a3;
-  font-size:10px;
-  line-height:1.8;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.form-box{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.015);
-  padding:35px;
-}
-
-.form-title{
-  font-family:var(--serif);
-  font-size:31px;
-  font-weight:400;
-  margin-bottom:28px;
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:22px;
-}
-
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
+.program-name{font-family:var(--serif);font-size:46px;font-weight:400;line-height:1.1;margin:18px 0}
+.program-desc{font-size:12px;color:#aab0bb;max-width:440px;line-height:2}
+.program-list{display:flex;flex-wrap:wrap;gap:8px;margin:25px 0}
+.program-list span{font-size:9px;padding:7px 11px;border:1px solid rgba(255,255,255,.13);color:#aeb3bd}
+.program-btn{background:none;border:0;border-bottom:1px solid var(--gold;padding:12px 0;font-size:9px;letter-spacing:2px;color:var(--gold2);cursor:pointer;display:inline-flex;gap:12px;align-items:center;margin-top:8px}
+.program-btn:hover{gap:20px}
+.program-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px}
+.program-tab{background:none;border:1px solid rgba(255,255,255,.14);padding:10px 15px;color:#a8aeb8;font-size:9px;letter-spacing:1px;cursor:pointer;transition:.3s}
+.program-tab.active,.program-tab:hover{border-color:var(--gold);color:var(--gold2);background:rgba(197,163,107,.06)}
+
+.journey{height:280vh;position:relative}
+.journey-sticky{position:sticky;top:0;height:100svh;min-height:600px;display:flex;align-items:center;overflow:hidden}
+.journey-content{width:min(1180px,89%);margin:auto;position:relative;z-index:7}
+.journey-title{font-family:var(--serif);font-size:clamp(43px,6vw,80px);line-height:1.05;margin-top:25px}
+.journey-title em{color:var(--gold2)}
+.journey-stage{position:absolute;right:8%;top:50%;transform:translateY(-50%);width:min(380px,35%);opacity:0;transition:.6s}
+.journey-stage.active{opacity:1}
+.journey-stage h3{font-family:var(--serif);font-size:40px;font-weight:400}
+.journey-stage p{font-size:12px;color:#aeb4be;line-height:2;margin-top:15px}
+.journey-steps{display:flex;gap:12px;margin-top:35px}
+.journey-steps span{width:45px;height:2px;background:rgba(255,255,255,.18);transition:.3s}
+.journey-steps span.active{background:var(--gold)}
+.journey-bottom{position:absolute;bottom:40px;left:5.5%;font-size:9px;letter-spacing:2px;color:#858b96}
+
+.closing{padding:150px 0 160px;background:linear-gradient(180,#080b12,#0d121a)}
+.closing-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:10%;align-items:end}
+.closing-title{font-family:var(--serif);font-size:clamp(48px,6.7vw,88px);line-height:1.02;margin-top:30px}
+.closing-title em{color:var(--gold2)}
+.closing-copy{font-size:13px;color:#aeb4be;line-height:2;max-width:420px}
+.closing-copy .btn{margin-top:30px}
+
+.contact{padding:120px 0 130px;background:#eae7df;color:#121720}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:12%}
+.contact .section-label{color:#9d7a43}
+.contact-title{font-family:var(--serif);font-size:clamp(42px,5.6vw,75px);line-height:1.05;margin-top:25px}
+.contact-title em{font-style:italic}
+.contact-intro{font-size:12px;color:#616671;max-width:420px;margin-top:22px;line-height:2}
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
+.field{display:flex;flex-direction:column;gap:8px}
 .field.full{grid-column:1/-1}
+.field label{font-size:9px;letter-spacing:1.5px;color:#5f626a}
+.field input,.field select,.field textarea{width:100%;background:transparent;border:0;border-bottom:1px solid #c6c4be;padding:11px 2px;outline:none;color:#171b23;font-size:12px;border-radius:0}
+.field select option{background:#eae7df}
+.field textarea{resize:vertical;min-height:80px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#9d7a43}
+.field input::placeholder,.field textarea::placeholder{color:#9b9da2}
+.form-submit{grid-column:1/-1;background:#111720;color:#f1eee7;border:0;padding:16px 22px;letter-spacing:1.5px;font-size:9px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:.3s}
+.form-submit:hover{background:#252e3b}
+.form-submit:disabled{opacity:.6;cursor:wait}
+.form-message{grid-column:1/-1;font-size:11px;min-height:20px;color:#454951}
 
-.field label{
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:1.4px;
-  color:#95a4b3;
-}
-
-.field input,.field select,.field textarea{
-  width:100%;
-  border:0;
-  border-bottom:1px solid rgba(255,255,255,.15);
-  background:transparent;
-  border-radius:0;
-  padding:12px 0;
-  outline:none;
-  color:var(--white);
-  font-size:12px;
-}
-
-.field input:focus,.field select:focus,.field textarea:focus{
-  border-color:var(--gold);
-}
-
-.field input::placeholder,.field textarea::placeholder{color:#68798b}
-
-.field select{color:#b6c1cc}
-.field select option{background:#102033;color:#fff}
-
-.field textarea{min-height:95px;resize:vertical}
-
-.submit{
-  margin-top:25px;
-  width:100%;
-}
-
-.form-status{
-  display:none;
-  margin-top:14px;
-  font-size:12px;
-  line-height:1.7;
-}
-
-.form-status.show{display:block}
-.form-status.success{color:#a9d4ba}
-.form-status.error{color:#e6a5a5}
-
-.privacy{
-  margin-top:13px;
-  font-size:9px;
-  line-height:1.8;
-  color:#728295;
-}
-
-/* FOOTER */
-
-.footer{
-  background:#060e18;
-  padding:55px 0 22px;
-}
-
-.footer-main{
-  display:flex;
-  justify-content:space-between;
-  align-items:start;
-  gap:40px;
-  padding-bottom:40px;
-}
-
-.footer-about{max-width:330px}
-
-.footer-about p{
-  margin-top:16px;
-  color:#7f8e9f;
-  font-size:12px;
-  line-height:1.9;
-}
-
-.footer-links{
-  display:flex;
-  flex-wrap:wrap;
-  gap:24px;
-}
-
-.footer-links a{
-  font-size:10px;
-  color:#a2afbd;
-}
-
+.footer{padding:40px 5.5%;background:#080b12;position:relative;z-index:8}
+.footer-top{display:flex;align-items:center;justify-content:space-between;padding-bottom:30px;border-bottom:1px solid var(--line)}
+.footer-brand{font-family:var(--serif);font-size:26px;letter-spacing:1px}
+.footer-links{display:flex;gap:25px}
+.footer-links a{font-size:9px;color:#969ca6;letter-spacing:1px}
 .footer-links a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;padding-top:25px;font-size:8px;color:#727986;letter-spacing:1px}
+.back-top{position:fixed;bottom:24px;right:24px;z-index:20;border:1px solid rgba(197,163,107,.5);background:#0b1019;width:42px;height:42px;cursor:pointer;opacity:0;pointer-events:none;transition:.3s}
+.back-top.show{opacity:1;pointer-events:auto}
+.back-top:hover{background:var(--gold);color:#0b1019}
 
-.footer-bottom{
-  border-top:1px solid rgba(255,255,255,.08);
-  padding-top:20px;
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  color:#657487;
-  font-size:9px;
-  letter-spacing:.4px;
+@media(max-width:850px){
+ .nav{height:72px;padding:0 6%}
+ .nav-links{gap:20px}
+ .nav-links a{font-size:9px}
+ .hero-content{width:88%}
+ .hero-title{font-size:clamp(60px,11vw,90px)}
+ .intro-grid,.story-grid,.program-head,.closing-grid,.contact-grid{grid-template-columns:1fr;gap:35px}
+ .intro-right{padding-top:0}
+ .intro{padding:120px 0}
+ .story-grid{gap:20px}
+ .story-title{font-size:clamp(45px,8vw,65px)}
+ .story-right{min-height:250px}
+ .program-experience{grid-template-columns:1fr}
+ .program-visual{height:320px}
+ .program-content{padding:35px 6%}
+ .journey-stage{right:6%;width:44%}
+ .journey-title{max-width:420px}
+ .closing-grid{gap:35px}
+ .contact-grid{gap:50px}
 }
-
-.back-top{
-  position:fixed;
-  bottom:22px;
-  right:22px;
-  width:40px;
-  height:40px;
-  display:grid;
-  place-items:center;
-  background:var(--gold);
-  color:var(--bg);
-  border:0;
-  z-index:99;
-  opacity:0;
-  visibility:hidden;
-  transition:.3s;
+@media(max-width:600px){
+ .nav{height:65px}
+ .brand-text{font-size:9px;letter-spacing:1.5px}
+ .brand-text small{font-size:7px}
+ .brand-mark{width:29px;height:29px}
+ .menu-toggle{display:block}
+ .nav-links{position:absolute;top:65px;left:0;width:100%;padding:25px 6%;background:rgba(8,11,18,.97);backdrop-filter:blur(18px);display:flex;flex-direction:column;align-items:flex-start;gap:20px;transform:translateY(-10px);opacity:0;pointer-events:none;transition:.3s;border-bottom:1px solid var(--line)}
+ .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto}
+ .nav-cta{display:none}
+ .hero{min-height:650px}
+ .hero-title{font-size:clamp(55px,15vw,82px)}
+ .hero-description{font-size:12px;max-width:320px}
+ .hero-actions{gap:15px;flex-wrap:wrap}
+ .hero-note{display:none}
+ .hero-bottom{bottom:22px}
+ .intro-heading{font-size:48px}
+ .intro-stats{gap:24px}
+ .stat-num{font-size:28px}
+ .story{height:300vh}
+ .story-sticky{min-height:570px}
+ .story-grid{grid-template-columns:1fr;gap:25px}
+ .story-title{font-size:49px;max-width:330px}
+ .story-right{min-height:220px}
+ .story-panel h3{font-size:34px}
+ .story-panel p{font-size:11px}
+ .story-caption{bottom:25px}
+ .programs{padding:100px 0}
+ .program-head{gap:20px;margin-bottom:35px}
+ .program-head h2{font-size:47px}
+ .program-visual{height:280px}
+ .program-name{font-size:38px}
+ .program-experience{min-height:unset}
+ .journey{height:260vh}
+ .journey-sticky{min-height:570px}
+ .journey-content{width:88%}
+ .journey-title{font-size:49px;max-width:300px}
+ .journey-stage{top:auto;bottom:100px;left:6%;right:auto;width:88%;transform:none}
+ .journey-stage h3{font-size:34px}
+ .journey-stage p{font-size:11px}
+ .journey-bottom{bottom:25px}
+ .closing{padding:100px 0}
+ .closing-title{font-size:57px}
+ .contact{padding:100px 0}
+ .contact-grid{gap:40px}
+ .contact-title{font-size:49px}
+ .contact-form{grid-template-columns:1fr}
+ .field.full{grid-column:auto}
+ .form-submit{grid-column:auto}
+ .footer-top{align-items:flex-start;gap:30px;flex-direction:column}
+ .footer-links{flex-wrap:wrap;gap:18px}
+ .footer-bottom{gap:12px;flex-direction:column}
 }
-
-.back-top.visible{opacity:1;visibility:visible}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-  .hero-content{grid-template-columns:1fr 1fr;gap:25px}
-  .hero-title{font-size:clamp(52px,7vw,75px)}
-  .hero-object{height:350px}
-  .object-wrap{width:250px;height:250px}
-  .object-core{width:115px;height:115px}
-  .object-core:before{font-size:70px}
-  .intro-grid{gap:45px}
-  .story-layout{gap:35px}
-  .story-object{width:150px;height:150px;right:0}
-  .program-header{align-items:start}
-  .journey-header{gap:35px}
-  .closing-grid{gap:40px}
-  .contact-layout{gap:40px}
-}
-
-@media(max-width:700px){
-
-  .container{width:89%}
-  .section{padding:80px 0}
-  .nav{height:67px}
-  .menu-toggle{display:block;z-index:1002}
-  .nav-links{
-    position:fixed;
-    inset:0;
-    height:100svh;
-    background:rgba(8,19,33,.98);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:28px;
-    transform:translateX(100%);
-    transition:transform .35s;
-  }
-  .nav-links.open{transform:translateX(0)}
-  .nav-links a{font-size:13px}
-  body.menu-open{overflow:hidden}
-
-  .hero{min-height:auto;padding:115px 0 80px}
-  .hero-content{grid-template-columns:1fr}
-  .hero-title{font-size:clamp(54px,13vw,78px)}
-  .hero-description{font-size:13px}
-  .hero-object{height:300px;margin-top:5px}
-  .object-wrap{width:230px;height:230px}
-  .hero-bottom{bottom:15px;font-size:8px}
-  .hero-meta{gap:15px;flex-wrap:wrap}
-
-  .intro-grid{grid-template-columns:1fr;gap:25px}
-  .intro-signature{gap:12px}
-
-  /* Mobile pinned narrative */
-  .story-scroll{height:240vh}
-  .story-sticky{min-height:550px;height:100svh}
-  .story-layout{grid-template-columns:1fr;gap:35px}
-  .story-left h2{font-size:43px}
-  .story-right{min-height:270px}
-  .story-panel h3{font-size:29px}
-  .story-panel p{font-size:12px;max-width:340px}
-  .story-number{font-size:55px}
-  .story-object{width:125px;height:125px;right:3%;opacity:.65}
-  .story-scroll-hint{bottom:17px}
-
-  .program-header{display:block}
-  .program-header .body-copy{margin-top:22px}
-  .program-grid{grid-template-columns:1fr}
-  .program,.program:nth-child(even){
-    padding:24px 0;
-    border-left:0;
-    grid-template-columns:36px 1fr 22px;
-  }
-  .program-content h3{font-size:15px}
-  .program-content p{font-size:11px}
-
-  .journey-scroll{height:240vh}
-  .journey-sticky{min-height:550px}
-  .journey-header{display:block;margin-bottom:45px}
-  .journey-header .body-copy{margin-top:20px}
-  .journey-track{grid-template-columns:1fr;gap:24px}
-  .journey-track:before{left:17px;right:auto;top:0;bottom:0;width:1px;height:auto}
-  .journey-stage,.journey-stage:nth-child(2),.journey-stage:nth-child(3){
-    padding:0;
-    display:grid;
-    grid-template-columns:35px 1fr;
-    gap:0 18px;
-  }
-  .stage-dot{grid-row:1/4}
-  .stage-title{margin:0;font-size:26px}
-  .stage-copy{margin-top:8px;max-width:400px}
-  .stage-foot{margin-top:10px}
-  .journey-progress{margin-top:28px}
-
-  .closing-grid{grid-template-columns:1fr;gap:25px}
-  .contact-layout{grid-template-columns:1fr}
-  .form-box{padding:26px 20px}
-  .form-grid{grid-template-columns:1fr}
-  .field.full{grid-column:auto}
-  .footer-main{flex-direction:column;gap:30px}
-  .footer-links{gap:17px}
-  .footer-bottom{flex-direction:column;gap:10px}
-}
-
-@media(max-width:390px){
-  .hero-title{font-size:52px}
-  .hero-actions .btn{width:100%}
-  .story-left h2{font-size:39px}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 </style>
 </head>
+<body class="loading">
 
-<body>
-
-<!-- NAVIGATION -->
-<nav class="nav" id="navbar">
-  <div class="container nav-inner">
-
-    <a class="logo" href="#home">
-      <div class="logo-mark">A</div>
-      <div class="logo-text">
-        <span class="logo-title">Asterbridge</span>
-        <span class="logo-sub">Learning</span>
-      </div>
-    </a>
-
-    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
-
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#intro">Perspective</a></li>
-      <li><a href="#philosophy">Philosophy</a></li>
-      <li><a href="#programs">Programs</a></li>
-      <li><a href="#journey">Approach</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a class="contact-link" href="#contact">Enquire ↗</a></li>
-    </ul>
-
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-name">ASTERBRIDGE</div>
+    <div class="loader-line"></div>
+    <div class="loader-label">PREPARING YOUR EXPERIENCE</div>
   </div>
+</div>
+
+<div id="webgl"></div>
+<div class="noise"></div>
+<div class="vignette"></div>
+
+<nav class="nav" id="nav">
+  <a href="#home" class="brand">
+    <div class="brand-mark"><span>A</span></div>
+    <div class="brand-text">ASTERBRIDGE<small>LEARNING</small></div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#approach">OUR APPROACH</a>
+    <a href="#programs">PROGRAMS</a>
+    <a href="#journey">THE JOURNEY</a>
+    <a href="#contact">CONTACT</a>
+  </div>
+  <a href="#contact" class="nav-cta">ENQUIRE NOW ↗</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
-
-  <div class="hero-grid"></div>
-
-  <div class="container hero-content">
-
+  <div class="hero-content">
     <div class="hero-copy">
-
-      <div class="small-label">A considered approach to education</div>
-
+      <div class="hero-eyebrow">A DIFFERENT APPROACH TO LEARNING</div>
       <h1 class="hero-title">
-        Beyond the
-        <span class="second">classroom.</span>
-        <span class="third">Into a world of possibility.</span>
+        <span class="line"><span>Think beyond.</span></span>
+        <span class="line"><span><em>Become more.</em></span></span>
       </h1>
-
-      <p class="hero-description">
-        Learning should open doors — to ideas, to understanding,
-        and to a future shaped by the ability to think independently.
-        We believe education is where that journey begins.
-      </p>
-
+      <p class="hero-description">Education is not simply the pursuit of answers. It is the process of building the mind that knows how to find them.</p>
       <div class="hero-actions">
-        <a href="#programs" class="btn">Explore learning <span>↗</span></a>
-        <a href="#philosophy" class="btn secondary">Our perspective</a>
+        <a href="#programs" class="btn btn-primary">EXPLORE PROGRAMS <span>↗</span></a>
+        <span class="hero-note">LEARN WITH INTENTION</span>
       </div>
-
-      <div class="hero-meta">
-        <span>Academic development</span>
-        <span>Personalized learning</span>
-      </div>
-
     </div>
-
-    <div class="hero-object" id="heroObject">
-      <div class="object-wrap" id="objectWrap">
-        <div class="object-ring"></div>
-        <div class="object-ring r2"></div>
-        <div class="object-ring r3"></div>
-        <div class="object-core"></div>
-      </div>
-      <div class="object-shadow"></div>
-      <div class="object-caption">Knowledge · Perspective · Growth</div>
-    </div>
-
   </div>
-
-  <div class="container hero-bottom">
-    <span>Asterbridge Learning</span>
-    <span>Scroll to discover ↓</span>
+  <div class="hero-bottom">
+    <div class="hero-scroll"><div class="scroll-line"></div> SCROLL TO EXPLORE</div>
+    <div class="hero-index">01 — 05</div>
   </div>
-
 </section>
 
-<!-- INTRO -->
-<section class="section intro" id="intro">
-
-  <div class="container intro-grid">
-
-    <div class="fade-in">
-      <div class="small-label">Our perspective</div>
-      <h2 class="heading" style="margin-top:22px">
-        Education is not the accumulation of answers.
-        <em>It is learning how to find them.</em>
-      </h2>
+<section class="intro" id="approach">
+  <div class="wrap intro-grid">
+    <div class="intro-left">
+      <div class="section-label">OUR PHILOSOPHY</div>
+      <h2 class="intro-heading serif">Knowledge is a beginning.<br><em>Not the destination.</em></h2>
     </div>
-
-    <div class="intro-text fade-in">
-      <p>
-        Every student approaches learning differently. Some need
-        stronger foundations, some need direction, and others need
-        the space to explore ideas beyond what is already familiar.
-      </p>
-
-      <p>
-        We see education as a process of building capability.
-        Through thoughtful teaching, structured practice, and
-        meaningful understanding, students can develop the confidence
-        to approach unfamiliar challenges and make knowledge their own.
-      </p>
-
-      <div class="intro-signature">
-        <span>Curiosity</span>
-        <span>Clarity</span>
-        <span>Independent thought</span>
+    <div class="intro-right">
+      <p>At Asterbridge, learning is approached as a process of transformation. Beyond memorisation and repetition, we focus on understanding, confidence, intellectual discipline and the ability to apply knowledge independently.</p>
+      <p>Every student has a different starting point. The right guidance does not simply deliver information — it builds the foundation for lasting progress.</p>
+      <div class="intro-stats">
+        <div><div class="stat-num serif">01</div><div class="stat-label">UNDERSTAND</div></div>
+        <div><div class="stat-num serif">02</div><div class="stat-label">DEVELOP</div></div>
+        <div><div class="stat-num serif">03</div><div class="stat-label">APPLY</div></div>
       </div>
     </div>
-
   </div>
-
 </section>
 
-<!-- PINNED PHILOSOPHY STORY -->
-<section class="story" id="philosophy">
-
-  <div class="story-scroll" id="storyScroll">
-
-    <div class="story-sticky">
-
-      <div class="story-bg"></div>
-
-      <div class="story-layout">
-
-        <div class="story-left">
-          <div class="small-label">The philosophy</div>
-
-          <h2>
-            The way we learn
-            shapes the way
-            <em>we think.</em>
-          </h2>
-
-          <div class="story-progress" id="storyProgress">
-            <span class="active"></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-
-        <div class="story-right">
-
-          <div class="story-object" id="storyObject"></div>
-
-          <article class="story-panel active">
-            <div class="story-number">01</div>
-            <h3>Curiosity comes first.</h3>
-            <p>
-              Meaningful learning begins with a question.
-              We encourage students to explore concepts, recognise
-              connections, and approach subjects with genuine interest
-              rather than simply memorising information.
-            </p>
-            <div class="story-accent"></div>
-          </article>
-
-          <article class="story-panel">
-            <div class="story-number">02</div>
-            <h3>Understanding creates confidence.</h3>
-            <p>
-              Confidence grows when students know why something works.
-              Strong foundations, clear explanations, and guided
-              practice help turn uncertainty into understanding.
-            </p>
-            <div class="story-accent"></div>
-          </article>
-
-          <article class="story-panel">
-            <div class="story-number">03</div>
-            <h3>Knowledge becomes independence.</h3>
-            <p>
-              The real measure of learning is the ability to use it.
-              We value independent thinking, application, and the
-              confidence to face new academic challenges.
-            </p>
-            <div class="story-accent"></div>
-          </article>
-
-        </div>
-
+<section class="story" id="story">
+  <div class="story-sticky">
+    <div class="story-bg"></div>
+    <div class="story-grid">
+      <div class="story-left">
+        <div class="section-label">THE ASTERBRIDGE METHOD</div>
+        <h2 class="story-title">Learning that<br>moves <em>you forward.</em></h2>
+        <div class="story-progress" id="storyProgress"><span class="active"></span><span></span><span></span></div>
       </div>
-
-      <div class="story-scroll-hint">Continue scrolling</div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- PROGRAMS -->
-<section class="section programs" id="programs">
-
-  <div class="container">
-
-    <div class="program-header fade-in">
-
-      <div class="header-copy">
-        <div class="small-label">Academic pathways</div>
-        <h2 class="heading" style="margin-top:20px">
-          Areas of <em>learning.</em>
-        </h2>
+      <div class="story-right">
+        <div class="story-panel active">
+          <div class="story-number">01 / FOUNDATION</div>
+          <h3>Clarity before complexity.</h3>
+          <p>We identify gaps, simplify difficult concepts and establish a strong foundation. Learning begins when ideas make sense — not when pages have been memorised.</p>
+        </div>
+        <div class="story-panel">
+          <div class="story-number">02 / DEVELOPMENT</div>
+          <h3>Practice with purpose.</h3>
+          <p>Structured exercises, targeted feedback and deliberate practice help students move beyond familiarity toward genuine mastery.</p>
+        </div>
+        <div class="story-panel">
+          <div class="story-number">03 / INDEPENDENCE</div>
+          <h3>Confidence without dependence.</h3>
+          <p>Our goal is to develop students who can think critically, approach unfamiliar problems and work with confidence on their own.</p>
+        </div>
       </div>
-
-      <p class="body-copy">
-        Focused academic support across language, sciences,
-        and examination preparation — guided by the student's
-        objectives and learning needs.
-      </p>
-
     </div>
-
-    <div class="program-grid">
-
-      <a href="#contact" class="program fade-in" data-program="English Language & Academic Writing">
-        <div class="program-index">01</div>
-        <div class="program-content">
-          <h3>English & Academic Writing</h3>
-          <p>Language proficiency, academic communication, writing, comprehension, and expression.</p>
-        </div>
-        <span class="program-arrow">↗</span>
-      </a>
-
-      <a href="#contact" class="program fade-in" data-program="Biology & Medical Entrance Preparation">
-        <div class="program-index">02</div>
-        <div class="program-content">
-          <h3>Biology & Medical Preparation</h3>
-          <p>Biological concepts, scientific reasoning, structured revision, and entrance examination preparation.</p>
-        </div>
-        <span class="program-arrow">↗</span>
-      </a>
-
-      <a href="#contact" class="program fade-in" data-program="Chemistry & Science Preparation">
-        <div class="program-index">03</div>
-        <div class="program-content">
-          <h3>Chemistry & Sciences</h3>
-          <p>Conceptual science learning, problem-solving, and application of fundamental principles.</p>
-        </div>
-        <span class="program-arrow">↗</span>
-      </a>
-
-      <a href="#contact" class="program fade-in" data-program="Examination Preparation">
-        <div class="program-index">04</div>
-        <div class="program-content">
-          <h3>Examination Preparation</h3>
-          <p>Practice, strategic revision, exam-focused learning, and performance development.</p>
-        </div>
-        <span class="program-arrow">↗</span>
-      </a>
-
-      <a href="#contact" class="program fade-in" data-program="Personalized Academic Support">
-        <div class="program-index">05</div>
-        <div class="program-content">
-          <h3>Individual Academic Support</h3>
-          <p>Personalized learning pathways shaped around a student's academic priorities and goals.</p>
-        </div>
-        <span class="program-arrow">↗</span>
-      </a>
-
-      <a href="#contact" class="program fade-in" data-program="General Enquiry">
-        <div class="program-index">06</div>
-        <div class="program-content">
-          <h3>Other Learning Objectives</h3>
-          <p>Discuss a subject, curriculum, academic objective, or learning requirement not listed here.</p>
-        </div>
-        <span class="program-arrow">↗</span>
-      </a>
-
-    </div>
-
+    <div class="story-caption">SCROLL — THE PROCESS OF PROGRESS</div>
   </div>
-
 </section>
 
-<!-- PINNED LEARNING JOURNEY -->
+<section class="programs" id="programs">
+  <div class="wrap">
+    <div class="program-head">
+      <div>
+        <div class="section-label">ACADEMIC PROGRAMS</div>
+        <h2>Designed around<br><em class="gold">your next step.</em></h2>
+      </div>
+      <p>Focused academic support and exam preparation shaped around your curriculum, goals, learning pace and the level of challenge you need.</p>
+    </div>
+
+    <div class="program-experience">
+      <div class="program-visual" id="programVisual">
+        <svg id="programSvg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="64" stroke="#C5A36B" stroke-opacity=".5"/>
+          <circle cx="100" cy="100" r="48" stroke="#C5A36B" stroke-opacity=".25" stroke-dasharray="2 7"/>
+          <path d="M100 28L162 136H38L100 28Z" stroke="#E6C98E" stroke-width="1.2"/>
+          <path d="M100 28V136M38 136L100 100L162 136" stroke="#C5A36B" stroke-opacity=".55"/>
+          <circle cx="100" cy="100" r="5" fill="#E6C98E"/>
+        </svg>
+      </div>
+      <div class="program-content">
+        <div class="program-count" id="programCount">PROGRAM / 01</div>
+        <h3 class="program-name" id="programName">International<br>Curricula</h3>
+        <p class="program-desc" id="programDesc">Structured support for students following international academic pathways, combining curriculum understanding with examination strategy and independent thinking.</p>
+        <div class="program-list" id="programTags"><span>IGCSE</span><span>AS & A LEVEL</span><span>IB</span></div>
+        <button class="program-btn" id="programEnquire">ENQUIRE ABOUT THIS PROGRAM <span>↗</span></button>
+      </div>
+    </div>
+    <div class="program-tabs" id="programTabs">
+      <button class="program-tab active" data-program="0">International Curricula</button>
+      <button class="program-tab" data-program="1">North American</button>
+      <button class="program-tab" data-program="2">Science & Entrance</button>
+      <button class="program-tab" data-program="3">Academic Development</button>
+    </div>
+  </div>
+</section>
+
 <section class="journey" id="journey">
-
-  <div class="journey-scroll" id="journeyScroll">
-
-    <div class="journey-sticky">
-
-      <div class="journey-inner">
-
-        <div class="journey-header">
-          <div>
-            <div class="small-label">Our learning approach</div>
-            <h2 class="heading" style="margin-top:20px">
-              Progress, with <em>purpose.</em>
-            </h2>
-          </div>
-
-          <p class="body-copy">
-            A learning journey built around the student:
-            understand where they are, develop what they need,
-            and move forward with confidence.
-          </p>
-        </div>
-
-        <div class="journey-track" id="journeyTrack">
-
-          <article class="journey-stage active">
-            <div class="stage-dot">01</div>
-            <h3 class="stage-title">Discover</h3>
-            <p class="stage-copy">
-              Understand goals, current knowledge, strengths,
-              challenges, and the student's direction.
-            </p>
-            <div class="stage-foot">Assessment & direction</div>
-          </article>
-
-          <article class="journey-stage">
-            <div class="stage-dot">02</div>
-            <h3 class="stage-title">Develop</h3>
-            <p class="stage-copy">
-              Build foundations through teaching, practice,
-              feedback, and progressively deeper understanding.
-            </p>
-            <div class="stage-foot">Learning & application</div>
-          </article>
-
-          <article class="journey-stage">
-            <div class="stage-dot">03</div>
-            <h3 class="stage-title">Advance</h3>
-            <p class="stage-copy">
-              Strengthen independent thinking, apply knowledge,
-              and work toward meaningful academic progress.
-            </p>
-            <div class="stage-foot">Progress & independence</div>
-          </article>
-
-        </div>
-
-        <div class="journey-progress">
-          <div class="journey-progress-fill" id="journeyFill"></div>
-        </div>
-
-      </div>
-
+  <div class="journey-sticky">
+    <div class="journey-content">
+      <div class="section-label">YOUR LEARNING JOURNEY</div>
+      <h2 class="journey-title">Every step has<br><em class="gold">a purpose.</em></h2>
+      <div class="journey-steps" id="journeySteps"><span class="active"></span><span></span><span></span></div>
     </div>
-
+    <div class="journey-stage active"><div class="story-number">STAGE 01</div><h3>Discover</h3><p>Understand your starting point, identify the challenges and define the goals that matter to you.</p></div>
+    <div class="journey-stage"><div class="story-number">STAGE 02</div><h3>Develop</h3><p>Build understanding through guided learning, consistent practice, structured feedback and measurable progress.</p></div>
+    <div class="journey-stage"><div class="story-number">STAGE 03</div><h3>Advance</h3><p>Turn knowledge into performance. Approach examinations and unfamiliar challenges with independence and confidence.</p></div>
+    <div class="journey-bottom">A PROCESS BUILT AROUND PROGRESS</div>
   </div>
-
 </section>
 
-<!-- CLOSING STATEMENT -->
-<section class="closing" id="about">
-
-  <div class="container closing-grid">
-
-    <div class="fade-in">
-      <div class="small-label">Asterbridge Learning</div>
-      <h2>
-        Beyond the lesson.
-        Beyond the exam.
-        <em>Into the future.</em>
-      </h2>
+<section class="closing">
+  <div class="wrap closing-grid">
+    <div><div class="section-label">THE NEXT CHAPTER</div><h2 class="closing-title">Your potential<br>is not a <em>fixed point.</em></h2></div>
+    <div class="closing-copy">
+      <p>Progress begins with a conversation. Tell us where you are, what you're working towards and what you want to achieve. We'll help you identify the next step.</p>
+      <a href="#contact" class="btn btn-outline">START A CONVERSATION <span>↗</span></a>
     </div>
-
-    <div class="closing-text fade-in">
-      <p>
-        Education should prepare students not only to meet
-        expectations, but to move beyond them. To question,
-        to understand, and to approach the world with
-        perspective.
-      </p>
-
-      <p>
-        Asterbridge Learning brings together structured academic
-        support and a belief in the lasting value of education —
-        one student, one idea, one step at a time.
-      </p>
-
-      <a href="#contact" class="btn" style="margin-top:25px">
-        Start a conversation ↗
-      </a>
-    </div>
-
   </div>
-
 </section>
 
-<!-- CONTACT -->
-<section class="section contact" id="contact">
-
-  <div class="container contact-layout">
-
-    <div class="contact-copy fade-in">
-
-      <div class="small-label">Enquiries & admissions</div>
-
-      <h2 class="heading" style="margin-top:22px">
-        Let's find the right
-        <em>path.</em>
-      </h2>
-
-      <p class="body-copy">
-        Tell us what you are working toward. Whether you need
-        subject support, examination preparation, or a structured
-        learning plan, we would be glad to hear from you.
-      </p>
-
-      <div class="contact-detail">
-        A thoughtful first conversation.<br>
-        A clearer direction for learning.
-      </div>
-
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="section-label">ADMISSIONS & ENQUIRIES</div>
+      <h2 class="contact-title">Let's find your<br>next <em>step.</em></h2>
+      <p class="contact-intro">Share a little about your academic goals. Our team can help you explore suitable programs and learning options.</p>
     </div>
-
-    <div class="form-box fade-in">
-
-      <h3 class="form-title">Student enquiry</h3>
-
-      <form id="contactForm">
-
-        <div class="form-grid">
-
-          <div class="field">
-            <label for="name">Full name *</label>
-            <input id="name" name="name" type="text" placeholder="Your name" required>
-          </div>
-
-          <div class="field">
-            <label for="email">Email address *</label>
-            <input id="email" name="email" type="email" placeholder="Your email" required>
-          </div>
-
-          <div class="field">
-            <label for="province">Province / Region</label>
-            <input id="province" name="province" type="text" placeholder="Province or region">
-          </div>
-
-          <div class="field">
-            <label for="grade">Grade / Academic level</label>
-            <input id="grade" name="grade" type="text" placeholder="e.g. Grade 12">
-          </div>
-
-          <div class="field">
-            <label for="subject">Subject</label>
-            <input id="subject" name="subject" type="text" placeholder="Subject of interest">
-          </div>
-
-          <div class="field">
-            <label for="program">Program *</label>
-            <select id="program" name="program" required>
-              <option value="">Select a program</option>
-              <option>English Language & Academic Writing</option>
-              <option>Biology & Medical Entrance Preparation</option>
-              <option>Chemistry & Science Preparation</option>
-              <option>Examination Preparation</option>
-              <option>Personalized Academic Support</option>
-              <option>General Enquiry</option>
-            </select>
-          </div>
-
-          <div class="field full">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="What would you like help with?"></textarea>
-          </div>
-
-        </div>
-
-        <button class="btn submit" type="submit" id="submitBtn">
-          Send enquiry <span>↗</span>
-        </button>
-
-        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
-
-        <div class="privacy">
-          Your information will be used only to respond to your enquiry
-          and provide relevant information about our learning services.
-        </div>
-
-      </form>
-
-    </div>
-
+    <form class="contact-form" id="contactForm">
+      <div class="field"><label for="name">YOUR NAME</label><input id="name" name="name" placeholder="Full name" required></div>
+      <div class="field"><label for="email">EMAIL ADDRESS</label><input id="email" name="email" type="email" placeholder="Email address" required></div>
+      <div class="field"><label for="province">LOCATION</label><input id="province" name="province" placeholder="Country / city"></div>
+      <div class="field"><label for="grade">GRADE / LEVEL</label><input id="grade" name="grade" placeholder="Your current level"></div>
+      <div class="field"><label for="subject">SUBJECT</label><input id="subject" name="subject" placeholder="Subject of interest"></div>
+      <div class="field"><label for="program">PROGRAM</label><select id="program" name="program"><option value="">Select a program</option><option>International Curricula</option><option>North American</option><option>Science & Entrance Preparation</option><option>Academic Development</option><option>Other / Not sure yet</option></select></div>
+      <div class="field full"><label for="message">HOW CAN WE HELP?</label><textarea id="message" name="message" placeholder="Tell us about your goals, exam, or what you need help with."></textarea></div>
+      <button type="submit" class="form-submit" id="submitBtn">SEND ENQUIRY <span>↗</span></button>
+      <div class="form-message" id="formMessage"></div>
+    </form>
   </div>
-
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
-
-  <div class="container">
-
-    <div class="footer-main">
-
-      <div class="footer-about">
-
-        <a class="logo" href="#home">
-          <div class="logo-mark">A</div>
-          <div class="logo-text">
-            <span class="logo-title">Asterbridge</span>
-            <span class="logo-sub">Learning</span>
-          </div>
-        </a>
-
-        <p>
-          Education beyond boundaries.
-          Learning with purpose, perspective, and possibility.
-        </p>
-
-      </div>
-
-      <div class="footer-links">
-        <a href="#intro">Perspective</a>
-        <a href="#philosophy">Philosophy</a>
-        <a href="#programs">Programs</a>
-        <a href="#journey">Approach</a>
-        <a href="#about">About</a>
-        <a href="#contact">Enquiries</a>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> Asterbridge Learning</span>
-      <span>Education beyond boundaries.</span>
-    </div>
-
+  <div class="footer-top">
+    <a href="#home" class="footer-brand">Asterbridge Learning</a>
+    <div class="footer-links"><a href="#approach">OUR APPROACH</a><a href="#programs">PROGRAMS</a><a href="#journey">JOURNEY</a><a href="#contact">CONTACT</a></div>
   </div>
-
+  <div class="footer-bottom"><span>© <span id="year"></span> ASTERBRIDGE LEARNING</span><span>THINK BEYOND. BECOME MORE.</span></div>
 </footer>
 
 <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
 
-<script>
-/* ============================================
-   ASTERBRIDGE LEARNING — INTERACTIONS
-============================================ */
+<script type="module">
+import * as THREE from "three";
+import { gsap } from "https://cdn.jsdelivr.net/npm/gsap@3.12.7/index.js";
+import { ScrollTrigger } from "https://cdn.jsdelivr.net/npm/gsap@3.12.7/ScrollTrigger.js";
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwvaj5paFntHpSSF0i2kso40TOS6FC2PqHCn_OKkjjDkHN9fsrBZpQCMV_dc2g-f6pN/exec";
+gsap.registerPlugin(ScrollTrigger);
 
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* =========================
+   THREE.JS SCENE
+========================= */
+const host=document.getElementById("webgl");
+const scene=new THREE.Scene();
+scene.background=new THREE.Color("#080b12");
+scene.fog=new THREE.FogExp2("#080b12",.035);
 
-document.getElementById("year").textContent = new Date().getFullYear();
+const camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,.1,100);
+camera.position.set(0,0,11);
 
-/* NAV */
+const renderer=new THREE.WebGLRenderer({
+  antialias:true,alpha:false,powerPreference:"high-performance"
+});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));
+renderer.setSize(innerWidth,innerHeight);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.1;
+host.appendChild(renderer.domElement);
 
-const nav = document.getElementById("navbar");
-const toggle = document.getElementById("menuToggle");
-const links = document.getElementById("navLinks");
-const backTop = document.getElementById("backTop");
+scene.add(new THREE.AmbientLight(0x8996b0,.8));
 
-window.addEventListener("scroll",()=>{
-  nav.classList.toggle("scrolled",window.scrollY > 30);
-  backTop.classList.toggle("visible",window.scrollY > 450);
+const keyLight=new THREE.PointLight(0xe4c48b,85,35,2);
+keyLight.position.set(3,4,6);
+scene.add(keyLight);
+
+const blueLight=new THREE.PointLight(0x4d6b9b,55,30,2);
+blueLight.position.set(-5,-2,-4);
+scene.add(blueLight);
+
+const backLight=new THREE.PointLight(0xc5a36b,50,25,2);
+backLight.position.set(0,0,-5);
+scene.add(backLight);
+
+const core=new THREE.Group();
+scene.add(core);
+
+const gold=new THREE.MeshPhysicalMaterial({
+  color:0xb99b64,metalness:.85,roughness:.24,
+  clearcoat:.8,clearcoatRoughness:.18
+});
+const darkGold=new THREE.MeshStandardMaterial({color:0x77603b,metalness:.8,roughness:.4});
+const glass=new THREE.MeshPhysicalMaterial({
+  color:0x9baec7,metalness:.2,roughness:.15,
+  transparent:true,opacity:.14,transmission:.25
+});
+const lineMat=new THREE.MeshBasicMaterial({color:0xc5a36b,transparent:true,opacity:.65});
+
+const outer=new THREE.Mesh(new THREE.IcosahedronGeometry(2.05,1),glass);
+core.add(outer);
+
+const wire=new THREE.Mesh(new THREE.IcosahedronGeometry(2.1,1),new THREE.MeshBasicMaterial({
+  color:0xc5a36b,wireframe:true,transparent:true,opacity:.22
+}));
+core.add(wire);
+
+const inner=new THREE.Mesh(new THREE.OctahedronGeometry(1.12,0),gold);
+core.add(inner);
+
+const innerWire=new THREE.Mesh(new THREE.OctahedronGeometry(1.32,1),new THREE.MeshBasicMaterial({
+  color:0xe6c98e,wireframe:true,transparent:true,opacity:.48
+}));
+core.add(innerWire);
+
+function makeRing(radius,tube,material,rotation){
+  const mesh=new THREE.Mesh(new THREE.TorusGeometry(radius,tube,8,160),material);
+  mesh.rotation.set(rotation[0],rotation[1],rotation[2]);
+  core.add(mesh);
+  return mesh;
+}
+const ring1=makeRing(2.65,.012,lineMat,[1.1,.3,.4]);
+const ring2=makeRing(2.85,.008,new THREE.MeshBasicMaterial({color:0x62738d,transparent:true,opacity:.4}),[.5,1.2,.2]);
+const ring3=makeRing(1.8,.01,darkGold,[1.8,.5,1.1]);
+
+const orbitGroup=new THREE.Group();
+core.add(orbitGroup);
+const orbMat=new THREE.MeshPhysicalMaterial({color:0xe4c48b,metalness:.65,roughness:.2,emissive:0x6e502a,emissiveIntensity:.35});
+const orbGeometry=new THREE.SphereGeometry(.07,16,16);
+for(let i=0;i<9;i++){
+  const orb=new THREE.Mesh(orbGeometry,orbMat);
+  const angle=i/9*Math.PI*2;
+  orb.position.set(Math.cos(angle)*3.05,Math.sin(angle)*1.5,Math.sin(angle*2)*.5);
+  orbitGroup.add(orb);
+}
+
+const blocks=new THREE.Group();
+scene.add(blocks);
+for(let i=0;i<16;i++){
+  const b=new THREE.Mesh(
+    new THREE.BoxGeometry(.08+Math.random()*.14,.35+Math.random()*.9,.08+Math.random()*.14),
+    i%3===0?gold:glass
+  );
+  b.position.set((Math.random()-.5)*13,(Math.random()-.5)*9,-2-Math.random()*5);
+  b.rotation.set(Math.random()*3,Math.random()*3,Math.random()*3);
+  blocks.add(b);
+}
+
+const particleCount=1600;
+const positions=new Float32Array(particleCount*3);
+for(let i=0;i<particleCount;i++){
+  positions[i*3]=(Math.random()-.5)*28;
+  positions[i*3+1]=(Math.random()-.5)*18;
+  positions[i*3+2]=(Math.random()-.5)*18;
+}
+const particleGeometry=new THREE.BufferGeometry();
+particleGeometry.setAttribute("position",new THREE.BufferAttribute(positions,3));
+const particleMaterial=new THREE.PointsMaterial({color:0xb5a27e,size:.025,transparent:true,opacity:.55,sizeAttenuation:true});
+const particles=new THREE.Points(particleGeometry,particleMaterial);
+scene.add(particles);
+
+let mouseX=0,mouseY=0,targetX=0,targetY=0;
+window.addEventListener("pointermove",e=>{
+  targetX=(e.clientX/innerWidth-.5)*2;
+  targetY=(e.clientY/innerHeight-.5)*2;
 },{passive:true});
 
-toggle.addEventListener("click",()=>{
-  const opened = links.classList.toggle("open");
-  document.body.classList.toggle("menu-open",opened);
-  toggle.setAttribute("aria-expanded",opened);
-  toggle.textContent = opened ? "×" : "☰";
-});
+/* SCROLL STATE — SHARED WITH CAMERA */
+let scrollProgress=0;
+let sceneMode=0;
+const clock=new THREE.Clock();
+let animationFrame=null;
 
-links.querySelectorAll("a").forEach(a=>{
-  a.addEventListener("click",()=>{
-    links.classList.remove("open");
-    document.body.classList.remove("menu-open");
-    toggle.setAttribute("aria-expanded","false");
-    toggle.textContent="☰";
-  });
-});
+function animate(){
+  animationFrame=requestAnimationFrame(animate);
+  const t=clock.getElapsedTime();
 
-backTop.addEventListener("click",()=>{
-  window.scrollTo({top:0,behavior:"smooth"});
-});
+  mouseX+=(targetX-mouseX)*.035;
+  mouseY+=(targetY-mouseY)*.035;
 
-/* REVEAL */
+  core.rotation.y=t*.12+mouseX*.12;
+  core.rotation.x=Math.sin(t*.15)*.12+mouseY*.12;
 
-const revealObserver = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("show");
-      revealObserver.unobserve(entry.target);
-    }
-  });
-},{threshold:.12});
+  inner.rotation.y=-t*.25;
+  inner.rotation.x=t*.18;
+  innerWire.rotation.y=t*.1;
+  outer.rotation.y=-t*.06;
+  wire.rotation.x=t*.1;
 
-document.querySelectorAll(".fade-in").forEach(el=>revealObserver.observe(el));
+  ring1.rotation.z+=.0015;
+  ring2.rotation.x+=.001;
+  ring3.rotation.y-=.0014;
 
-/* PROGRAM -> FORM */
+  orbitGroup.rotation.y=t*.22;
+  orbitGroup.rotation.x=Math.sin(t*.2)*.15;
 
-document.querySelectorAll("[data-program]").forEach(item=>{
-  item.addEventListener("click",()=>{
-    const value=item.getAttribute("data-program");
-    const select=document.getElementById("program");
-    if(select) select.value=value;
-  });
-});
+  particles.rotation.y=t*.012;
+  particles.rotation.x=Math.sin(t*.1)*.02;
 
-/* HERO OBJECT MOUSE PARALLAX */
-
-const heroObject=document.getElementById("heroObject");
-const objectWrap=document.getElementById("objectWrap");
-
-if(!reduceMotion && window.matchMedia("(hover:hover)").matches){
-
-  heroObject.addEventListener("mousemove",e=>{
-    const rect=heroObject.getBoundingClientRect();
-    const x=(e.clientX-rect.left)/rect.width-.5;
-    const y=(e.clientY-rect.top)/rect.height-.5;
-
-    objectWrap.style.animation="none";
-    objectWrap.style.transform=
-      `rotateY(${x*16}deg) rotateX(${y*-12}deg) translateY(-5px)`;
+  blocks.children.forEach((b,i)=>{
+    b.rotation.x+=.001*(i%2?1:-1);
+    b.rotation.y+=.0015;
+    b.position.y+=Math.sin(t*.4+i)*.0015;
   });
 
-  heroObject.addEventListener("mouseleave",()=>{
-    objectWrap.style.transform="";
-    objectWrap.style.animation="";
-  });
+  /* Scroll-linked camera movement */
+  const p=scrollProgress;
+  camera.position.x=mouseX*.22+Math.sin(p*Math.PI*2)*.28;
+  camera.position.y=mouseY*.15+Math.sin(p*3)*.2;
+  camera.position.z=11-p*2.3;
+  camera.lookAt(0,0,0);
 
+  /* Scene evolution */
+  core.visible=p<.78;
+  core.scale.setScalar(1+p*.24);
+  keyLight.intensity=85+Math.sin(t)*5;
+  blueLight.intensity=55+Math.sin(t*.6)*8;
+
+  if(sceneMode===1)inner.rotation.z=t*.3;
+  else if(sceneMode===2)core.rotation.z=Math.sin(t*.2)*.25;
+  else if(sceneMode===3)core.scale.setScalar(1.2+Math.sin(t*.4)*.06);
+
+  renderer.render(scene,camera);
 }
+animate();
 
-/* PINNED PHILOSOPHY */
+/* Resize */
+window.addEventListener("resize",()=>{
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));
+});
 
-const storyScroll=document.getElementById("storyScroll");
+/* Stop rendering while tab is hidden */
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden){
+    if(animationFrame)cancelAnimationFrame(animationFrame);
+  }else{
+    clock.start();
+    animate();
+  }
+});
+
+/* Loader */
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    document.getElementById("loader").classList.add("hide");
+    document.body.classList.remove("loading");
+    ScrollTrigger.refresh();
+  },650);
+});
+
+/* Navigation */
+const nav=document.getElementById("nav");
+const menu=document.getElementById("menuToggle");
+const navLinks=document.getElementById("navLinks");
+
+window.addEventListener("scroll",()=>{
+  nav.classList.toggle("scrolled",window.scrollY>40);
+  document.getElementById("backTop").classList.toggle("show",window.scrollY>800);
+},{passive:true});
+
+menu.addEventListener("click",()=>navLinks.classList.toggle("open"));
+navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>navLinks.classList.remove("open")));
+document.getElementById("year").textContent=new Date().getFullYear();
+document.getElementById("backTop").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+/* Pinned story */
 const storyPanels=document.querySelectorAll(".story-panel");
 const storyBars=document.querySelectorAll("#storyProgress span");
-const storyObject=document.getElementById("storyObject");
 
-function updateStory(){
+ScrollTrigger.create({
+  trigger:".story",
+  start:"top top",
+  end:"bottom bottom",
+  onUpdate:self=>{
+    scrollProgress=self.progress;
+    const index=Math.min(2,Math.floor(self.progress*3));
+    storyPanels.forEach((p,i=>p.classList.toggle("active",i===index)));
+    storyBars.forEach((b,i=>b.classList.toggle("active",i===index));
+    sceneMode=index;
+  }
+});
 
-  const rect=storyScroll.getBoundingClientRect();
-  const total=storyScroll.offsetHeight-window.innerHeight;
-
-  if(total<=0)return;
-
-  const progress=Math.min(1,Math.max(0,-rect.top/total));
-
-  let index=0;
-  if(progress>.66)index=2;
-  else if(progress>.33)index=1;
-
-  storyPanels.forEach((panel,i)=>{
-    panel.classList.toggle("active",i===index);
-  });
-
-  storyBars.forEach((bar,i)=>{
-    bar.classList.toggle("active",i<=index);
-  });
-
-  storyObject.className="story-object";
-
-  if(index===1)storyObject.classList.add("object-2");
-  if(index===2)storyObject.classList.add("object-3");
-
-}
-
- /* PINNED JOURNEY */
-
-const journeyScroll=document.getElementById("journeyScroll");
+/* Journey stages */
 const journeyStages=document.querySelectorAll(".journey-stage");
-const journeyFill=document.getElementById("journeyFill");
+const journeyBars=document.querySelectorAll("#journeySteps span");
 
-function updateJourney(){
+ScrollTrigger.create({
+  trigger:".journey",
+  start:"top top",
+  end:"bottom bottom",
+  onUpdate:self=>{
+    scrollProgress=self.progress;
+    const index=Math.min(2,Math.floor(self.progress*3));
+    journeyStages.forEach((stage,i)=>stage.classList.toggle("active",i===index));
+    journeyBars.forEach((bar,i)=>bar.classList.toggle("active",i===index));
+    sceneMode=index;
+  }
+});
 
-  const rect=journeyScroll.getBoundingClientRect();
-  const total=journeyScroll.offsetHeight-window.innerHeight;
+/* Program selector */
+const programs=[
+ {
+  name:"International<br>Curricula",
+  desc:"Structured support for students following international academic pathways, combining curriculum understanding with examination strategy and independent thinking.",
+  tags:["IGCSE","AS & A LEVEL","IB"],count:"PROGRAM / 01"
+ },
+ {
+  name:"North American<br>Programs",
+  desc:"Academic support aligned with North American learning systems, strengthening subject knowledge, coursework, exam preparation and analytical skills.",
+  tags:["ONTARIO","GRADE 9–12","SAT"],count:"PROGRAM / 02"
+ },
+ {
+  name:"Science & Entrance<br>Preparation",
+  desc:"Focused preparation in science disciplines and competitive examinations through concept development, problem-solving and structured revision.",
+  tags:["BIOLOGY","CHEMISTRY","EXAM PREP"],count:"PROGRAM / 03"
+ },
+ {
+  name:"Academic<br>Development",
+  desc:"Personalised academic support to improve writing, study habits, critical thinking, organisation and confidence across learning environments.",
+  tags:["ACADEMIC WRITING","STUDY SKILLS","FOUNDATION"],count:"PROGRAM / 04"
+ }
+];
 
-  if(total<=0)return;
+const tabs=document.querySelectorAll(".program-tab");
+const programName=document.getElementById("programName");
+const programDesc=document.getElementById("programDesc");
+const programTags=document.getElementById("programTags");
+const programCount=document.getElementById("programCount");
+const programSvg=document.getElementById("programSvg");
+let selectedProgram=0;
 
-  const progress=Math.min(1,Math.max(0,-rect.top/total));
+function selectProgram(i){
+  selectedProgram=i;
+  const p=programs[i];
+  tabs.forEach((t,n)=>t.classList.toggle("active",n===i));
 
-  journeyFill.style.width=(progress*100)+"%";
-
-  let active=0;
-  if(progress>.66)active=2;
-  else if(progress>.33)active=1;
-
-  journeyStages.forEach((stage,i=>{
-    stage.classList.toggle("active",i===active);
-  }));
-
-}
-
-/* SCROLL CONTROLLER */
-
-let ticking=false;
-
-function onScroll(){
-
-  if(ticking)return;
-
-  ticking=true;
-
-  requestAnimationFrame(()=>{
-    updateStory();
-    updateJourney();
-    ticking=false;
+  gsap.to([programName,programDesc,programTags],{
+    opacity:0,y:10,duration:.18,onComplete:()=>{
+      programName.innerHTML=p.name;
+      programDesc.textContent=p.desc;
+      programCount.textContent=p.count;
+      programTags.innerHTML=p.tags.map(t=>`<span>${t}</span>`).join("");
+      gsap.to([programName,programDesc,programTags],{opacity:1,y:0,duration:.35});
+    }
   });
-
+  gsap.to(programSvg,{rotation:i*90,duration:.6,ease:"power2.inOut"});
 }
+tabs.forEach(tab=>tab.addEventListener("click",()=>selectProgram(+tab.dataset.program)));
 
-window.addEventListener("scroll",onScroll,{passive:true});
-window.addEventListener("resize",onScroll);
+document.getElementById("programEnquire").addEventListener("click",()=>{
+  document.getElementElementById("program");
+  document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+});
 
-updateStory();
-updateJourney();
-
-/* CONTACT FORM */
-
+/* Contact form */
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwvaj5paFntHpSSF0i2kso40TOS6FC2PqHCn_OKkjjDkHN9fsrBZpQCMV_dc2g-f6pN/exec";
 const form=document.getElementById("contactForm");
-const status=document.getElementById("formStatus");
-const submit=document.getElementById("submitBtn");
+const formMessage=document.getElementById("formMessage");
+const submitBtn=document.getElementById("submitBtn");
 
 form.addEventListener("submit",async e=>{
-
   e.preventDefault();
+  submitBtn.disabled=true;
+  submitBtn.innerHTML="SENDING ENQUIRY…";
+  formMessage.textContent="Submitting your enquiry…";
 
-  if(!form.checkValidity()){
-    form.reportValidity();
-    return;
-  }
-
-  submit.disabled=true;
-  submit.style.opacity=".6";
-  submit.innerHTML="Sending enquiry...";
-
-  status.className="form-status";
-  status.style.display="none";
-
-  const formData=new FormData(form);
-  formData.append("source","Asterbridge Learning Website");
-
-  const payload=new URLSearchParams();
-
-  for(const [key,value] of formData.entries()){
-    payload.append(key,value);
-  }
+  const data=new FormData(form);
+  data.append("source","Asterbridge Learning Website");
 
   try{
-
     await fetch(SCRIPT_URL,{
       method:"POST",
       mode:"no-cors",
-      body:payload
+      body:new URLSearchParams(data)
     });
-
-    status.textContent=
-      "Thank you. Your enquiry has been submitted. We look forward to connecting with you.";
-
-    status.className="form-status show success";
-    status.style.display="block";
-
+    formMessage.textContent="Your enquiry has been submitted. Thank you for contacting Asterbridge.";
     form.reset();
-
-  }catch(error){
-
-    status.textContent=
-      "We could not send your enquiry. Please try again shortly.";
-
-    status.className="form-status show error";
-    status.style.display="block";
-
+  }catch(err){
+    formMessage.textContent="Unable to submit at the moment. Please try again.";
   }finally{
-
-    submit.disabled=false;
-    submit.style.opacity="1";
-    submit.innerHTML="Send enquiry ↗";
-
+    submitBtn.disabled=false;
+    submitBtn.innerHTML='SEND ENQUIRY <span>↗</span>';
   }
-
 });
 
-/* REDUCED MOTION */
-
-if(reduceMotion){
-  document.querySelectorAll(".fade-in").forEach(el=>el.classList.add("show"));
-}
-
+/* Entrance animations */
+gsap.from(".program-head",{y:40,opacity:0,duration:1,ease:"power2.out",scrollTrigger:{
+  trigger:".program-head",start:"top 80%",once:true
+}});
+gsap.from(".program-experience",{opacity:0,y:35,duration:1,scrollTrigger:{
+  trigger:".program-experience",start:"top 85%",once:true
+}});
+gsap.from(".closing-grid",{opacity:0,y:40,duration:1,scrollTrigger:{
+  trigger:".closing",start:"top 80%",once:true
+}});
 </script>
-
 </body>
 </html>

@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Register for personalised, exam-oriented online tutoring at Asterbridge Learning.">
+  <title>Student Registration | Asterbridge Learning</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <span class="logo">A<span>✦</span></span>
+    <span>ASTERBRIDGE<small>LEARNING</small></span>
+  </a>
+  <a class="btn" href="index.html">← Back to website</a>
+</header>
+
+<main>
+  <section class="contact" id="registration">
+    <div class="container">
+      <span class="tag">YOUR NEXT STEP STARTS HERE</span>
+      <h1>Let's build your academic success.</h1>
+      <p>Complete the registration form below. Tell us what you want to improve, and our team will follow up with you.</p>
+
+      <form id="contact-form" class="contactform">
+        <label>Name (parent/guardian if student is under 18)
+          <input name="name" required autocomplete="name" placeholder="Name">
+        </label>
+
+        <label>Email
+          <input name="email" type="email" required autocomplete="email" placeholder="Email address">
+        </label>
+
+        <div class="two">
+          <label>Province / territory
+            <select name="province">
+              <option value="">Select</option>
+              <option>Alberta</option>
+              <option>British Columbia</option>
+              <option>Manitoba</option>
+              <option>New Brunswick</option>
+              <option>Newfoundland and Labrador</option>
+              <option>Northwest Territories</option>
+              <option>Nova Scotia</option>
+              <option>Nunavut</option>
+              <option>Ontario</option>
+              <option>Prince Edward Island</option>
+              <option>Quebec</option>
+              <option>Saskatchewan</option>
+              <option>Yukon</option>
+            </select>
+          </label>
+
+          <label>Grade / level
+            <input name="grade" placeholder="e.g. Grade 10">
+          </label>
+        </div>
+
+        <label>Subject
+          <select name="subject" required>
+            <option value="">Select subject</option>
+            <option>Mathematics</option>
+            <option>Biology</option>
+            <option>Chemistry</option>
+            <option>Physics</option>
+            <option>English / writing</option>
+            <option>SAT / AP</option>
+            <option>Multiple subjects</option>
+          </select>
+        </label>
+
+        <label>Program / request
+          <select name="program" id="program">
+            <option>General enquiry</option>
+            <option>30-day assessment and plan — $100</option>
+            <option>One-to-one exam-oriented tutoring — $20/hour</option>
+            <option>30-day exam-prep crash course — $320</option>
+            <option>Custom weak-concept support / proofreading — $25/hour</option>
+          </select>
+        </label>
+
+        <label>Message
+          <textarea name="message" rows="4" placeholder="What are your goals, topic priorities and preferred schedule?"></textarea>
+        </label>
+
+        <button class="btn primary wide" type="submit">Submit registration ↗</button>
+
+        <p class="smallnote" id="form-status">
+          Please avoid sharing sensitive information. A parent or guardian should submit for students under 18.
+        </p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <a class="brand" href="index.html">
+    <span class="logo">A<span>✦</span></span>
+    <span>ASTERBRIDGE<small>LEARNING</small></span>
+  </a>
+  <p>Clarity changes everything.</p>
+  <small>© Asterbridge Learning. Independent online tutoring.</small>
+  <p><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+</footer>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const selectedProgram = params.get("program");
+  const programSelect = document.getElementById("program");
+
+  if (selectedProgram && programSelect) {
+    const matchingOption = [...programSelect.options].find(option =>
+      option.value === selectedProgram ||
+      option.text.toLowerCase().includes(selectedProgram.toLowerCase())
+    );
+
+    if (matchingOption) {
+      programSelect.value = matchingOption.value;
+    }
+  }
+</script>
+
+</body>
+</html>

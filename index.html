@@ -3,171 +3,161 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#071323">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#081321">
 
-<title>Asterbridge Learning | Education Beyond Boundaries</title>
-<meta name="description" content="Asterbridge Learning offers personalized academic guidance, science education, examination preparation, and structured learning pathways for students.">
-<meta name="robots" content="index, follow">
-
+<title>Asterbridge Learning — Education Beyond Boundaries</title>
+<meta name="description" content="Asterbridge Learning. Thoughtful academic guidance, science education, English, examination preparation and personalized learning.">
 <link rel="canonical" href="https://asterbridge-learning.pages.dev/">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --navy:#071323;
-  --navy2:#0b1c31;
-  --navy3:#122945;
-  --gold:#c8a96a;
-  --gold2:#e0c58d;
-  --ivory:#f5f1e8;
-  --white:#fff;
-  --muted:#9cabbc;
-  --line:rgba(200,169,106,.22);
+  --bg:#081321;
+  --bg2:#0d1b2a;
+  --panel:#102033;
+  --panel2:#14263a;
+  --cream:#e9e5dc;
+  --white:#f4f3ee;
+  --muted:#98a4b2;
+  --gold:#c3a16c;
+  --gold2:#dfc28a;
+  --line:rgba(222,226,230,.12);
   --serif:"Cormorant Garamond",serif;
-  --sans:"DM Sans",sans-serif;
+  --sans:"Manrope",sans-serif;
+  --body:"DM Sans",sans-serif;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 
-html{
-  scroll-behavior:smooth;
-  scroll-padding-top:90px;
-}
+html{scroll-behavior:smooth}
 
 body{
-  background:var(--navy);
-  color:var(--ivory);
-  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--white);
+  font-family:var(--body);
   overflow-x:hidden;
 }
 
-body.menu-open{overflow:hidden}
-
 a{color:inherit;text-decoration:none}
-
 button,input,select,textarea{font:inherit}
-
 button{cursor:pointer}
+img{max-width:100%}
 
 .container{
-  width:min(1180px,90%);
-  margin:auto;
+  width:min(1160px,88%);
+  margin-inline:auto;
+}
+
+.section{padding:110px 0}
+
+.small-label{
+  color:var(--gold);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:2.8px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.small-label:before{
+  content:"";
+  width:24px;
+  height:1px;
+  background:var(--gold);
+}
+
+.heading{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(38px,4.4vw,61px);
+  line-height:1.03;
+  letter-spacing:-.4px;
+}
+
+.heading em{color:var(--gold);font-weight:400}
+
+.body-copy{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.95;
 }
 
 .gold{color:var(--gold)}
 
-.section{
-  position:relative;
-  padding:120px 0;
+.fade-in{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .75s ease,transform .75s ease;
 }
 
-.eyebrow{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  color:var(--gold);
-  text-transform:uppercase;
-  letter-spacing:3px;
-  font-size:11px;
-  font-weight:600;
+.fade-in.show{
+  opacity:1;
+  transform:none;
 }
 
-.eyebrow::before{
-  content:"";
-  width:30px;
-  height:1px;
-  background:var(--gold);
-}
-
-.section-title{
-  font-family:var(--serif);
-  font-weight:500;
-  font-size:clamp(42px,6vw,75px);
-  line-height:.98;
-  margin-top:24px;
-}
-
-.section-description{
-  color:var(--muted);
-  line-height:1.9;
-  font-size:15px;
-  max-width:600px;
-  margin-top:24px;
-}
-
-.gold-line{
-  height:1px;
-  width:100%;
-  background:linear-gradient(90deg,var(--gold),transparent);
-  opacity:.4;
-}
+.rule{height:1px;background:var(--line)}
 
 .btn{
   display:inline-flex;
-  align-items:center;
   justify-content:center;
-  gap:12px;
-  padding:16px 24px;
+  align-items:center;
+  gap:16px;
+  padding:13px 19px;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.4px;
+  transition:.3s;
   border:1px solid var(--gold);
   background:var(--gold);
-  color:var(--navy);
-  text-transform:uppercase;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:1.6px;
-  transition:.3s;
+  color:var(--bg);
 }
 
 .btn:hover{
   background:transparent;
   color:var(--gold);
-  transform:translateY(-3px);
 }
 
-.btn-outline{
+.btn.secondary{
+  border-color:var(--line);
   background:transparent;
-  color:var(--ivory);
-  border-color:rgba(255,255,255,.25);
+  color:var(--white);
 }
 
-.btn-outline:hover{
+.btn.secondary:hover{
   border-color:var(--gold);
   color:var(--gold);
 }
 
-.reveal{
-  opacity:0;
-  transform:translateY(35px);
-  transition:opacity .8s ease,transform .8s ease;
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
 }
 
-.reveal.visible{
-  opacity:1;
-  transform:translateY(0);
-}
+/* NAV */
 
-/* NAVIGATION */
-
-.navbar{
+.nav{
   position:fixed;
-  inset:0 0 auto 0;
   z-index:1000;
-  height:85px;
+  top:0;
+  left:0;
+  width:100%;
+  height:76px;
   display:flex;
   align-items:center;
+  background:rgba(8,19,33,.76);
+  backdrop-filter:blur(16px);
   border-bottom:1px solid rgba(255,255,255,.07);
-  background:rgba(7,19,35,.82);
-  backdrop-filter:blur(18px);
-  transition:.3s;
+  transition:height .3s,background .3s;
 }
 
-.navbar.scrolled{
-  height:72px;
-  background:rgba(7,19,35,.97);
+.nav.scrolled{
+  height:65px;
+  background:rgba(8,19,33,.97);
 }
 
 .nav-inner{
@@ -176,739 +166,743 @@ button{cursor:pointer}
   justify-content:space-between;
 }
 
-.brand{
+.logo{
   display:flex;
   align-items:center;
-  gap:13px;
+  gap:12px;
 }
 
-.brand-symbol{
-  width:38px;
-  height:38px;
+.logo-mark{
+  width:34px;
+  height:34px;
   border:1px solid var(--gold);
-  display:flex;
-  align-items:center;
-  justify-content:center;
   color:var(--gold);
+  display:grid;
+  place-items:center;
   font-family:var(--serif);
-  font-size:24px;
-  transform:rotate(45deg);
+  font-size:23px;
 }
 
-.brand-symbol span{transform:rotate(-45deg)}
+.logo-text{display:flex;flex-direction:column;gap:2px}
 
-.brand-text{
-  display:flex;
-  flex-direction:column;
-}
-
-.brand-name{
+.logo-title{
   font-family:var(--serif);
-  font-size:24px;
-  letter-spacing:.5px;
+  font-size:22px;
   line-height:1;
 }
 
-.brand-sub{
+.logo-sub{
   font-size:8px;
-  letter-spacing:3px;
+  letter-spacing:2.8px;
   text-transform:uppercase;
   color:var(--gold);
-  margin-top:5px;
 }
 
 .nav-links{
   display:flex;
   align-items:center;
-  gap:35px;
   list-style:none;
+  gap:30px;
 }
 
 .nav-links a{
-  color:#c6cfda;
-  font-size:11px;
-  letter-spacing:1px;
-  transition:.3s;
+  font-size:10px;
+  color:#c0cad4;
+  transition:color .2s;
 }
 
 .nav-links a:hover{color:var(--gold)}
 
-.nav-links .nav-cta{
+.nav-links .contact-link{
+  border:1px solid rgba(195,161,108,.65);
   color:var(--gold);
-  border:1px solid var(--gold);
-  padding:12px 17px;
+  padding:11px 15px;
 }
 
-.menu-btn{
+.menu-toggle{
   display:none;
-  background:none;
   border:0;
-  color:var(--ivory);
-  font-size:25px;
+  background:none;
+  color:var(--white);
+  font-size:23px;
 }
 
 /* HERO */
 
 .hero{
-  min-height:100vh;
+  min-height:100svh;
   position:relative;
+  overflow:hidden;
   display:flex;
   align-items:center;
-  overflow:hidden;
-  padding:130px 0 90px;
   background:
-    radial-gradient(ellipse at 75% 40%,rgba(34,69,105,.35),transparent 50%),
-    linear-gradient(135deg,#071323 0%,#0a1c32 60%,#071323 100%);
-}
-
-#particles{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
+    radial-gradient(ellipse at 70% 45%,rgba(36,64,92,.36),transparent 55%),
+    var(--bg);
+  padding:125px 0 70px;
 }
 
 .hero-grid{
   position:absolute;
   inset:0;
+  opacity:.17;
   background-image:
-    linear-gradient(rgba(200,169,106,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(200,169,106,.035) 1px,transparent 1px);
-  background-size:80px 80px;
-  mask-image:linear-gradient(to bottom,black,transparent);
+    linear-gradient(to right,rgba(200,169,106,.12) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(200,169,106,.12) 1px,transparent 1px);
+  background-size:70px 70px;
+  mask-image:linear-gradient(to bottom,black,transparent 90%);
 }
 
 .hero-content{
-  position:relative;
-  z-index:2;
-  width:100%;
   display:grid;
   grid-template-columns:1.12fr .88fr;
   align-items:center;
-  gap:50px;
+  gap:60px;
+  position:relative;
+  z-index:2;
 }
 
-.hero-text{max-width:720px}
+.hero-copy{max-width:620px}
 
-.hero-kicker{
-  color:var(--gold);
-  text-transform:uppercase;
-  font-size:11px;
-  letter-spacing:4px;
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin-bottom:30px;
-}
+.hero-copy .small-label{margin-bottom:27px}
 
-.hero-kicker:before{
-  content:"";
-  width:45px;
-  height:1px;
-  background:var(--gold);
-}
-
-.hero h1{
+.hero-title{
   font-family:var(--serif);
+  font-size:clamp(55px,6.5vw,88px);
   font-weight:400;
-  font-size:clamp(65px,8.5vw,115px);
-  line-height:.88;
-  letter-spacing:-2px;
+  line-height:.97;
+  letter-spacing:-1px;
 }
 
-.hero h1 span{
-  display:block;
+.hero-title .second{
   color:var(--gold);
   font-style:italic;
 }
 
+.hero-title .third{
+  display:block;
+  color:#d8dce0;
+  font-size:.68em;
+  margin-top:8px;
+  letter-spacing:0;
+}
+
 .hero-description{
-  color:#b2c0cf;
-  max-width:490px;
-  font-size:15px;
+  margin-top:26px;
+  max-width:440px;
+  color:#a9b5c2;
+  font-size:14px;
   line-height:1.9;
-  margin:30px 0 35px;
 }
 
-.hero-buttons{
+.hero-actions{
   display:flex;
+  gap:12px;
+  margin-top:29px;
   flex-wrap:wrap;
-  gap:14px;
 }
 
-.hero-footnote{
-  margin-top:55px;
+.hero-meta{
+  margin-top:42px;
   display:flex;
-  align-items:center;
-  gap:16px;
-  color:#7d91a6;
-  font-size:10px;
+  gap:25px;
+  color:#8291a3;
+  font-size:9px;
   letter-spacing:1.4px;
   text-transform:uppercase;
 }
 
-.hero-footnote .dot{
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:var(--gold);
-}
-
-/* ORBIT */
-
-.hero-visual{
+.hero-meta span{
   display:flex;
+  gap:9px;
   align-items:center;
-  justify-content:center;
-  min-height:480px;
-  perspective:1000px;
 }
 
-.orbit-scene{
-  width:min(440px,100%);
-  aspect-ratio:1;
+.hero-meta span:before{
+  content:"";
+  width:4px;
+  height:4px;
+  background:var(--gold);
+  border-radius:50%;
+}
+
+/* HERO OBJECT */
+
+.hero-object{
+  height:460px;
+  display:grid;
+  place-items:center;
+  perspective:900px;
   position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
-.orbit{
+.object-wrap{
+  width:320px;
+  height:320px;
+  position:relative;
+  transform-style:preserve-3d;
+  animation:objectFloat 8s ease-in-out infinite;
+}
+
+.object-ring{
   position:absolute;
-  border:1px solid rgba(200,169,106,.22);
+  inset:20px;
+  border:1px solid rgba(195,161,108,.32);
   border-radius:50%;
-  transform:rotate(-25deg);
+  transform:rotateX(67deg) rotateZ(-20deg);
 }
 
-.orbit-one{width:100%;height:65%}
-.orbit-two{width:80%;height:100%;transform:rotate(45deg)}
-.orbit-three{width:68%;height:68%;border-color:rgba(255,255,255,.1)}
-
-.orbit-center{
-  width:180px;
-  height:180px;
-  border:1px solid rgba(200,169,106,.45);
-  background:radial-gradient(circle,rgba(200,169,106,.16),rgba(10,28,49,.1) 65%);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  transform:rotate(45deg);
-  box-shadow:0 0 70px rgba(200,169,106,.08);
+.object-ring.r2{
+  inset:40px -5px;
+  transform:rotateY(67deg) rotateZ(20deg);
+  border-color:rgba(195,161,108,.19);
 }
 
-.orbit-center-inner{transform:rotate(-45deg);text-align:center}
+.object-ring.r3{
+  inset:0;
+  transform:rotateX(18deg) rotateZ(35deg);
+  border-color:rgba(255,255,255,.12);
+}
 
-.orbit-center .monogram{
+.object-core{
+  position:absolute;
+  width:145px;
+  height:145px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) rotateX(12deg) rotateY(-20deg);
+  background:linear-gradient(135deg,#c6a36b,#7d6137 45%,#d5b77d);
+  box-shadow:
+    25px 25px 55px rgba(0,0,0,.45),
+    inset -20px -20px 30px rgba(0,0,0,.22),
+    inset 15px 15px 25px rgba(255,255,255,.15);
+}
+
+.object-core:before{
+  content:"A";
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:#132338;
   font-family:var(--serif);
-  color:var(--gold);
-  font-size:72px;
-  line-height:1;
+  font-size:88px;
 }
 
-.orbit-center small{
-  font-size:8px;
-  letter-spacing:4px;
-  color:var(--ivory);
-  text-transform:uppercase;
-}
-
-.orbit-node{
+.object-core:after{
+  content:"";
   position:absolute;
-  width:12px;
-  height:12px;
+  inset:0;
+  border:1px solid rgba(255,255,255,.18);
+}
+
+.object-shadow{
+  position:absolute;
+  bottom:25px;
+  left:50%;
+  width:180px;
+  height:35px;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.25);
+  filter:blur(20px);
   border-radius:50%;
-  background:var(--gold);
-  box-shadow:0 0 20px rgba(200,169,106,.5);
 }
 
-.node-one{top:8%;left:45%}
-.node-two{right:7%;top:53%}
-.node-three{left:8%;bottom:19%}
-
-.orbit-label{
+.object-caption{
   position:absolute;
-  color:var(--gold);
+  bottom:15px;
+  right:5px;
+  color:#8b99a9;
   font-size:9px;
   letter-spacing:2px;
   text-transform:uppercase;
-  white-space:nowrap;
 }
 
-.label-one{top:13%;right:4%}
-.label-two{bottom:8%;left:3%}
-.label-three{top:46%;left:-5%}
+@keyframes objectFloat{
+  0%,100%{transform:translateY(0) rotateY(-5deg)}
+  50%{transform:translateY(-13px) rotateY(7deg)}
+}
 
-.scroll-indicator{
+.hero-bottom{
   position:absolute;
-  bottom:30px;
-  left:50%;
-  transform:translateX(-50%);
+  bottom:25px;
+  left:0;
+  right:0;
   display:flex;
-  align-items:center;
-  flex-direction:column;
-  gap:10px;
-  color:#718399;
-  text-transform:uppercase;
+  justify-content:space-between;
+  color:#748397;
   font-size:9px;
-  letter-spacing:3px;
-}
-
-.scroll-indicator:after{
-  content:"";
-  height:35px;
-  width:1px;
-  background:linear-gradient(var(--gold),transparent);
+  letter-spacing:1.5px;
+  text-transform:uppercase;
 }
 
 /* INTRO */
 
 .intro{
-  background:var(--ivory);
-  color:var(--navy);
-  padding:125px 0;
+  background:var(--cream);
+  color:#142438;
+  padding:100px 0;
 }
 
 .intro-grid{
   display:grid;
-  grid-template-columns:.75fr 1.25fr;
-  gap:90px;
+  grid-template-columns:.85fr 1.15fr;
+  gap:80px;
   align-items:start;
 }
 
-.intro .eyebrow{color:#94733b}
+.intro .small-label{color:#987847}
 
-.intro h2{
-  font-family:var(--serif);
-  font-weight:500;
-  font-size:clamp(43px,5.4vw,72px);
-  line-height:1;
-}
-
-.intro h2 span{
-  color:#94733b;
-  font-style:italic;
-}
+.intro .heading{margin-top:23px}
 
 .intro-text{
-  color:#596777;
-  font-size:15px;
+  color:#586777;
+  font-size:14px;
   line-height:2;
 }
 
-.intro-text p+p{margin-top:22px}
+.intro-text p+p{margin-top:20px}
 
-.intro-bottom{
+.intro-signature{
+  margin-top:36px;
+  border-top:1px solid rgba(16,32,51,.15);
+  padding-top:20px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  border-top:1px solid rgba(7,19,35,.15);
-  margin-top:65px;
-  padding-top:25px;
-  gap:20px;
-}
-
-.intro-bottom span{
-  color:#8b7652;
-  font-size:10px;
-  letter-spacing:2px;
+  flex-wrap:wrap;
+  gap:12px;
+  font-size:9px;
+  color:#947849;
+  letter-spacing:1.5px;
   text-transform:uppercase;
 }
 
-/* PHILOSOPHY */
+/* PINNED STORY */
 
-.philosophy{
-  background:var(--navy2);
+.story{
+  background:#0b1827;
+  padding:0;
+}
+
+.story-scroll{
+  height:300vh;
+  position:relative;
+}
+
+.story-sticky{
+  position:sticky;
+  top:0;
+  height:100svh;
+  min-height:620px;
+  display:flex;
+  align-items:center;
   overflow:hidden;
 }
 
-.philosophy-heading{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:30px;
-  margin-bottom:65px;
+.story-bg{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 68% 50%,rgba(43,70,99,.32),transparent 38%),
+    #0b1827;
 }
 
-.philosophy-heading .section-description{max-width:380px}
+.story-bg:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:100% 65px;
+}
 
-.philosophy-grid{
+.story-layout{
+  width:min(1160px,88%);
+  margin:auto;
+  position:relative;
+  z-index:2;
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;
-  background:var(--line);
-  border:1px solid var(--line);
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:center;
 }
 
-.philosophy-card{
-  background:var(--navy2);
-  padding:42px 35px;
-  min-height:300px;
-  transition:.4s;
+.story-left .small-label{margin-bottom:25px}
+
+.story-left h2{
+  font-family:var(--serif);
+  font-size:clamp(38px,4.2vw,58px);
+  font-weight:400;
+  line-height:1.05;
 }
 
-.philosophy-card:hover{
-  background:#10243c;
-}
-
-.card-number{
+.story-left h2 em{
   color:var(--gold);
-  font-family:var(--serif);
-  font-size:35px;
+  font-style:italic;
 }
 
-.philosophy-card h3{
-  font-family:var(--serif);
-  font-size:32px;
-  font-weight:500;
-  margin:35px 0 18px;
+.story-progress{
+  display:flex;
+  gap:8px;
+  margin-top:35px;
 }
 
-.philosophy-card p{
-  color:var(--muted);
+.story-progress span{
+  width:36px;
+  height:2px;
+  background:rgba(255,255,255,.17);
+  transition:background .4s;
+}
+
+.story-progress span.active{background:var(--gold)}
+
+.story-right{
+  min-height:360px;
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+
+.story-panel{
+  position:absolute;
+  width:100%;
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .6s,transform .6s;
+  pointer-events:none;
+}
+
+.story-panel.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.story-number{
+  font-family:var(--serif);
+  font-size:70px;
+  color:rgba(195,161,108,.22);
+  line-height:1;
+}
+
+.story-panel h3{
+  font-family:var(--serif);
+  font-size:34px;
+  font-weight:400;
+  margin:15px 0;
+}
+
+.story-panel p{
+  color:#a5b2c1;
+  max-width:410px;
   font-size:13px;
-  line-height:1.9;
+  line-height:1.95;
+}
+
+.story-accent{
+  margin-top:28px;
+  width:60px;
+  height:1px;
+  background:var(--gold);
+}
+
+.story-object{
+  position:absolute;
+  right:7%;
+  width:230px;
+  height:230px;
+  border:1px solid rgba(195,161,108,.2);
+  transform:rotate(45deg);
+  transition:transform .8s;
+}
+
+.story-object:before,
+.story-object:after{
+  content:"";
+  position:absolute;
+  inset:20px;
+  border:1px solid rgba(195,161,108,.15);
+}
+
+.story-object:after{
+  inset:45px;
+  background:linear-gradient(135deg,rgba(195,161,108,.12),rgba(23,40,61,.05));
+}
+
+.story-object.object-2{transform:rotate(20deg) scale(.8)}
+.story-object.object-3{transform:rotate(65deg) scale(1.1)}
+
+.story-scroll-hint{
+  position:absolute;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:9px;
+  color:#7d8c9d;
+  letter-spacing:2px;
+  text-transform:uppercase;
 }
 
 /* PROGRAMS */
 
 .programs{
-  background:#081626;
+  background:#101e2e;
 }
 
-.program-heading{
-  margin-bottom:60px;
+.program-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:45px;
+  margin-bottom:50px;
 }
 
-.program-list{
+.program-header .header-copy{max-width:460px}
+
+.program-header .heading{margin-top:20px}
+
+.program-header .body-copy{max-width:390px}
+
+.program-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
   border-top:1px solid var(--line);
 }
 
-.program-item{
-  display:grid;
-  grid-template-columns:80px 1fr 50px;
-  gap:30px;
-  align-items:center;
-  padding:35px 10px;
+.program{
+  padding:30px 28px 32px 0;
   border-bottom:1px solid var(--line);
-  transition:.35s;
+  display:grid;
+  grid-template-columns:44px 1fr 30px;
+  gap:15px;
+  align-items:start;
+  transition:background .3s;
 }
 
-.program-item:hover{
-  padding-left:22px;
-  background:rgba(200,169,106,.035);
+.program:nth-child(even){
+  padding-left:28px;
+  border-left:1px solid var(--line);
 }
 
 .program-index{
-  font-family:var(--serif);
   color:var(--gold);
-  font-size:35px;
-}
-
-.program-item h3{
   font-family:var(--serif);
-  font-weight:500;
-  font-size:35px;
+  font-size:24px;
 }
 
-.program-item p{
+.program-content h3{
+  font-size:16px;
+  font-weight:500;
+  margin-bottom:9px;
+}
+
+.program-content p{
   color:var(--muted);
-  font-size:13px;
-  line-height:1.8;
-  max-width:650px;
-  margin-top:8px;
+  font-size:12px;
+  line-height:1.85;
 }
 
 .program-arrow{
-  width:42px;
-  height:42px;
-  border:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:center;
   color:var(--gold);
-  transition:.3s;
+  font-size:16px;
+  transition:transform .3s;
 }
 
-.program-item:hover .program-arrow{
-  background:var(--gold);
-  color:var(--navy);
-}
+.program:hover .program-arrow{transform:translate(4px,-4px)}
 
-/* JOURNEY */
+.program:hover .program-content h3{color:var(--gold2)}
+
+.program{cursor:pointer}
+
+/* JOURNEY TIMELINE */
 
 .journey{
-  background:var(--ivory);
-  color:var(--navy);
+  background:#081321;
+  padding:0;
 }
 
-.journey .eyebrow{color:#94743d}
+.journey-scroll{height:240vh}
 
-.journey-top{
+.journey-sticky{
+  position:sticky;
+  top:0;
+  height:100svh;
+  min-height:620px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+
+.journey-inner{
+  width:min(1160px,88%);
+  margin:auto;
+}
+
+.journey-header{
   display:flex;
   justify-content:space-between;
-  gap:40px;
   align-items:end;
   margin-bottom:65px;
 }
 
-.journey-top .section-description{max-width:420px;color:#687583}
+.journey-header .heading{margin-top:20px}
 
-.journey-grid{
+.journey-header .body-copy{max-width:390px}
+
+.journey-track{
+  position:relative;
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:24px;
 }
 
-.journey-card{
-  min-height:350px;
-  padding:35px;
-  position:relative;
-  background:#fff;
-  border:1px solid rgba(7,19,35,.08);
-  box-shadow:0 20px 50px rgba(7,19,35,.04);
-  transform-style:preserve-3d;
-  transition:transform .2s ease,box-shadow .3s;
-}
-
-.journey-card:hover{
-  box-shadow:0 25px 60px rgba(7,19,35,.1);
-}
-
-.journey-card .card-symbol{
-  font-family:var(--serif);
-  font-size:58px;
-  color:#b4945a;
-  line-height:1;
-}
-
-.journey-card h3{
-  font-family:var(--serif);
-  font-size:34px;
-  font-weight:500;
-  margin:25px 0 15px;
-}
-
-.journey-card p{
-  color:#687583;
-  font-size:13px;
-  line-height:1.9;
-}
-
-.journey-card .card-footer{
-  position:absolute;
-  bottom:30px;
-  left:35px;
-  right:35px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-top:1px solid rgba(7,19,35,.1);
-  padding-top:18px;
-  font-size:10px;
-  color:#94733b;
-  text-transform:uppercase;
-  letter-spacing:2px;
-}
-
-/* STATEMENT */
-
-.statement{
-  padding:130px 0;
-  background:
-    radial-gradient(ellipse at center,rgba(200,169,106,.08),transparent 70%),
-    var(--navy);
-  text-align:center;
-}
-
-.statement-inner{max-width:900px;margin:auto}
-
-.statement-mark{
-  font-family:var(--serif);
-  font-size:70px;
-  color:var(--gold);
-  line-height:1;
-}
-
-.statement h2{
-  font-family:var(--serif);
-  font-size:clamp(45px,6vw,82px);
-  font-weight:400;
-  line-height:1.05;
-  margin:25px 0;
-}
-
-.statement h2 span{
-  color:var(--gold);
-  font-style:italic;
-}
-
-.statement p{
-  color:var(--muted);
-  line-height:1.9;
-  max-width:550px;
-  margin:25px auto 0;
-  font-size:14px;
-}
-
-/* ABOUT */
-
-.about{
-  background:var(--navy2);
-}
-
-.about-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:85px;
-  align-items:center;
-}
-
-.about-visual{
-  min-height:470px;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    radial-gradient(circle at center,rgba(200,169,106,.13),transparent 55%),
-    linear-gradient(135deg,#0b1c31,#071323);
-  border:1px solid var(--line);
-  overflow:hidden;
-}
-
-.about-visual:before,
-.about-visual:after{
+.journey-track:before{
   content:"";
   position:absolute;
-  border:1px solid rgba(200,169,106,.18);
-  transform:rotate(45deg);
+  top:17px;
+  left:0;
+  right:0;
+  height:1px;
+  background:rgba(195,161,108,.25);
 }
 
-.about-visual:before{width:250px;height:250px}
-.about-visual:after{width:180px;height:180px}
+.journey-stage{position:relative;padding:0 28px 0 0}
 
-.about-logo{
+.journey-stage:nth-child(2){padding-left:20px}
+.journey-stage:nth-child(3){padding-left:35px}
+
+.stage-dot{
+  width:35px;
+  height:35px;
   position:relative;
   z-index:2;
-  text-align:center;
-}
-
-.about-logo .big-letter{
-  font-family:var(--serif);
-  font-size:150px;
-  line-height:1;
-  color:var(--gold);
-  font-weight:400;
-}
-
-.about-logo p{
-  font-size:9px;
-  letter-spacing:5px;
-  color:var(--ivory);
-  text-transform:uppercase;
-}
-
-.about-copy h2{
-  font-family:var(--serif);
-  font-size:clamp(45px,5vw,67px);
-  line-height:.98;
-  font-weight:500;
-  margin:25px 0;
-}
-
-.about-copy h2 span{
-  color:var(--gold);
-  font-style:italic;
-}
-
-.about-copy>p{
-  color:var(--muted);
-  font-size:14px;
-  line-height:2;
-}
-
-.about-points{
-  margin-top:35px;
+  border:1px solid rgba(195,161,108,.5);
+  background:var(--bg);
   display:grid;
-  gap:18px;
-}
-
-.about-point{
-  display:flex;
-  gap:15px;
-  align-items:start;
-}
-
-.about-point .point{
+  place-items:center;
+  font-size:10px;
   color:var(--gold);
-  font-size:17px;
+  transition:.4s;
 }
 
-.about-point p{
-  color:#c4cfda;
-  font-size:12px;
-  line-height:1.8;
+.journey-stage.active .stage-dot{
+  background:var(--gold);
+  color:var(--bg);
+  box-shadow:0 0 25px rgba(195,161,108,.18);
 }
+
+.stage-title{
+  font-family:var(--serif);
+  font-size:31px;
+  font-weight:400;
+  margin-top:30px;
+}
+
+.stage-copy{
+  margin-top:13px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.9;
+  max-width:300px;
+  transition:opacity .4s;
+}
+
+.stage-foot{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  font-size:9px;
+  margin-top:25px;
+}
+
+.journey-progress{
+  height:2px;
+  background:rgba(255,255,255,.1);
+  margin-top:55px;
+  position:relative;
+}
+
+.journey-progress-fill{
+  height:100%;
+  width:0;
+  background:var(--gold);
+  transition:width .15s linear;
+}
+
+/* CLOSING */
+
+.closing{
+  padding:105px 0;
+  background:#e9e5dc;
+  color:#102033;
+}
+
+.closing-grid{
+  display:grid;
+  grid-template-columns:1fr .8fr;
+  gap:70px;
+  align-items:center;
+}
+
+.closing .small-label{color:#917344}
+
+.closing h2{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(42px,4.5vw,63px);
+  line-height:1.02;
+  margin-top:24px;
+}
+
+.closing h2 em{color:#947545}
+
+.closing-text{
+  color:#637181;
+  font-size:13px;
+  line-height:1.95;
+}
+
+.closing-text p+p{margin-top:20px}
+
+.closing .btn{margin-top:28px}
 
 /* CONTACT */
 
 .contact{
-  background:var(--ivory);
-  color:var(--navy);
+  background:#101e2e;
 }
 
-.contact-grid{
+.contact-layout{
   display:grid;
-  grid-template-columns:.85fr 1.15fr;
+  grid-template-columns:.8fr 1.2fr;
   gap:75px;
 }
 
-.contact .eyebrow{color:#94733b}
+.contact-copy .heading{margin-top:24px}
 
-.contact-copy h2{
-  font-family:var(--serif);
-  font-size:clamp(50px,6vw,78px);
-  line-height:.95;
-  font-weight:500;
-  margin:25px 0;
+.contact-copy p{
+  margin-top:20px;
+  max-width:380px;
 }
 
-.contact-copy h2 span{
-  color:#94733b;
-  font-style:italic;
-}
-
-.contact-copy>p{
-  color:#657384;
-  font-size:14px;
-  line-height:1.9;
-}
-
-.contact-note{
-  margin-top:35px;
-  padding-top:25px;
-  border-top:1px solid rgba(7,19,35,.15);
-  color:#8c7650;
+.contact-detail{
+  margin-top:38px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  color:#7f90a3;
   font-size:10px;
-  letter-spacing:1.5px;
   line-height:1.8;
+  letter-spacing:1px;
   text-transform:uppercase;
 }
 
-.contact-form{
-  padding:40px;
-  background:white;
-  border:1px solid rgba(7,19,35,.08);
-  box-shadow:0 20px 60px rgba(7,19,35,.05);
+.form-box{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.015);
+  padding:35px;
 }
 
-.form-heading{
+.form-title{
   font-family:var(--serif);
-  font-size:34px;
-  font-weight:500;
-  margin-bottom:30px;
+  font-size:31px;
+  font-weight:400;
+  margin-bottom:28px;
 }
 
 .form-grid{
@@ -917,334 +911,243 @@ button{cursor:pointer}
   gap:22px;
 }
 
-.form-field{
+.field{
   display:flex;
   flex-direction:column;
-  gap:9px;
+  gap:8px;
 }
 
-.form-field.full{grid-column:1/-1}
+.field.full{grid-column:1/-1}
 
-.form-field label{
-  color:#697888;
-  font-size:10px;
-  letter-spacing:1.5px;
+.field label{
+  font-size:9px;
   text-transform:uppercase;
+  letter-spacing:1.4px;
+  color:#95a4b3;
 }
 
-.form-field input,
-.form-field select,
-.form-field textarea{
+.field input,.field select,.field textarea{
   width:100%;
   border:0;
-  border-bottom:1px solid #dce1e6;
+  border-bottom:1px solid rgba(255,255,255,.15);
   background:transparent;
-  padding:12px 0;
-  color:var(--navy);
   border-radius:0;
+  padding:12px 0;
   outline:none;
-  font-size:13px;
+  color:var(--white);
+  font-size:12px;
 }
 
-.form-field input:focus,
-.form-field select:focus,
-.form-field textarea:focus{
-  border-color:#a88951;
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--gold);
 }
 
-.form-field select{cursor:pointer}
+.field input::placeholder,.field textarea::placeholder{color:#68798b}
 
-.form-field select option{background:white;color:var(--navy)}
+.field select{color:#b6c1cc}
+.field select option{background:#102033;color:#fff}
 
-.form-field textarea{
-  min-height:100px;
-  resize:vertical;
-}
+.field textarea{min-height:95px;resize:vertical}
 
-.form-field input::placeholder,
-.form-field textarea::placeholder{
-  color:#aab4be;
-}
-
-.form-submit{
-  margin-top:28px;
+.submit{
+  margin-top:25px;
   width:100%;
 }
 
-.form-message{
-  font-size:12px;
-  margin-top:15px;
-  line-height:1.6;
+.form-status{
   display:none;
+  margin-top:14px;
+  font-size:12px;
+  line-height:1.7;
 }
 
-.form-message.show{display:block}
+.form-status.show{display:block}
+.form-status.success{color:#a9d4ba}
+.form-status.error{color:#e6a5a5}
 
-.form-message.success{color:#287c55}
-.form-message.error{color:#b54545}
-
-.form-privacy{
-  font-size:10px;
-  color:#97a2ae;
-  line-height:1.7;
-  margin-top:15px;
+.privacy{
+  margin-top:13px;
+  font-size:9px;
+  line-height:1.8;
+  color:#728295;
 }
 
 /* FOOTER */
 
 .footer{
-  background:#050e1a;
-  padding:70px 0 25px;
+  background:#060e18;
+  padding:55px 0 22px;
 }
 
-.footer-top{
+.footer-main{
   display:flex;
   justify-content:space-between;
-  gap:50px;
   align-items:start;
-  padding-bottom:50px;
+  gap:40px;
+  padding-bottom:40px;
 }
 
-.footer-description{
-  color:#8292a5;
+.footer-about{max-width:330px}
+
+.footer-about p{
+  margin-top:16px;
+  color:#7f8e9f;
   font-size:12px;
   line-height:1.9;
-  max-width:350px;
-  margin-top:20px;
 }
 
 .footer-links{
   display:flex;
   flex-wrap:wrap;
-  gap:30px;
+  gap:24px;
 }
 
 .footer-links a{
-  color:#9ba9b8;
-  font-size:11px;
-  transition:.3s;
+  font-size:10px;
+  color:#a2afbd;
 }
 
 .footer-links a:hover{color:var(--gold)}
 
 .footer-bottom{
   border-top:1px solid rgba(255,255,255,.08);
-  padding-top:22px;
+  padding-top:20px;
   display:flex;
   justify-content:space-between;
   gap:20px;
   color:#657487;
-  font-size:10px;
-  letter-spacing:.5px;
+  font-size:9px;
+  letter-spacing:.4px;
 }
-
-/* BACK TO TOP */
 
 .back-top{
   position:fixed;
-  bottom:25px;
-  right:25px;
-  z-index:500;
-  width:44px;
-  height:44px;
+  bottom:22px;
+  right:22px;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
   background:var(--gold);
-  color:var(--navy);
+  color:var(--bg);
   border:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
+  z-index:99;
   opacity:0;
   visibility:hidden;
   transition:.3s;
 }
 
-.back-top.visible{
-  opacity:1;
-  visibility:visible;
-}
-
-.back-top:hover{transform:translateY(-4px)}
+.back-top.visible{opacity:1;visibility:visible}
 
 /* RESPONSIVE */
 
-@media(max-width:1000px){
+@media(max-width:900px){
 
-  .hero-content{
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-
-  .hero-text{max-width:750px}
-
-  .hero-visual{
-    min-height:350px;
-    max-width:480px;
-    margin:0 auto;
-  }
-
-  .hero{padding-bottom:110px}
-
+  .hero-content{grid-template-columns:1fr 1fr;gap:25px}
+  .hero-title{font-size:clamp(52px,7vw,75px)}
+  .hero-object{height:350px}
+  .object-wrap{width:250px;height:250px}
+  .object-core{width:115px;height:115px}
+  .object-core:before{font-size:70px}
   .intro-grid{gap:45px}
-
-  .philosophy-card{padding:30px 25px}
-
-  .journey-grid{gap:15px}
-
-  .journey-card{padding:28px}
-
-  .journey-card .card-footer{
-    left:28px;
-    right:28px;
-  }
-
-  .about-grid{gap:45px}
-
-  .contact-grid{gap:40px}
+  .story-layout{gap:35px}
+  .story-object{width:150px;height:150px;right:0}
+  .program-header{align-items:start}
+  .journey-header{gap:35px}
+  .closing-grid{gap:40px}
+  .contact-layout{gap:40px}
 }
 
-@media(max-width:760px){
+@media(max-width:700px){
 
-  .section{padding:85px 0}
-
-  .navbar{height:72px}
-
-  .brand-name{font-size:21px}
-
-  .menu-btn{display:block;z-index:1002}
-
+  .container{width:89%}
+  .section{padding:80px 0}
+  .nav{height:67px}
+  .menu-toggle{display:block;z-index:1002}
   .nav-links{
     position:fixed;
     inset:0;
-    height:100vh;
-    background:rgba(5,14,26,.98);
+    height:100svh;
+    background:rgba(8,19,33,.98);
+    display:flex;
     flex-direction:column;
     justify-content:center;
-    gap:32px;
+    align-items:center;
+    gap:28px;
     transform:translateX(100%);
-    transition:transform .4s ease;
-    z-index:1001;
+    transition:transform .35s;
   }
-
   .nav-links.open{transform:translateX(0)}
+  .nav-links a{font-size:13px}
+  body.menu-open{overflow:hidden}
 
-  .nav-links a{font-size:14px}
+  .hero{min-height:auto;padding:115px 0 80px}
+  .hero-content{grid-template-columns:1fr}
+  .hero-title{font-size:clamp(54px,13vw,78px)}
+  .hero-description{font-size:13px}
+  .hero-object{height:300px;margin-top:5px}
+  .object-wrap{width:230px;height:230px}
+  .hero-bottom{bottom:15px;font-size:8px}
+  .hero-meta{gap:15px;flex-wrap:wrap}
 
-  .hero{
-    min-height:auto;
-    padding:130px 0 95px;
+  .intro-grid{grid-template-columns:1fr;gap:25px}
+  .intro-signature{gap:12px}
+
+  /* Mobile pinned narrative */
+  .story-scroll{height:240vh}
+  .story-sticky{min-height:550px;height:100svh}
+  .story-layout{grid-template-columns:1fr;gap:35px}
+  .story-left h2{font-size:43px}
+  .story-right{min-height:270px}
+  .story-panel h3{font-size:29px}
+  .story-panel p{font-size:12px;max-width:340px}
+  .story-number{font-size:55px}
+  .story-object{width:125px;height:125px;right:3%;opacity:.65}
+  .story-scroll-hint{bottom:17px}
+
+  .program-header{display:block}
+  .program-header .body-copy{margin-top:22px}
+  .program-grid{grid-template-columns:1fr}
+  .program,.program:nth-child(even){
+    padding:24px 0;
+    border-left:0;
+    grid-template-columns:36px 1fr 22px;
   }
+  .program-content h3{font-size:15px}
+  .program-content p{font-size:11px}
 
-  .hero h1{font-size:clamp(63px,15vw,95px)}
-
-  .hero-content{gap:0}
-
-  .hero-visual{min-height:320px}
-
-  .orbit-label{font-size:8px}
-
-  .orbit-scene{max-width:340px}
-
-  .orbit-center{width:135px;height:135px}
-
-  .orbit-center .monogram{font-size:58px}
-
-  .scroll-indicator{bottom:15px}
-
-  .intro-grid{grid-template-columns:1fr;gap:30px}
-
-  .intro-bottom{
-    margin-top:45px;
-    flex-wrap:wrap;
+  .journey-scroll{height:240vh}
+  .journey-sticky{min-height:550px}
+  .journey-header{display:block;margin-bottom:45px}
+  .journey-header .body-copy{margin-top:20px}
+  .journey-track{grid-template-columns:1fr;gap:24px}
+  .journey-track:before{left:17px;right:auto;top:0;bottom:0;width:1px;height:auto}
+  .journey-stage,.journey-stage:nth-child(2),.journey-stage:nth-child(3){
+    padding:0;
+    display:grid;
+    grid-template-columns:35px 1fr;
+    gap:0 18px;
   }
+  .stage-dot{grid-row:1/4}
+  .stage-title{margin:0;font-size:26px}
+  .stage-copy{margin-top:8px;max-width:400px}
+  .stage-foot{margin-top:10px}
+  .journey-progress{margin-top:28px}
 
-  .philosophy-heading,
-  .journey-top{
-    display:block;
-  }
-
-  .philosophy-heading .section-description,
-  .journey-top .section-description{
-    margin-top:20px;
-  }
-
-  .philosophy-grid{grid-template-columns:1fr}
-
-  .philosophy-card{min-height:auto;padding:35px}
-
-  .philosophy-card h3{margin:20px 0 12px}
-
-  .program-item{
-    grid-template-columns:45px 1fr 38px;
-    gap:12px;
-    padding:25px 5px;
-  }
-
-  .program-index{font-size:25px}
-
-  .program-item h3{font-size:27px}
-
-  .program-item p{font-size:12px}
-
-  .program-arrow{width:34px;height:34px}
-
-  .journey-grid{grid-template-columns:1fr}
-
-  .journey-card{min-height:300px}
-
-  .statement{padding:100px 0}
-
-  .about-grid{grid-template-columns:1fr}
-
-  .about-visual{min-height:330px}
-
-  .about-logo .big-letter{font-size:115px}
-
-  .contact-grid{grid-template-columns:1fr}
-
-  .contact-form{padding:28px 22px}
-
+  .closing-grid{grid-template-columns:1fr;gap:25px}
+  .contact-layout{grid-template-columns:1fr}
+  .form-box{padding:26px 20px}
   .form-grid{grid-template-columns:1fr}
-
-  .form-field.full{grid-column:auto}
-
-  .footer-top{
-    flex-direction:column;
-    gap:35px;
-  }
-
-  .footer-links{gap:20px}
-
-  .footer-bottom{
-    flex-direction:column;
-    gap:10px;
-  }
+  .field.full{grid-column:auto}
+  .footer-main{flex-direction:column;gap:30px}
+  .footer-links{gap:17px}
+  .footer-bottom{flex-direction:column;gap:10px}
 }
 
-@media(max-width:400px){
-
-  .hero-buttons .btn{width:100%}
-
-  .hero-footnote{font-size:8px}
-
-  .brand-sub{letter-spacing:2px}
-
-  .form-heading{font-size:29px}
-}
-
-@media(prefers-reduced-motion:reduce){
-
-  html{scroll-behavior:auto}
-
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    transition-duration:.01ms!important;
-  }
-
-  .reveal{
-    opacity:1;
-    transform:none;
-  }
+@media(max-width:390px){
+  .hero-title{font-size:52px}
+  .hero-actions .btn{width:100%}
+  .story-left h2{font-size:39px}
 }
 </style>
 </head>
@@ -1252,206 +1155,194 @@ button{cursor:pointer}
 <body>
 
 <!-- NAVIGATION -->
-
-<nav class="navbar" id="navbar">
+<nav class="nav" id="navbar">
   <div class="container nav-inner">
 
-    <a href="#home" class="brand">
-      <div class="brand-symbol"><span>A</span></div>
-      <div class="brand-text">
-        <div class="brand-name">Asterbridge</div>
-        <div class="brand-sub">Learning</div>
+    <a class="logo" href="#home">
+      <div class="logo-mark">A</div>
+      <div class="logo-text">
+        <span class="logo-title">Asterbridge</span>
+        <span class="logo-sub">Learning</span>
       </div>
     </a>
 
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
 
     <ul class="nav-links" id="navLinks">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#philosophy">Our Philosophy</a></li>
+      <li><a href="#intro">Perspective</a></li>
+      <li><a href="#philosophy">Philosophy</a></li>
       <li><a href="#programs">Programs</a></li>
-      <li><a href="#journey">Learning Journey</a></li>
+      <li><a href="#journey">Approach</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#contact" class="nav-cta">Enquire Now ↗</a></li>
+      <li><a class="contact-link" href="#contact">Enquire ↗</a></li>
     </ul>
 
   </div>
 </nav>
 
 <!-- HERO -->
-
 <section class="hero" id="home">
 
-  <canvas id="particles"></canvas>
   <div class="hero-grid"></div>
 
   <div class="container hero-content">
 
-    <div class="hero-text">
+    <div class="hero-copy">
 
-      <div class="hero-kicker">A new perspective on learning</div>
+      <div class="small-label">A considered approach to education</div>
 
-      <h1>
-        Beyond
-        <span>boundaries.</span>
-        Beyond
-        <span>expectations.</span>
+      <h1 class="hero-title">
+        Beyond the
+        <span class="second">classroom.</span>
+        <span class="third">Into a world of possibility.</span>
       </h1>
 
       <p class="hero-description">
-        Education is more than the pursuit of answers.
-        It is the discovery of possibility, the cultivation of
-        confidence, and the development of a mind prepared
-        to navigate an ever-changing world.
+        Learning should open doors — to ideas, to understanding,
+        and to a future shaped by the ability to think independently.
+        We believe education is where that journey begins.
       </p>
 
-      <div class="hero-buttons">
-        <a href="#programs" class="btn">Explore Programs ↗</a>
-        <a href="#philosophy" class="btn btn-outline">Our Philosophy</a>
+      <div class="hero-actions">
+        <a href="#programs" class="btn">Explore learning <span>↗</span></a>
+        <a href="#philosophy" class="btn secondary">Our perspective</a>
       </div>
 
-      <div class="hero-footnote">
-        <span class="dot"></span>
-        Education with purpose
-        <span class="dot"></span>
-        Learning without limits
+      <div class="hero-meta">
+        <span>Academic development</span>
+        <span>Personalized learning</span>
       </div>
 
     </div>
 
-    <div class="hero-visual">
-      <div class="orbit-scene">
-
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-        <div class="orbit orbit-three"></div>
-
-        <div class="orbit-center">
-          <div class="orbit-center-inner">
-            <div class="monogram">A</div>
-            <small>Asterbridge</small>
-          </div>
-        </div>
-
-        <div class="orbit-node node-one"></div>
-        <div class="orbit-node node-two"></div>
-        <div class="orbit-node node-three"></div>
-
-        <div class="orbit-label label-one">Knowledge</div>
-        <div class="orbit-label label-two">Potential</div>
-        <div class="orbit-label label-three">Growth</div>
-
+    <div class="hero-object" id="heroObject">
+      <div class="object-wrap" id="objectWrap">
+        <div class="object-ring"></div>
+        <div class="object-ring r2"></div>
+        <div class="object-ring r3"></div>
+        <div class="object-core"></div>
       </div>
+      <div class="object-shadow"></div>
+      <div class="object-caption">Knowledge · Perspective · Growth</div>
     </div>
 
   </div>
 
-  <div class="scroll-indicator">Discover</div>
+  <div class="container hero-bottom">
+    <span>Asterbridge Learning</span>
+    <span>Scroll to discover ↓</span>
+  </div>
 
 </section>
 
 <!-- INTRO -->
-
 <section class="section intro" id="intro">
 
-  <div class="container">
+  <div class="container intro-grid">
 
-    <div class="intro-grid">
-
-      <div class="reveal">
-        <div class="eyebrow">The Asterbridge perspective</div>
-
-        <h2>
-          Learning is a journey.
-          <span>Not a destination.</span>
-        </h2>
-      </div>
-
-      <div class="intro-text reveal">
-        <p>
-          Every student carries a unique set of ambitions, abilities,
-          and questions. The right learning environment does not simply
-          deliver information — it helps transform curiosity into
-          understanding and understanding into confidence.
-        </p>
-
-        <p>
-          At Asterbridge Learning, we believe education should be
-          purposeful, intellectually engaging, and built around the
-          individual. Our approach brings structure to learning while
-          encouraging students to think independently, explore deeply,
-          and move forward with clarity.
-        </p>
-      </div>
-
+    <div class="fade-in">
+      <div class="small-label">Our perspective</div>
+      <h2 class="heading" style="margin-top:22px">
+        Education is not the accumulation of answers.
+        <em>It is learning how to find them.</em>
+      </h2>
     </div>
 
-    <div class="intro-bottom reveal">
-      <span>Individual potential</span>
-      <span>Structured learning</span>
-      <span>Lasting understanding</span>
-      <span>Future readiness</span>
+    <div class="intro-text fade-in">
+      <p>
+        Every student approaches learning differently. Some need
+        stronger foundations, some need direction, and others need
+        the space to explore ideas beyond what is already familiar.
+      </p>
+
+      <p>
+        We see education as a process of building capability.
+        Through thoughtful teaching, structured practice, and
+        meaningful understanding, students can develop the confidence
+        to approach unfamiliar challenges and make knowledge their own.
+      </p>
+
+      <div class="intro-signature">
+        <span>Curiosity</span>
+        <span>Clarity</span>
+        <span>Independent thought</span>
+      </div>
     </div>
 
   </div>
 
 </section>
 
-<!-- PHILOSOPHY -->
+<!-- PINNED PHILOSOPHY STORY -->
+<section class="story" id="philosophy">
 
-<section class="section philosophy" id="philosophy">
+  <div class="story-scroll" id="storyScroll">
 
-  <div class="container">
+    <div class="story-sticky">
 
-    <div class="philosophy-heading reveal">
+      <div class="story-bg"></div>
 
-      <div>
-        <div class="eyebrow">Our philosophy</div>
-        <h2 class="section-title">
-          A different way<br>
-          <span class="gold">to learn.</span>
-        </h2>
+      <div class="story-layout">
+
+        <div class="story-left">
+          <div class="small-label">The philosophy</div>
+
+          <h2>
+            The way we learn
+            shapes the way
+            <em>we think.</em>
+          </h2>
+
+          <div class="story-progress" id="storyProgress">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="story-right">
+
+          <div class="story-object" id="storyObject"></div>
+
+          <article class="story-panel active">
+            <div class="story-number">01</div>
+            <h3>Curiosity comes first.</h3>
+            <p>
+              Meaningful learning begins with a question.
+              We encourage students to explore concepts, recognise
+              connections, and approach subjects with genuine interest
+              rather than simply memorising information.
+            </p>
+            <div class="story-accent"></div>
+          </article>
+
+          <article class="story-panel">
+            <div class="story-number">02</div>
+            <h3>Understanding creates confidence.</h3>
+            <p>
+              Confidence grows when students know why something works.
+              Strong foundations, clear explanations, and guided
+              practice help turn uncertainty into understanding.
+            </p>
+            <div class="story-accent"></div>
+          </article>
+
+          <article class="story-panel">
+            <div class="story-number">03</div>
+            <h3>Knowledge becomes independence.</h3>
+            <p>
+              The real measure of learning is the ability to use it.
+              We value independent thinking, application, and the
+              confidence to face new academic challenges.
+            </p>
+            <div class="story-accent"></div>
+          </article>
+
+        </div>
+
       </div>
 
-      <p class="section-description">
-        Meaningful education begins when students move beyond
-        memorisation and develop the ability to understand,
-        question, connect, and apply knowledge.
-      </p>
-
-    </div>
-
-    <div class="philosophy-grid">
-
-      <article class="philosophy-card reveal">
-        <div class="card-number">01</div>
-        <h3>Clarity before complexity</h3>
-        <p>
-          We build strong foundations first. Complex ideas become
-          approachable when concepts are organised, explained,
-          and connected with clarity.
-        </p>
-      </article>
-
-      <article class="philosophy-card reveal">
-        <div class="card-number">02</div>
-        <h3>Understanding before memorisation</h3>
-        <p>
-          Learning should develop genuine comprehension.
-          We encourage reasoning, application, and meaningful
-          connections rather than dependence on rote recall.
-        </p>
-      </article>
-
-      <article class="philosophy-card reveal">
-        <div class="card-number">03</div>
-        <h3>Progress with purpose</h3>
-        <p>
-          Every learning journey requires direction. We value
-          structured progress, consistent effort, and the confidence
-          that develops through measurable improvement.
-        </p>
-      </article>
+      <div class="story-scroll-hint">Continue scrolling</div>
 
     </div>
 
@@ -1460,167 +1351,82 @@ button{cursor:pointer}
 </section>
 
 <!-- PROGRAMS -->
-
 <section class="section programs" id="programs">
 
   <div class="container">
 
-    <div class="program-heading reveal">
-      <div class="eyebrow">Academic pathways</div>
+    <div class="program-header fade-in">
 
-      <h2 class="section-title">
-        Knowledge, directed<br>
-        <span class="gold">toward possibility.</span>
-      </h2>
-
-      <p class="section-description">
-        Explore learning opportunities designed to support academic
-        development, examination preparation, scientific understanding,
-        and the ambitions of individual students.
-      </p>
-    </div>
-
-    <div class="program-list">
-
-      <a href="#contact" class="program-item reveal" data-program="English Language & Academic Writing">
-        <div class="program-index">01</div>
-        <div>
-          <h3>English & Academic Writing</h3>
-          <p>
-            Develop language proficiency, communication skills,
-            academic writing, comprehension, and the confidence
-            to express ideas effectively.
-          </p>
-        </div>
-        <div class="program-arrow">↗</div>
-      </a>
-
-      <a href="#contact" class="program-item reveal" data-program="Biology & Medical Entrance Preparation">
-        <div class="program-index">02</div>
-        <div>
-          <h3>Biology & Medical Preparation</h3>
-          <p>
-            Build conceptual foundations in biology, strengthen
-            scientific reasoning, and prepare strategically for
-            competitive medical examinations.
-          </p>
-        </div>
-        <div class="program-arrow">↗</div>
-      </a>
-
-      <a href="#contact" class="program-item reveal" data-program="Chemistry & Science Preparation">
-        <div class="program-index">03</div>
-        <div>
-          <h3>Chemistry & Sciences</h3>
-          <p>
-            Understand scientific principles through structured
-            explanations, problem-solving, conceptual learning,
-            and examination-focused practice.
-          </p>
-        </div>
-        <div class="program-arrow">↗</div>
-      </a>
-
-      <a href="#contact" class="program-item reveal" data-program="Examination Preparation">
-        <div class="program-index">04</div>
-        <div>
-          <h3>Examination Preparation</h3>
-          <p>
-            Strengthen performance through focused preparation,
-            practice questions, strategic revision, and an
-            understanding of examination requirements.
-          </p>
-        </div>
-        <div class="program-arrow">↗</div>
-      </a>
-
-      <a href="#contact" class="program-item reveal" data-program="Personalized Academic Support">
-        <div class="program-index">05</div>
-        <div>
-          <h3>Personalized Academic Support</h3>
-          <p>
-            A learning approach shaped around individual academic
-            needs, learning objectives, subject challenges,
-            and personal goals.
-          </p>
-        </div>
-        <div class="program-arrow">↗</div>
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- LEARNING JOURNEY -->
-
-<section class="section journey" id="journey">
-
-  <div class="container">
-
-    <div class="journey-top reveal">
-
-      <div>
-        <div class="eyebrow">The learning experience</div>
-
-        <h2 class="section-title">
-          Progress is<br>
-          <span class="gold">designed.</span>
+      <div class="header-copy">
+        <div class="small-label">Academic pathways</div>
+        <h2 class="heading" style="margin-top:20px">
+          Areas of <em>learning.</em>
         </h2>
       </div>
 
-      <p class="section-description">
-        A thoughtful learning experience moves from identifying
-        needs to building understanding and finally developing
-        the confidence to apply knowledge independently.
+      <p class="body-copy">
+        Focused academic support across language, sciences,
+        and examination preparation — guided by the student's
+        objectives and learning needs.
       </p>
 
     </div>
 
-    <div class="journey-grid">
+    <div class="program-grid">
 
-      <article class="journey-card reveal">
-        <div class="card-symbol">I</div>
-        <h3>Discover</h3>
-        <p>
-          Identify academic goals, existing knowledge, learning
-          challenges, and the direction in which the student
-          wishes to progress.
-        </p>
-        <div class="card-footer">
-          <span>Understanding the student</span>
-          <span>01</span>
+      <a href="#contact" class="program fade-in" data-program="English Language & Academic Writing">
+        <div class="program-index">01</div>
+        <div class="program-content">
+          <h3>English & Academic Writing</h3>
+          <p>Language proficiency, academic communication, writing, comprehension, and expression.</p>
         </div>
-      </article>
+        <span class="program-arrow">↗</span>
+      </a>
 
-      <article class="journey-card reveal">
-        <div class="card-symbol">II</div>
-        <h3>Develop</h3>
-        <p>
-          Build knowledge through structured teaching,
-          concept development, guided practice, and
-          progressively challenging learning.
-        </p>
-        <div class="card-footer">
-          <span>Building capability</span>
-          <span>02</span>
+      <a href="#contact" class="program fade-in" data-program="Biology & Medical Entrance Preparation">
+        <div class="program-index">02</div>
+        <div class="program-content">
+          <h3>Biology & Medical Preparation</h3>
+          <p>Biological concepts, scientific reasoning, structured revision, and entrance examination preparation.</p>
         </div>
-      </article>
+        <span class="program-arrow">↗</span>
+      </a>
 
-      <article class="journey-card reveal">
-        <div class="card-symbol">III</div>
-        <h3>Advance</h3>
-        <p>
-          Apply knowledge independently, strengthen reasoning,
-          assess progress, and move toward academic goals
-          with greater confidence.
-        </p>
-        <div class="card-footer">
-          <span>Moving forward</span>
-          <span>03</span>
+      <a href="#contact" class="program fade-in" data-program="Chemistry & Science Preparation">
+        <div class="program-index">03</div>
+        <div class="program-content">
+          <h3>Chemistry & Sciences</h3>
+          <p>Conceptual science learning, problem-solving, and application of fundamental principles.</p>
         </div>
-      </article>
+        <span class="program-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="program fade-in" data-program="Examination Preparation">
+        <div class="program-index">04</div>
+        <div class="program-content">
+          <h3>Examination Preparation</h3>
+          <p>Practice, strategic revision, exam-focused learning, and performance development.</p>
+        </div>
+        <span class="program-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="program fade-in" data-program="Personalized Academic Support">
+        <div class="program-index">05</div>
+        <div class="program-content">
+          <h3>Individual Academic Support</h3>
+          <p>Personalized learning pathways shaped around a student's academic priorities and goals.</p>
+        </div>
+        <span class="program-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="program fade-in" data-program="General Enquiry">
+        <div class="program-index">06</div>
+        <div class="program-content">
+          <h3>Other Learning Objectives</h3>
+          <p>Discuss a subject, curriculum, academic objective, or learning requirement not listed here.</p>
+        </div>
+        <span class="program-arrow">↗</span>
+      </a>
 
     </div>
 
@@ -1628,90 +1434,107 @@ button{cursor:pointer}
 
 </section>
 
-<!-- STATEMENT -->
+<!-- PINNED LEARNING JOURNEY -->
+<section class="journey" id="journey">
 
-<section class="statement">
+  <div class="journey-scroll" id="journeyScroll">
 
-  <div class="container statement-inner reveal">
+    <div class="journey-sticky">
 
-    <div class="statement-mark">“</div>
+      <div class="journey-inner">
 
-    <h2>
-      The goal is not simply
-      to know more.
-      <span>It is to become capable of more.</span>
-    </h2>
+        <div class="journey-header">
+          <div>
+            <div class="small-label">Our learning approach</div>
+            <h2 class="heading" style="margin-top:20px">
+              Progress, with <em>purpose.</em>
+            </h2>
+          </div>
 
-    <div class="gold-line"></div>
+          <p class="body-copy">
+            A learning journey built around the student:
+            understand where they are, develop what they need,
+            and move forward with confidence.
+          </p>
+        </div>
 
-    <p>
-      A meaningful education empowers students to think
-      independently, approach challenges with confidence,
-      and carry knowledge beyond the classroom.
-    </p>
+        <div class="journey-track" id="journeyTrack">
 
-  </div>
+          <article class="journey-stage active">
+            <div class="stage-dot">01</div>
+            <h3 class="stage-title">Discover</h3>
+            <p class="stage-copy">
+              Understand goals, current knowledge, strengths,
+              challenges, and the student's direction.
+            </p>
+            <div class="stage-foot">Assessment & direction</div>
+          </article>
 
-</section>
+          <article class="journey-stage">
+            <div class="stage-dot">02</div>
+            <h3 class="stage-title">Develop</h3>
+            <p class="stage-copy">
+              Build foundations through teaching, practice,
+              feedback, and progressively deeper understanding.
+            </p>
+            <div class="stage-foot">Learning & application</div>
+          </article>
 
-<!-- ABOUT -->
+          <article class="journey-stage">
+            <div class="stage-dot">03</div>
+            <h3 class="stage-title">Advance</h3>
+            <p class="stage-copy">
+              Strengthen independent thinking, apply knowledge,
+              and work toward meaningful academic progress.
+            </p>
+            <div class="stage-foot">Progress & independence</div>
+          </article>
 
-<section class="section about" id="about">
+        </div>
 
-  <div class="container about-grid">
+        <div class="journey-progress">
+          <div class="journey-progress-fill" id="journeyFill"></div>
+        </div>
 
-    <div class="about-visual reveal">
-
-      <div class="about-logo">
-        <div class="big-letter">A</div>
-        <p>Asterbridge Learning</p>
       </div>
 
     </div>
 
-    <div class="about-copy reveal">
+  </div>
 
-      <div class="eyebrow">About Asterbridge</div>
+</section>
 
+<!-- CLOSING STATEMENT -->
+<section class="closing" id="about">
+
+  <div class="container closing-grid">
+
+    <div class="fade-in">
+      <div class="small-label">Asterbridge Learning</div>
       <h2>
-        Education with<br>
-        <span>perspective.</span>
+        Beyond the lesson.
+        Beyond the exam.
+        <em>Into the future.</em>
       </h2>
+    </div>
+
+    <div class="closing-text fade-in">
+      <p>
+        Education should prepare students not only to meet
+        expectations, but to move beyond them. To question,
+        to understand, and to approach the world with
+        perspective.
+      </p>
 
       <p>
-        Asterbridge Learning is an educational initiative founded
-        on the belief that knowledge becomes truly valuable
-        when students understand it, apply it, and grow through it.
+        Asterbridge Learning brings together structured academic
+        support and a belief in the lasting value of education —
+        one student, one idea, one step at a time.
       </p>
 
-      <div class="about-points">
-
-        <div class="about-point">
-          <div class="point">✦</div>
-          <p>
-            A thoughtful approach to teaching, with emphasis on
-            conceptual clarity and individual development.
-          </p>
-        </div>
-
-        <div class="about-point">
-          <div class="point">✦</div>
-          <p>
-            Structured learning designed to support academic
-            objectives and examination requirements.
-          </p>
-        </div>
-
-        <div class="about-point">
-          <div class="point">✦</div>
-          <p>
-            An environment that values curiosity, discipline,
-            independent thought, and meaningful progress.
-          </p>
-        </div>
-
-      </div>
-
+      <a href="#contact" class="btn" style="margin-top:25px">
+        Start a conversation ↗
+      </a>
     </div>
 
   </div>
@@ -1719,68 +1542,66 @@ button{cursor:pointer}
 </section>
 
 <!-- CONTACT -->
-
 <section class="section contact" id="contact">
 
-  <div class="container contact-grid">
+  <div class="container contact-layout">
 
-    <div class="contact-copy reveal">
+    <div class="contact-copy fade-in">
 
-      <div class="eyebrow">Begin your journey</div>
+      <div class="small-label">Enquiries & admissions</div>
 
-      <h2>
-        Every great journey
-        <span>begins somewhere.</span>
+      <h2 class="heading" style="margin-top:22px">
+        Let's find the right
+        <em>path.</em>
       </h2>
 
-      <p>
-        Tell us a little about your academic goals, the subjects
-        you wish to explore, or the support you are looking for.
-        We will get in touch to discuss the next step.
+      <p class="body-copy">
+        Tell us what you are working toward. Whether you need
+        subject support, examination preparation, or a structured
+        learning plan, we would be glad to hear from you.
       </p>
 
-      <div class="contact-note">
-        Thoughtful learning.<br>
-        Meaningful progress.<br>
-        A future without boundaries.
+      <div class="contact-detail">
+        A thoughtful first conversation.<br>
+        A clearer direction for learning.
       </div>
 
     </div>
 
-    <div class="contact-form reveal">
+    <div class="form-box fade-in">
 
-      <h3 class="form-heading">Student Enquiry</h3>
+      <h3 class="form-title">Student enquiry</h3>
 
       <form id="contactForm">
 
         <div class="form-grid">
 
-          <div class="form-field">
-            <label for="name">Full Name *</label>
-            <input type="text" id="name" name="name" placeholder="Your full name" required>
+          <div class="field">
+            <label for="name">Full name *</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required>
           </div>
 
-          <div class="form-field">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" name="email" placeholder="Your email address" required>
+          <div class="field">
+            <label for="email">Email address *</label>
+            <input id="email" name="email" type="email" placeholder="Your email" required>
           </div>
 
-          <div class="form-field">
+          <div class="field">
             <label for="province">Province / Region</label>
-            <input type="text" id="province" name="province" placeholder="Province or region">
+            <input id="province" name="province" type="text" placeholder="Province or region">
           </div>
 
-          <div class="form-field">
-            <label for="grade">Grade / Level</label>
-            <input type="text" id="grade" name="grade" placeholder="e.g. Grade 12, University">
+          <div class="field">
+            <label for="grade">Grade / Academic level</label>
+            <input id="grade" name="grade" type="text" placeholder="e.g. Grade 12">
           </div>
 
-          <div class="form-field">
+          <div class="field">
             <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" placeholder="Subject of interest">
+            <input id="subject" name="subject" type="text" placeholder="Subject of interest">
           </div>
 
-          <div class="form-field">
+          <div class="field">
             <label for="program">Program *</label>
             <select id="program" name="program" required>
               <option value="">Select a program</option>
@@ -1793,23 +1614,23 @@ button{cursor:pointer}
             </select>
           </div>
 
-          <div class="form-field full">
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" placeholder="Tell us about your learning goals, academic requirements, or questions..."></textarea>
+          <div class="field full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="What would you like help with?"></textarea>
           </div>
 
         </div>
 
-        <button type="submit" class="btn form-submit" id="submitBtn">
-          Submit Enquiry ↗
+        <button class="btn submit" type="submit" id="submitBtn">
+          Send enquiry <span>↗</span>
         </button>
 
-        <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
 
-        <p class="form-privacy">
-          Your information will be used to respond to your enquiry
-          and provide relevant educational information.
-        </p>
+        <div class="privacy">
+          Your information will be used only to respond to your enquiry
+          and provide relevant information about our learning services.
+        </div>
 
       </form>
 
@@ -1820,35 +1641,34 @@ button{cursor:pointer}
 </section>
 
 <!-- FOOTER -->
-
 <footer class="footer">
 
   <div class="container">
 
-    <div class="footer-top">
+    <div class="footer-main">
 
-      <div>
+      <div class="footer-about">
 
-        <a href="#home" class="brand">
-          <div class="brand-symbol"><span>A</span></div>
-          <div class="brand-text">
-            <div class="brand-name">Asterbridge</div>
-            <div class="brand-sub">Learning</div>
+        <a class="logo" href="#home">
+          <div class="logo-mark">A</div>
+          <div class="logo-text">
+            <span class="logo-title">Asterbridge</span>
+            <span class="logo-sub">Learning</span>
           </div>
         </a>
 
-        <p class="footer-description">
-          A thoughtful approach to education, academic development,
-          and the pursuit of knowledge beyond boundaries.
+        <p>
+          Education beyond boundaries.
+          Learning with purpose, perspective, and possibility.
         </p>
 
       </div>
 
       <div class="footer-links">
-        <a href="#home">Home</a>
+        <a href="#intro">Perspective</a>
         <a href="#philosophy">Philosophy</a>
         <a href="#programs">Programs</a>
-        <a href="#journey">Learning Journey</a>
+        <a href="#journey">Approach</a>
         <a href="#about">About</a>
         <a href="#contact">Enquiries</a>
       </div>
@@ -1856,7 +1676,7 @@ button{cursor:pointer}
     </div>
 
     <div class="footer-bottom">
-      <span>© <span id="year"></span> Asterbridge Learning. All rights reserved.</span>
+      <span>© <span id="year"></span> Asterbridge Learning</span>
       <span>Education beyond boundaries.</span>
     </div>
 
@@ -1867,240 +1687,207 @@ button{cursor:pointer}
 <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
 
 <script>
-/* ==========================================
-   ASTERBRIDGE LEARNING
-   WEBSITE SCRIPT
-========================================== */
-
-/* GOOGLE APPS SCRIPT ENDPOINT */
+/* ============================================
+   ASTERBRIDGE LEARNING — INTERACTIONS
+============================================ */
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwvaj5paFntHpSSF0i2kso40TOS6FC2PqHCn_OKkjjDkHN9fsrBZpQCMV_dc2g-f6pN/exec";
 
-/* YEAR */
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
-/* NAVIGATION */
+/* NAV */
 
-const navbar = document.getElementById("navbar");
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
+const nav = document.getElementById("navbar");
+const toggle = document.getElementById("menuToggle");
+const links = document.getElementById("navLinks");
 const backTop = document.getElementById("backTop");
 
-function handleScroll(){
+window.addEventListener("scroll",()=>{
+  nav.classList.toggle("scrolled",window.scrollY > 30);
+  backTop.classList.toggle("visible",window.scrollY > 450);
+},{passive:true});
 
-  const scrollY = window.scrollY;
-
-  navbar.classList.toggle("scrolled",scrollY > 40);
-  backTop.classList.toggle("visible",scrollY > 500);
-
-}
-
-window.addEventListener("scroll",handleScroll,{passive:true});
-handleScroll();
-
-menuBtn.addEventListener("click",()=>{
-
-  const open = navLinks.classList.toggle("open");
-
-  document.body.classList.toggle("menu-open",open);
-  menuBtn.setAttribute("aria-expanded",open);
-  menuBtn.innerHTML = open ? "✕" : "☰";
-
+toggle.addEventListener("click",()=>{
+  const opened = links.classList.toggle("open");
+  document.body.classList.toggle("menu-open",opened);
+  toggle.setAttribute("aria-expanded",opened);
+  toggle.textContent = opened ? "×" : "☰";
 });
 
-navLinks.querySelectorAll("a").forEach(link=>{
-
-  link.addEventListener("click",()=>{
-
-    navLinks.classList.remove("open");
+links.querySelectorAll("a").forEach(a=>{
+  a.addEventListener("click",()=>{
+    links.classList.remove("open");
     document.body.classList.remove("menu-open");
-    menuBtn.setAttribute("aria-expanded","false");
-    menuBtn.innerHTML = "☰";
-
+    toggle.setAttribute("aria-expanded","false");
+    toggle.textContent="☰";
   });
-
 });
 
 backTop.addEventListener("click",()=>{
   window.scrollTo({top:0,behavior:"smooth"});
 });
 
-/* SCROLL REVEAL */
+/* REVEAL */
 
-const revealElements = document.querySelectorAll(".reveal");
+const revealObserver = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+},{threshold:.12});
 
-if("IntersectionObserver" in window){
+document.querySelectorAll(".fade-in").forEach(el=>revealObserver.observe(el));
 
-  const revealObserver = new IntersectionObserver((entries,observer)=>{
-
-    entries.forEach(entry=>{
-
-      if(entry.isIntersecting){
-
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-
-      }
-
-    });
-
-  },{threshold:.12});
-
-  revealElements.forEach(element=>revealObserver.observe(element));
-
-}else{
-
-  revealElements.forEach(element=>element.classList.add("visible"));
-
-}
-
-/* PROGRAM AUTO-SELECTION */
+/* PROGRAM -> FORM */
 
 document.querySelectorAll("[data-program]").forEach(item=>{
-
   item.addEventListener("click",()=>{
-
-    const program = item.getAttribute("data-program");
-    const select = document.getElementById("program");
-
-    if(select){
-
-      select.value = program;
-
-    }
-
+    const value=item.getAttribute("data-program");
+    const select=document.getElementById("program");
+    if(select) select.value=value;
   });
-
 });
 
-/* 3D CARD INTERACTION */
+/* HERO OBJECT MOUSE PARALLAX */
 
-const cards = document.querySelectorAll(".journey-card");
+const heroObject=document.getElementById("heroObject");
+const objectWrap=document.getElementById("objectWrap");
 
-const isTouchDevice = window.matchMedia("(hover: none)").matches;
+if(!reduceMotion && window.matchMedia("(hover:hover)").matches){
 
-if(!isTouchDevice){
+  heroObject.addEventListener("mousemove",e=>{
+    const rect=heroObject.getBoundingClientRect();
+    const x=(e.clientX-rect.left)/rect.width-.5;
+    const y=(e.clientY-rect.top)/rect.height-.5;
 
-  cards.forEach(card=>{
+    objectWrap.style.animation="none";
+    objectWrap.style.transform=
+      `rotateY(${x*16}deg) rotateX(${y*-12}deg) translateY(-5px)`;
+  });
 
-    card.addEventListener("mousemove",event=>{
-
-      const rect = card.getBoundingClientRect();
-
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-
-      const centerX = rect.width/2;
-      const centerY = rect.height/2;
-
-      const rotateX = ((y-centerY)/centerY)*-5;
-      const rotateY = ((x-centerX)/centerX)*5;
-
-      card.style.transform =
-        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-    });
-
-    card.addEventListener("mouseleave",()=>{
-      card.style.transform = "perspective(900px) rotateX(0) rotateY(0)";
-    });
-
+  heroObject.addEventListener("mouseleave",()=>{
+    objectWrap.style.transform="";
+    objectWrap.style.animation="";
   });
 
 }
 
-/* PARTICLE BACKGROUND */
+/* PINNED PHILOSOPHY */
 
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+const storyScroll=document.getElementById("storyScroll");
+const storyPanels=document.querySelectorAll(".story-panel");
+const storyBars=document.querySelectorAll("#storyProgress span");
+const storyObject=document.getElementById("storyObject");
 
-let particles = [];
-let animationFrame;
-let canvasWidth;
-let canvasHeight;
+function updateStory(){
 
-function resizeCanvas(){
+  const rect=storyScroll.getBoundingClientRect();
+  const total=storyScroll.offsetHeight-window.innerHeight;
 
-  canvasWidth = canvas.width = canvas.offsetWidth;
-  canvasHeight = canvas.height = canvas.offsetHeight;
+  if(total<=0)return;
 
-  const count = Math.min(100,Math.floor(canvasWidth/12));
+  const progress=Math.min(1,Math.max(0,-rect.top/total));
 
-  particles = [];
+  let index=0;
+  if(progress>.66)index=2;
+  else if(progress>.33)index=1;
 
-  for(let i=0;i<count;i++){
-
-    particles.push({
-      x:Math.random()*canvasWidth,
-      y:Math.random()*canvasHeight,
-      size:Math.random()*1.5+.3,
-      speed:Math.random()*.25+.05,
-      opacity:Math.random()*.45+.1
-    });
-
-  }
-
-}
-
-function drawParticles(){
-
-  ctx.clearRect(0,0,canvasWidth,canvasHeight);
-
-  particles.forEach(p=>{
-
-    p.y -= p.speed;
-
-    if(p.y < 0){
-      p.y = canvasHeight;
-      p.x = Math.random()*canvasWidth;
-    }
-
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fillStyle = `rgba(200,169,106,${p.opacity})`;
-    ctx.fill();
-
+  storyPanels.forEach((panel,i)=>{
+    panel.classList.toggle("active",i===index);
   });
 
-  animationFrame = requestAnimationFrame(drawParticles);
+  storyBars.forEach((bar,i)=>{
+    bar.classList.toggle("active",i<=index);
+  });
+
+  storyObject.className="story-object";
+
+  if(index===1)storyObject.classList.add("object-2");
+  if(index===2)storyObject.classList.add("object-3");
 
 }
 
-resizeCanvas();
-drawParticles();
+ /* PINNED JOURNEY */
 
-window.addEventListener("resize",resizeCanvas);
+const journeyScroll=document.getElementById("journeyScroll");
+const journeyStages=document.querySelectorAll(".journey-stage");
+const journeyFill=document.getElementById("journeyFill");
+
+function updateJourney(){
+
+  const rect=journeyScroll.getBoundingClientRect();
+  const total=journeyScroll.offsetHeight-window.innerHeight;
+
+  if(total<=0)return;
+
+  const progress=Math.min(1,Math.max(0,-rect.top/total));
+
+  journeyFill.style.width=(progress*100)+"%";
+
+  let active=0;
+  if(progress>.66)active=2;
+  else if(progress>.33)active=1;
+
+  journeyStages.forEach((stage,i=>{
+    stage.classList.toggle("active",i===active);
+  }));
+
+}
+
+/* SCROLL CONTROLLER */
+
+let ticking=false;
+
+function onScroll(){
+
+  if(ticking)return;
+
+  ticking=true;
+
+  requestAnimationFrame(()=>{
+    updateStory();
+    updateJourney();
+    ticking=false;
+  });
+
+}
+
+window.addEventListener("scroll",onScroll,{passive:true});
+window.addEventListener("resize",onScroll);
+
+updateStory();
+updateJourney();
 
 /* CONTACT FORM */
 
-const contactForm = document.getElementById("contactForm");
-const formMessage = document.getElementById("formMessage");
-const submitBtn = document.getElementById("submitBtn");
+const form=document.getElementById("contactForm");
+const status=document.getElementById("formStatus");
+const submit=document.getElementById("submitBtn");
 
-contactForm.addEventListener("submit",async function(event){
+form.addEventListener("submit",async e=>{
 
-  event.preventDefault();
+  e.preventDefault();
 
-  if(!contactForm.checkValidity()){
-    contactForm.reportValidity();
+  if(!form.checkValidity()){
+    form.reportValidity();
     return;
   }
 
-  submitBtn.disabled = true;
-  submitBtn.style.opacity = ".6";
-  submitBtn.textContent = "Submitting...";
+  submit.disabled=true;
+  submit.style.opacity=".6";
+  submit.innerHTML="Sending enquiry...";
 
-  formMessage.className = "form-message";
-  formMessage.style.display = "none";
+  status.className="form-status";
+  status.style.display="none";
 
-  const formData = new FormData(contactForm);
+  const formData=new FormData(form);
+  formData.append("source","Asterbridge Learning Website");
 
-  /* Apps Script expects these exact parameter names */
-
-  formData.append("source","Website");
-
-  const payload = new URLSearchParams();
+  const payload=new URLSearchParams();
 
   for(const [key,value] of formData.entries()){
     payload.append(key,value);
@@ -2108,52 +1895,44 @@ contactForm.addEventListener("submit",async function(event){
 
   try{
 
-    /*
-      no-cors is used for the Apps Script cross-origin request.
-      The browser cannot read the server response in no-cors mode.
-    */
-
     await fetch(SCRIPT_URL,{
       method:"POST",
       mode:"no-cors",
       body:payload
     });
 
-    formMessage.textContent =
-      "Your enquiry has been submitted. Thank you for contacting Asterbridge Learning. We look forward to connecting with you.";
+    status.textContent=
+      "Thank you. Your enquiry has been submitted. We look forward to connecting with you.";
 
-    formMessage.className = "form-message success show";
-    formMessage.style.display = "block";
+    status.className="form-status show success";
+    status.style.display="block";
 
-    contactForm.reset();
+    form.reset();
 
   }catch(error){
 
-    formMessage.textContent =
-      "We could not send your enquiry at this moment. Please try again or contact us again shortly.";
+    status.textContent=
+      "We could not send your enquiry. Please try again shortly.";
 
-    formMessage.className = "form-message error show";
-    formMessage.style.display = "block";
+    status.className="form-status show error";
+    status.style.display="block";
 
   }finally{
 
-    submitBtn.disabled = false;
-    submitBtn.style.opacity = "1";
-    submitBtn.textContent = "Submit Enquiry ↗";
+    submit.disabled=false;
+    submit.style.opacity="1";
+    submit.innerHTML="Send enquiry ↗";
 
   }
 
 });
 
-/* REDUCE ANIMATION FOR REDUCED-MOTION USERS */
+/* REDUCED MOTION */
 
-if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-
-  cancelAnimationFrame(animationFrame);
-
-  ctx.clearRect(0,0,canvasWidth,canvasHeight);
-
+if(reduceMotion){
+  document.querySelectorAll(".fade-in").forEach(el=>el.classList.add("show"));
 }
+
 </script>
 
 </body>

@@ -1,413 +1,2159 @@
 
-<!doctype html>
-<html lang="en-CA">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#081126">
-<meta name="description" content="Asterbridge Learning — personalised online tutoring, focused exam preparation and academic support for Canadian students.">
-<title>Asterbridge Learning | Turn weak points into breakthroughs</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071323">
+
+<title>Asterbridge Learning | Education Beyond Boundaries</title>
+<meta name="description" content="Asterbridge Learning offers personalized academic guidance, science education, examination preparation, and structured learning pathways for students.">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://asterbridge-learning.pages.dev/">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="canonical" href="https://asterbridge-learning.pages.dev/">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<meta property="og:title" content="Asterbridge Learning | Online tutoring in Canada">
-<meta property="og:description" content="Focused one-to-one tutoring, exam preparation and learning support for Canadian students.">
-<meta property="og:type" content="website">
-<meta name="robots" content="index,follow">
-
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"EducationalOrganization",
-  "name":"Asterbridge Learning",
-  "description":"Independent online tutoring and exam preparation for students in Canada",
-  "url":"https://asterbridge-learning.pages.dev/",
-  "offers":{"@type":"Offer","priceCurrency":"CAD"}
+<style>
+:root{
+  --navy:#071323;
+  --navy2:#0b1c31;
+  --navy3:#122945;
+  --gold:#c8a96a;
+  --gold2:#e0c58d;
+  --ivory:#f5f1e8;
+  --white:#fff;
+  --muted:#9cabbc;
+  --line:rgba(200,169,106,.22);
+  --serif:"Cormorant Garamond",serif;
+  --sans:"DM Sans",sans-serif;
 }
-</script>
 
-<meta name="google-site-verification" content="gnFYHQX0etjp97WVEa6a-SQUQabvNKub7yFkwNOro_I">
+*{box-sizing:border-box;margin:0;padding:0}
 
-<script defer src="config.js"></script>
-<script defer src="script.js"></script>
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:90px;
+}
+
+body{
+  background:var(--navy);
+  color:var(--ivory);
+  font-family:var(--sans);
+  overflow-x:hidden;
+}
+
+body.menu-open{overflow:hidden}
+
+a{color:inherit;text-decoration:none}
+
+button,input,select,textarea{font:inherit}
+
+button{cursor:pointer}
+
+.container{
+  width:min(1180px,90%);
+  margin:auto;
+}
+
+.gold{color:var(--gold)}
+
+.section{
+  position:relative;
+  padding:120px 0;
+}
+
+.eyebrow{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:11px;
+  font-weight:600;
+}
+
+.eyebrow::before{
+  content:"";
+  width:30px;
+  height:1px;
+  background:var(--gold);
+}
+
+.section-title{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:clamp(42px,6vw,75px);
+  line-height:.98;
+  margin-top:24px;
+}
+
+.section-description{
+  color:var(--muted);
+  line-height:1.9;
+  font-size:15px;
+  max-width:600px;
+  margin-top:24px;
+}
+
+.gold-line{
+  height:1px;
+  width:100%;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  opacity:.4;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:16px 24px;
+  border:1px solid var(--gold);
+  background:var(--gold);
+  color:var(--navy);
+  text-transform:uppercase;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1.6px;
+  transition:.3s;
+}
+
+.btn:hover{
+  background:transparent;
+  color:var(--gold);
+  transform:translateY(-3px);
+}
+
+.btn-outline{
+  background:transparent;
+  color:var(--ivory);
+  border-color:rgba(255,255,255,.25);
+}
+
+.btn-outline:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* NAVIGATION */
+
+.navbar{
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:1000;
+  height:85px;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  background:rgba(7,19,35,.82);
+  backdrop-filter:blur(18px);
+  transition:.3s;
+}
+
+.navbar.scrolled{
+  height:72px;
+  background:rgba(7,19,35,.97);
+}
+
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.brand-symbol{
+  width:38px;
+  height:38px;
+  border:1px solid var(--gold);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  font-family:var(--serif);
+  font-size:24px;
+  transform:rotate(45deg);
+}
+
+.brand-symbol span{transform:rotate(-45deg)}
+
+.brand-text{
+  display:flex;
+  flex-direction:column;
+}
+
+.brand-name{
+  font-family:var(--serif);
+  font-size:24px;
+  letter-spacing:.5px;
+  line-height:1;
+}
+
+.brand-sub{
+  font-size:8px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-top:5px;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:35px;
+  list-style:none;
+}
+
+.nav-links a{
+  color:#c6cfda;
+  font-size:11px;
+  letter-spacing:1px;
+  transition:.3s;
+}
+
+.nav-links a:hover{color:var(--gold)}
+
+.nav-links .nav-cta{
+  color:var(--gold);
+  border:1px solid var(--gold);
+  padding:12px 17px;
+}
+
+.menu-btn{
+  display:none;
+  background:none;
+  border:0;
+  color:var(--ivory);
+  font-size:25px;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding:130px 0 90px;
+  background:
+    radial-gradient(ellipse at 75% 40%,rgba(34,69,105,.35),transparent 50%),
+    linear-gradient(135deg,#071323 0%,#0a1c32 60%,#071323 100%);
+}
+
+#particles{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+
+.hero-grid{
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(200,169,106,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,169,106,.035) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:linear-gradient(to bottom,black,transparent);
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  width:100%;
+  display:grid;
+  grid-template-columns:1.12fr .88fr;
+  align-items:center;
+  gap:50px;
+}
+
+.hero-text{max-width:720px}
+
+.hero-kicker{
+  color:var(--gold);
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:4px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:30px;
+}
+
+.hero-kicker:before{
+  content:"";
+  width:45px;
+  height:1px;
+  background:var(--gold);
+}
+
+.hero h1{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(65px,8.5vw,115px);
+  line-height:.88;
+  letter-spacing:-2px;
+}
+
+.hero h1 span{
+  display:block;
+  color:var(--gold);
+  font-style:italic;
+}
+
+.hero-description{
+  color:#b2c0cf;
+  max-width:490px;
+  font-size:15px;
+  line-height:1.9;
+  margin:30px 0 35px;
+}
+
+.hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+}
+
+.hero-footnote{
+  margin-top:55px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  color:#7d91a6;
+  font-size:10px;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+}
+
+.hero-footnote .dot{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--gold);
+}
+
+/* ORBIT */
+
+.hero-visual{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:480px;
+  perspective:1000px;
+}
+
+.orbit-scene{
+  width:min(440px,100%);
+  aspect-ratio:1;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.orbit{
+  position:absolute;
+  border:1px solid rgba(200,169,106,.22);
+  border-radius:50%;
+  transform:rotate(-25deg);
+}
+
+.orbit-one{width:100%;height:65%}
+.orbit-two{width:80%;height:100%;transform:rotate(45deg)}
+.orbit-three{width:68%;height:68%;border-color:rgba(255,255,255,.1)}
+
+.orbit-center{
+  width:180px;
+  height:180px;
+  border:1px solid rgba(200,169,106,.45);
+  background:radial-gradient(circle,rgba(200,169,106,.16),rgba(10,28,49,.1) 65%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transform:rotate(45deg);
+  box-shadow:0 0 70px rgba(200,169,106,.08);
+}
+
+.orbit-center-inner{transform:rotate(-45deg);text-align:center}
+
+.orbit-center .monogram{
+  font-family:var(--serif);
+  color:var(--gold);
+  font-size:72px;
+  line-height:1;
+}
+
+.orbit-center small{
+  font-size:8px;
+  letter-spacing:4px;
+  color:var(--ivory);
+  text-transform:uppercase;
+}
+
+.orbit-node{
+  position:absolute;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 20px rgba(200,169,106,.5);
+}
+
+.node-one{top:8%;left:45%}
+.node-two{right:7%;top:53%}
+.node-three{left:8%;bottom:19%}
+
+.orbit-label{
+  position:absolute;
+  color:var(--gold);
+  font-size:9px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
+.label-one{top:13%;right:4%}
+.label-two{bottom:8%;left:3%}
+.label-three{top:46%;left:-5%}
+
+.scroll-indicator{
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  gap:10px;
+  color:#718399;
+  text-transform:uppercase;
+  font-size:9px;
+  letter-spacing:3px;
+}
+
+.scroll-indicator:after{
+  content:"";
+  height:35px;
+  width:1px;
+  background:linear-gradient(var(--gold),transparent);
+}
+
+/* INTRO */
+
+.intro{
+  background:var(--ivory);
+  color:var(--navy);
+  padding:125px 0;
+}
+
+.intro-grid{
+  display:grid;
+  grid-template-columns:.75fr 1.25fr;
+  gap:90px;
+  align-items:start;
+}
+
+.intro .eyebrow{color:#94733b}
+
+.intro h2{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:clamp(43px,5.4vw,72px);
+  line-height:1;
+}
+
+.intro h2 span{
+  color:#94733b;
+  font-style:italic;
+}
+
+.intro-text{
+  color:#596777;
+  font-size:15px;
+  line-height:2;
+}
+
+.intro-text p+p{margin-top:22px}
+
+.intro-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-top:1px solid rgba(7,19,35,.15);
+  margin-top:65px;
+  padding-top:25px;
+  gap:20px;
+}
+
+.intro-bottom span{
+  color:#8b7652;
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+/* PHILOSOPHY */
+
+.philosophy{
+  background:var(--navy2);
+  overflow:hidden;
+}
+
+.philosophy-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:30px;
+  margin-bottom:65px;
+}
+
+.philosophy-heading .section-description{max-width:380px}
+
+.philosophy-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+}
+
+.philosophy-card{
+  background:var(--navy2);
+  padding:42px 35px;
+  min-height:300px;
+  transition:.4s;
+}
+
+.philosophy-card:hover{
+  background:#10243c;
+}
+
+.card-number{
+  color:var(--gold);
+  font-family:var(--serif);
+  font-size:35px;
+}
+
+.philosophy-card h3{
+  font-family:var(--serif);
+  font-size:32px;
+  font-weight:500;
+  margin:35px 0 18px;
+}
+
+.philosophy-card p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.9;
+}
+
+/* PROGRAMS */
+
+.programs{
+  background:#081626;
+}
+
+.program-heading{
+  margin-bottom:60px;
+}
+
+.program-list{
+  border-top:1px solid var(--line);
+}
+
+.program-item{
+  display:grid;
+  grid-template-columns:80px 1fr 50px;
+  gap:30px;
+  align-items:center;
+  padding:35px 10px;
+  border-bottom:1px solid var(--line);
+  transition:.35s;
+}
+
+.program-item:hover{
+  padding-left:22px;
+  background:rgba(200,169,106,.035);
+}
+
+.program-index{
+  font-family:var(--serif);
+  color:var(--gold);
+  font-size:35px;
+}
+
+.program-item h3{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:35px;
+}
+
+.program-item p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.8;
+  max-width:650px;
+  margin-top:8px;
+}
+
+.program-arrow{
+  width:42px;
+  height:42px;
+  border:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  transition:.3s;
+}
+
+.program-item:hover .program-arrow{
+  background:var(--gold);
+  color:var(--navy);
+}
+
+/* JOURNEY */
+
+.journey{
+  background:var(--ivory);
+  color:var(--navy);
+}
+
+.journey .eyebrow{color:#94743d}
+
+.journey-top{
+  display:flex;
+  justify-content:space-between;
+  gap:40px;
+  align-items:end;
+  margin-bottom:65px;
+}
+
+.journey-top .section-description{max-width:420px;color:#687583}
+
+.journey-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+
+.journey-card{
+  min-height:350px;
+  padding:35px;
+  position:relative;
+  background:#fff;
+  border:1px solid rgba(7,19,35,.08);
+  box-shadow:0 20px 50px rgba(7,19,35,.04);
+  transform-style:preserve-3d;
+  transition:transform .2s ease,box-shadow .3s;
+}
+
+.journey-card:hover{
+  box-shadow:0 25px 60px rgba(7,19,35,.1);
+}
+
+.journey-card .card-symbol{
+  font-family:var(--serif);
+  font-size:58px;
+  color:#b4945a;
+  line-height:1;
+}
+
+.journey-card h3{
+  font-family:var(--serif);
+  font-size:34px;
+  font-weight:500;
+  margin:25px 0 15px;
+}
+
+.journey-card p{
+  color:#687583;
+  font-size:13px;
+  line-height:1.9;
+}
+
+.journey-card .card-footer{
+  position:absolute;
+  bottom:30px;
+  left:35px;
+  right:35px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-top:1px solid rgba(7,19,35,.1);
+  padding-top:18px;
+  font-size:10px;
+  color:#94733b;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+/* STATEMENT */
+
+.statement{
+  padding:130px 0;
+  background:
+    radial-gradient(ellipse at center,rgba(200,169,106,.08),transparent 70%),
+    var(--navy);
+  text-align:center;
+}
+
+.statement-inner{max-width:900px;margin:auto}
+
+.statement-mark{
+  font-family:var(--serif);
+  font-size:70px;
+  color:var(--gold);
+  line-height:1;
+}
+
+.statement h2{
+  font-family:var(--serif);
+  font-size:clamp(45px,6vw,82px);
+  font-weight:400;
+  line-height:1.05;
+  margin:25px 0;
+}
+
+.statement h2 span{
+  color:var(--gold);
+  font-style:italic;
+}
+
+.statement p{
+  color:var(--muted);
+  line-height:1.9;
+  max-width:550px;
+  margin:25px auto 0;
+  font-size:14px;
+}
+
+/* ABOUT */
+
+.about{
+  background:var(--navy2);
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:85px;
+  align-items:center;
+}
+
+.about-visual{
+  min-height:470px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at center,rgba(200,169,106,.13),transparent 55%),
+    linear-gradient(135deg,#0b1c31,#071323);
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+
+.about-visual:before,
+.about-visual:after{
+  content:"";
+  position:absolute;
+  border:1px solid rgba(200,169,106,.18);
+  transform:rotate(45deg);
+}
+
+.about-visual:before{width:250px;height:250px}
+.about-visual:after{width:180px;height:180px}
+
+.about-logo{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+.about-logo .big-letter{
+  font-family:var(--serif);
+  font-size:150px;
+  line-height:1;
+  color:var(--gold);
+  font-weight:400;
+}
+
+.about-logo p{
+  font-size:9px;
+  letter-spacing:5px;
+  color:var(--ivory);
+  text-transform:uppercase;
+}
+
+.about-copy h2{
+  font-family:var(--serif);
+  font-size:clamp(45px,5vw,67px);
+  line-height:.98;
+  font-weight:500;
+  margin:25px 0;
+}
+
+.about-copy h2 span{
+  color:var(--gold);
+  font-style:italic;
+}
+
+.about-copy>p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:2;
+}
+
+.about-points{
+  margin-top:35px;
+  display:grid;
+  gap:18px;
+}
+
+.about-point{
+  display:flex;
+  gap:15px;
+  align-items:start;
+}
+
+.about-point .point{
+  color:var(--gold);
+  font-size:17px;
+}
+
+.about-point p{
+  color:#c4cfda;
+  font-size:12px;
+  line-height:1.8;
+}
+
+/* CONTACT */
+
+.contact{
+  background:var(--ivory);
+  color:var(--navy);
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:75px;
+}
+
+.contact .eyebrow{color:#94733b}
+
+.contact-copy h2{
+  font-family:var(--serif);
+  font-size:clamp(50px,6vw,78px);
+  line-height:.95;
+  font-weight:500;
+  margin:25px 0;
+}
+
+.contact-copy h2 span{
+  color:#94733b;
+  font-style:italic;
+}
+
+.contact-copy>p{
+  color:#657384;
+  font-size:14px;
+  line-height:1.9;
+}
+
+.contact-note{
+  margin-top:35px;
+  padding-top:25px;
+  border-top:1px solid rgba(7,19,35,.15);
+  color:#8c7650;
+  font-size:10px;
+  letter-spacing:1.5px;
+  line-height:1.8;
+  text-transform:uppercase;
+}
+
+.contact-form{
+  padding:40px;
+  background:white;
+  border:1px solid rgba(7,19,35,.08);
+  box-shadow:0 20px 60px rgba(7,19,35,.05);
+}
+
+.form-heading{
+  font-family:var(--serif);
+  font-size:34px;
+  font-weight:500;
+  margin-bottom:30px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+
+.form-field{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.form-field.full{grid-column:1/-1}
+
+.form-field label{
+  color:#697888;
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea{
+  width:100%;
+  border:0;
+  border-bottom:1px solid #dce1e6;
+  background:transparent;
+  padding:12px 0;
+  color:var(--navy);
+  border-radius:0;
+  outline:none;
+  font-size:13px;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{
+  border-color:#a88951;
+}
+
+.form-field select{cursor:pointer}
+
+.form-field select option{background:white;color:var(--navy)}
+
+.form-field textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder{
+  color:#aab4be;
+}
+
+.form-submit{
+  margin-top:28px;
+  width:100%;
+}
+
+.form-message{
+  font-size:12px;
+  margin-top:15px;
+  line-height:1.6;
+  display:none;
+}
+
+.form-message.show{display:block}
+
+.form-message.success{color:#287c55}
+.form-message.error{color:#b54545}
+
+.form-privacy{
+  font-size:10px;
+  color:#97a2ae;
+  line-height:1.7;
+  margin-top:15px;
+}
+
+/* FOOTER */
+
+.footer{
+  background:#050e1a;
+  padding:70px 0 25px;
+}
+
+.footer-top{
+  display:flex;
+  justify-content:space-between;
+  gap:50px;
+  align-items:start;
+  padding-bottom:50px;
+}
+
+.footer-description{
+  color:#8292a5;
+  font-size:12px;
+  line-height:1.9;
+  max-width:350px;
+  margin-top:20px;
+}
+
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:30px;
+}
+
+.footer-links a{
+  color:#9ba9b8;
+  font-size:11px;
+  transition:.3s;
+}
+
+.footer-links a:hover{color:var(--gold)}
+
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:22px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:#657487;
+  font-size:10px;
+  letter-spacing:.5px;
+}
+
+/* BACK TO TOP */
+
+.back-top{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  z-index:500;
+  width:44px;
+  height:44px;
+  background:var(--gold);
+  color:var(--navy);
+  border:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  opacity:0;
+  visibility:hidden;
+  transition:.3s;
+}
+
+.back-top.visible{
+  opacity:1;
+  visibility:visible;
+}
+
+.back-top:hover{transform:translateY(-4px)}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+  .hero-content{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .hero-text{max-width:750px}
+
+  .hero-visual{
+    min-height:350px;
+    max-width:480px;
+    margin:0 auto;
+  }
+
+  .hero{padding-bottom:110px}
+
+  .intro-grid{gap:45px}
+
+  .philosophy-card{padding:30px 25px}
+
+  .journey-grid{gap:15px}
+
+  .journey-card{padding:28px}
+
+  .journey-card .card-footer{
+    left:28px;
+    right:28px;
+  }
+
+  .about-grid{gap:45px}
+
+  .contact-grid{gap:40px}
+}
+
+@media(max-width:760px){
+
+  .section{padding:85px 0}
+
+  .navbar{height:72px}
+
+  .brand-name{font-size:21px}
+
+  .menu-btn{display:block;z-index:1002}
+
+  .nav-links{
+    position:fixed;
+    inset:0;
+    height:100vh;
+    background:rgba(5,14,26,.98);
+    flex-direction:column;
+    justify-content:center;
+    gap:32px;
+    transform:translateX(100%);
+    transition:transform .4s ease;
+    z-index:1001;
+  }
+
+  .nav-links.open{transform:translateX(0)}
+
+  .nav-links a{font-size:14px}
+
+  .hero{
+    min-height:auto;
+    padding:130px 0 95px;
+  }
+
+  .hero h1{font-size:clamp(63px,15vw,95px)}
+
+  .hero-content{gap:0}
+
+  .hero-visual{min-height:320px}
+
+  .orbit-label{font-size:8px}
+
+  .orbit-scene{max-width:340px}
+
+  .orbit-center{width:135px;height:135px}
+
+  .orbit-center .monogram{font-size:58px}
+
+  .scroll-indicator{bottom:15px}
+
+  .intro-grid{grid-template-columns:1fr;gap:30px}
+
+  .intro-bottom{
+    margin-top:45px;
+    flex-wrap:wrap;
+  }
+
+  .philosophy-heading,
+  .journey-top{
+    display:block;
+  }
+
+  .philosophy-heading .section-description,
+  .journey-top .section-description{
+    margin-top:20px;
+  }
+
+  .philosophy-grid{grid-template-columns:1fr}
+
+  .philosophy-card{min-height:auto;padding:35px}
+
+  .philosophy-card h3{margin:20px 0 12px}
+
+  .program-item{
+    grid-template-columns:45px 1fr 38px;
+    gap:12px;
+    padding:25px 5px;
+  }
+
+  .program-index{font-size:25px}
+
+  .program-item h3{font-size:27px}
+
+  .program-item p{font-size:12px}
+
+  .program-arrow{width:34px;height:34px}
+
+  .journey-grid{grid-template-columns:1fr}
+
+  .journey-card{min-height:300px}
+
+  .statement{padding:100px 0}
+
+  .about-grid{grid-template-columns:1fr}
+
+  .about-visual{min-height:330px}
+
+  .about-logo .big-letter{font-size:115px}
+
+  .contact-grid{grid-template-columns:1fr}
+
+  .contact-form{padding:28px 22px}
+
+  .form-grid{grid-template-columns:1fr}
+
+  .form-field.full{grid-column:auto}
+
+  .footer-top{
+    flex-direction:column;
+    gap:35px;
+  }
+
+  .footer-links{gap:20px}
+
+  .footer-bottom{
+    flex-direction:column;
+    gap:10px;
+  }
+}
+
+@media(max-width:400px){
+
+  .hero-buttons .btn{width:100%}
+
+  .hero-footnote{font-size:8px}
+
+  .brand-sub{letter-spacing:2px}
+
+  .form-heading{font-size:29px}
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  html{scroll-behavior:auto}
+
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+
+  .reveal{
+    opacity:1;
+    transform:none;
+  }
+}
+</style>
 </head>
 
 <body>
-<div class="announcement">CANADA-WIDE ONLINE TUTORING <span>✦</span> YOUR NEXT ACADEMIC BREAKTHROUGH STARTS HERE</div>
 
-<header>
-<a class="brand" href="#top"><span class="logo">A<span>✦</span></span><span>ASTERBRIDGE<small>LEARNING</small></span></a>
-<button class="menu" aria-label="Menu">☰</button>
-<nav>
-<a href="#classes">Classes</a>
-<a href="#offers">Offers</a>
-<a href="#articles">Study journal</a>
-<a href="#about">Our approach</a>
-<a class="navbtn" href="#contact">Register <span>↗</span></a>
+<!-- NAVIGATION -->
+
+<nav class="navbar" id="navbar">
+  <div class="container nav-inner">
+
+    <a href="#home" class="brand">
+      <div class="brand-symbol"><span>A</span></div>
+      <div class="brand-text">
+        <div class="brand-name">Asterbridge</div>
+        <div class="brand-sub">Learning</div>
+      </div>
+    </a>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#philosophy">Our Philosophy</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#journey">Learning Journey</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Enquire Now ↗</a></li>
+    </ul>
+
+  </div>
 </nav>
-</header>
 
-<main id="top">
+<!-- HERO -->
 
-<section class="hero">
-<div class="hero-text">
-<div class="eyebrow"><span class="pulse"></span> PERSONALIZED • ONLINE • EXAM-FOCUSED</div>
-<h1>Your weak points<br>are your <em>next wins.</em></h1>
-<p class="lead">Stop revising what you already know. Start mastering what holds you back—with focused tutoring, strategic practice and a plan built around your goals.</p>
-<div class="hero-buttons">
-<a class="btn primary" href="#contact">Find your learning plan <span>↗</span></a>
-<a class="btn outline" href="#classes">Explore classes ↓</a>
-</div>
-<div class="proofline"><div class="avatars">✦　✦　✦</div><span>Personal attention. Purposeful practice. A clearer path forward.</span></div>
-</div>
+<section class="hero" id="home">
 
-<div class="hero-visual">
-<div class="gridglow"></div>
-<div class="orb"></div>
-<div class="glass main-card">
-<div class="cardlabel">YOUR STUDY RESET</div>
-<div class="metric">01 <span>→</span></div>
-<h3>Identify the gap.</h3>
-<p>Discover the concepts that need attention.</p>
-<div class="progress"><i></i></div>
-<div class="progress-caption">UNDERSTANDING IN PROGRESS</div>
-</div>
-<div class="floating f1"><span>↗</span> Focus over guesswork</div>
-<div class="floating f2"><span>✦</span> One concept at a time</div>
-<div class="visual-caption">LEARN SMARTER / NOT JUST LONGER</div>
-</div>
+  <canvas id="particles"></canvas>
+  <div class="hero-grid"></div>
 
-<div class="hero-footer">
-<span>MATHEMATICS · SCIENCE · ENGLISH · EXAMS</span>
-<span>01 / LEARN WITH INTENTION</span>
-</div>
+  <div class="container hero-content">
+
+    <div class="hero-text">
+
+      <div class="hero-kicker">A new perspective on learning</div>
+
+      <h1>
+        Beyond
+        <span>boundaries.</span>
+        Beyond
+        <span>expectations.</span>
+      </h1>
+
+      <p class="hero-description">
+        Education is more than the pursuit of answers.
+        It is the discovery of possibility, the cultivation of
+        confidence, and the development of a mind prepared
+        to navigate an ever-changing world.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#programs" class="btn">Explore Programs ↗</a>
+        <a href="#philosophy" class="btn btn-outline">Our Philosophy</a>
+      </div>
+
+      <div class="hero-footnote">
+        <span class="dot"></span>
+        Education with purpose
+        <span class="dot"></span>
+        Learning without limits
+      </div>
+
+    </div>
+
+    <div class="hero-visual">
+      <div class="orbit-scene">
+
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit orbit-three"></div>
+
+        <div class="orbit-center">
+          <div class="orbit-center-inner">
+            <div class="monogram">A</div>
+            <small>Asterbridge</small>
+          </div>
+        </div>
+
+        <div class="orbit-node node-one"></div>
+        <div class="orbit-node node-two"></div>
+        <div class="orbit-node node-three"></div>
+
+        <div class="orbit-label label-one">Knowledge</div>
+        <div class="orbit-label label-two">Potential</div>
+        <div class="orbit-label label-three">Growth</div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="scroll-indicator">Discover</div>
+
 </section>
 
-<section class="ticker">
-<span>MAKE THE NEXT TEST YOUR TURNING POINT</span><b>✦</b>
-<span>CLARITY BUILDS CONFIDENCE</span><b>✦</b>
-<span>LEARN WITH A PLAN</span>
+<!-- INTRO -->
+
+<section class="section intro" id="intro">
+
+  <div class="container">
+
+    <div class="intro-grid">
+
+      <div class="reveal">
+        <div class="eyebrow">The Asterbridge perspective</div>
+
+        <h2>
+          Learning is a journey.
+          <span>Not a destination.</span>
+        </h2>
+      </div>
+
+      <div class="intro-text reveal">
+        <p>
+          Every student carries a unique set of ambitions, abilities,
+          and questions. The right learning environment does not simply
+          deliver information — it helps transform curiosity into
+          understanding and understanding into confidence.
+        </p>
+
+        <p>
+          At Asterbridge Learning, we believe education should be
+          purposeful, intellectually engaging, and built around the
+          individual. Our approach brings structure to learning while
+          encouraging students to think independently, explore deeply,
+          and move forward with clarity.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="intro-bottom reveal">
+      <span>Individual potential</span>
+      <span>Structured learning</span>
+      <span>Lasting understanding</span>
+      <span>Future readiness</span>
+    </div>
+
+  </div>
+
 </section>
 
-<section id="classes" class="section">
-<div class="sectionhead">
-<div><div class="kicker">CLASSES</div><h2>Find the class that<br><em>fits your goal.</em></h2></div>
-<p>Whether you need ongoing support or a targeted exam sprint, choose the format that makes sense for your learning journey.</p>
-</div>
+<!-- PHILOSOPHY -->
 
-<div class="classgrid">
+<section class="section philosophy" id="philosophy">
 
-<article class="classcard">
-<div class="class-icon">∑</div>
-<span class="tag">CORE SUBJECTS</span>
-<h3>One-to-one tutoring</h3>
-<p>Individual lessons in Mathematics, Biology, Chemistry, Physics and English. Lessons adapt to your pace, questions and syllabus.</p>
-<ul><li>Personalized lesson focus</li><li>Concept explanations & practice</li><li>Flexible scheduling request</li></ul>
-<a href="#contact" class="textlink">View hourly offer ↗</a>
-</article>
+  <div class="container">
 
-<article class="classcard featured">
-<div class="ribbon">POPULAR STUDY RESET</div>
-<div class="class-icon">◎</div>
-<span class="tag">30-DAY PROGRAM</span>
-<h3>30-day assessment & study plan</h3>
-<p>Start with an assessment to identify priority topics, then follow a structured 30-day learning roadmap with guided support.</p>
-<ul><li>Initial skills assessment</li><li>Personalized focus plan</li><li>Progress checkpoints</li></ul>
-<a href="#contact" class="textlink">Explore the 30-day offer ↗</a>
-</article>
+    <div class="philosophy-heading reveal">
 
-<article class="classcard">
-<div class="class-icon">⚡</div>
-<span class="tag">INTENSIVE</span>
-<h3>Exam-prep crash course</h3>
-<p>Focused preparation for an upcoming exam with practice, revision priorities and exam-oriented strategies.</p>
-<ul><li>Targeted revision</li><li>Practice & feedback</li><li>Exam strategy</li></ul>
-<a href="#contact" class="textlink">See course details ↗</a>
-</article>
+      <div>
+        <div class="eyebrow">Our philosophy</div>
+        <h2 class="section-title">
+          A different way<br>
+          <span class="gold">to learn.</span>
+        </h2>
+      </div>
 
-<article class="classcard">
-<div class="class-icon">✎</div>
-<span class="tag">CUSTOM SUPPORT</span>
-<h3>Weak-concept coaching</h3>
-<p>Bring the topic, assignment type or concept that is giving you trouble. We work through it together.</p>
-<ul><li>Topic-specific sessions</li><li>Guided problem solving</li><li>Proofreading & writing feedback*</li></ul>
-<a href="#contact" class="textlink">See custom support ↗</a>
-</article>
+      <p class="section-description">
+        Meaningful education begins when students move beyond
+        memorisation and develop the ability to understand,
+        question, connect, and apply knowledge.
+      </p>
 
-</div>
-<p class="smallnote"></p>
+    </div>
+
+    <div class="philosophy-grid">
+
+      <article class="philosophy-card reveal">
+        <div class="card-number">01</div>
+        <h3>Clarity before complexity</h3>
+        <p>
+          We build strong foundations first. Complex ideas become
+          approachable when concepts are organised, explained,
+          and connected with clarity.
+        </p>
+      </article>
+
+      <article class="philosophy-card reveal">
+        <div class="card-number">02</div>
+        <h3>Understanding before memorisation</h3>
+        <p>
+          Learning should develop genuine comprehension.
+          We encourage reasoning, application, and meaningful
+          connections rather than dependence on rote recall.
+        </p>
+      </article>
+
+      <article class="philosophy-card reveal">
+        <div class="card-number">03</div>
+        <h3>Progress with purpose</h3>
+        <p>
+          Every learning journey requires direction. We value
+          structured progress, consistent effort, and the confidence
+          that develops through measurable improvement.
+        </p>
+      </article>
+
+    </div>
+
+  </div>
+
 </section>
 
-<section class="pricing section" id="offers">
-<div class="sectionhead">
-<div><div class="kicker">INTRODUCTORY OFFERS</div><h2>Invest in your<br><em>next breakthrough.</em></h2></div>
-<p>Transparent prices in Canadian dollars. Introductory offers are presented as current promotional pricing; availability and schedule are confirmed after enquiry.</p>
-</div>
+<!-- PROGRAMS -->
 
-<div class="pricegrid">
+<section class="section programs" id="programs">
 
-<article class="pricecard">
-<span class="tag">30-DAY STARTER</span>
-<h3>Assessment + 30-day plan</h3>
-<div class="price"><del>$150</del><strong>$100 <small>CAD</small></strong></div>
-<div class="save">INTRODUCTORY OFFER</div>
-<p>Assessment session, priority concept mapping and a personalized 30-day roadmap to help you focus your effort.</p>
-<a class="btn primary wide" data-register="assessment" href="#contact">Register for assessment ↗</a>
-</article>
+  <div class="container">
 
-<article class="pricecard">
-<span class="tag">ONE-TO-ONE</span>
-<h3>Exam-oriented tutoring</h3>
-<div class="price"><del>$30</del><strong>$20 <small>CAD / hour</small></strong></div>
-<div class="save">INTRODUCTORY HOURLY RATE</div>
-<p>Individual tutoring shaped around your curriculum, exam goals, learning pace and questions.</p>
-<a class="btn primary wide" data-register="tutoring" href="#contact">Register for a class ↗</a>
-</article>
+    <div class="program-heading reveal">
+      <div class="eyebrow">Academic pathways</div>
 
-<article class="pricecard darkprice">
-<span class="tag">INTENSIVE COURSE</span>
-<h3>30-day exam-prep crash course</h3>
-<div class="price"><strong>$320 <small>CAD</small></strong></div>
-<div class="save">STRUCTURED INTENSIVE</div>
-<p>A concentrated 30-day exam preparation program. Specific schedule and deliverables confirmed before enrollment.</p>
-<a class="btn light wide" data-register="crash" href="#contact">Request crash course ↗</a>
-</article>
+      <h2 class="section-title">
+        Knowledge, directed<br>
+        <span class="gold">toward possibility.</span>
+      </h2>
 
-<article class="pricecard">
-<span class="tag">CUSTOM CONCEPTS</span>
-<h3>Weak-concept coaching & proofreading</h3>
-<div class="price"><strong>$25 <small>CAD / hour</small></strong></div>
-<div class="save">FLEXIBLE TOPIC SUPPORT</div>
-<p>Focused one-on-one help with challenging concepts, practice problems or writing feedback.</p>
-<a class="btn primary wide" data-register="custom" href="#contact">Request custom support ↗</a>
-</article>
+      <p class="section-description">
+        Explore learning opportunities designed to support academic
+        development, examination preparation, scientific understanding,
+        and the ambitions of individual students.
+      </p>
+    </div>
 
-</div>
+    <div class="program-list">
+
+      <a href="#contact" class="program-item reveal" data-program="English Language & Academic Writing">
+        <div class="program-index">01</div>
+        <div>
+          <h3>English & Academic Writing</h3>
+          <p>
+            Develop language proficiency, communication skills,
+            academic writing, comprehension, and the confidence
+            to express ideas effectively.
+          </p>
+        </div>
+        <div class="program-arrow">↗</div>
+      </a>
+
+      <a href="#contact" class="program-item reveal" data-program="Biology & Medical Entrance Preparation">
+        <div class="program-index">02</div>
+        <div>
+          <h3>Biology & Medical Preparation</h3>
+          <p>
+            Build conceptual foundations in biology, strengthen
+            scientific reasoning, and prepare strategically for
+            competitive medical examinations.
+          </p>
+        </div>
+        <div class="program-arrow">↗</div>
+      </a>
+
+      <a href="#contact" class="program-item reveal" data-program="Chemistry & Science Preparation">
+        <div class="program-index">03</div>
+        <div>
+          <h3>Chemistry & Sciences</h3>
+          <p>
+            Understand scientific principles through structured
+            explanations, problem-solving, conceptual learning,
+            and examination-focused practice.
+          </p>
+        </div>
+        <div class="program-arrow">↗</div>
+      </a>
+
+      <a href="#contact" class="program-item reveal" data-program="Examination Preparation">
+        <div class="program-index">04</div>
+        <div>
+          <h3>Examination Preparation</h3>
+          <p>
+            Strengthen performance through focused preparation,
+            practice questions, strategic revision, and an
+            understanding of examination requirements.
+          </p>
+        </div>
+        <div class="program-arrow">↗</div>
+      </a>
+
+      <a href="#contact" class="program-item reveal" data-program="Personalized Academic Support">
+        <div class="program-index">05</div>
+        <div>
+          <h3>Personalized Academic Support</h3>
+          <p>
+            A learning approach shaped around individual academic
+            needs, learning objectives, subject challenges,
+            and personal goals.
+          </p>
+        </div>
+        <div class="program-arrow">↗</div>
+      </a>
+
+    </div>
+
+  </div>
+
 </section>
 
-<section class="section register-section" id="register">
-<div class="sectionhead">
-<div><div class="kicker">REGISTRATION</div><h2>One decision closer<br>to <em>your goal.</em></h2></div>
-<p></p>
-</div>
+<!-- LEARNING JOURNEY -->
 
-<div class="registerpanel">
-<div>
-<div class="regicon">✦</div>
-<h3>Ready to get started?</h3>
-<p>Use our registration form to tell us your subject, grade, goal and preferred option. For students under 18, a parent or guardian should submit the enquiry.</p>
-<p class="smallnote">Enrollment and schedule are confirmed after a follow-up. Do not submit sensitive personal information.</p>
-</div>
+<section class="section journey" id="journey">
 
-<div class="regactions">
-<a class="btn primary wide" data-register="assessment" href="#contact">30-day assessment & plan — $100</a>
-<a class="btn outline dark-outline wide" data-register="tutoring" href="#contact">One-to-one classes — $20/hour</a>
-<a class="btn outline dark-outline wide" data-register="crash" href="#contact">30-day crash course — $320</a>
-<a class="btn outline dark-outline wide" data-register="custom" href="#contact">Custom concepts — $25/hour</a>
-</div>
-</div>
+  <div class="container">
+
+    <div class="journey-top reveal">
+
+      <div>
+        <div class="eyebrow">The learning experience</div>
+
+        <h2 class="section-title">
+          Progress is<br>
+          <span class="gold">designed.</span>
+        </h2>
+      </div>
+
+      <p class="section-description">
+        A thoughtful learning experience moves from identifying
+        needs to building understanding and finally developing
+        the confidence to apply knowledge independently.
+      </p>
+
+    </div>
+
+    <div class="journey-grid">
+
+      <article class="journey-card reveal">
+        <div class="card-symbol">I</div>
+        <h3>Discover</h3>
+        <p>
+          Identify academic goals, existing knowledge, learning
+          challenges, and the direction in which the student
+          wishes to progress.
+        </p>
+        <div class="card-footer">
+          <span>Understanding the student</span>
+          <span>01</span>
+        </div>
+      </article>
+
+      <article class="journey-card reveal">
+        <div class="card-symbol">II</div>
+        <h3>Develop</h3>
+        <p>
+          Build knowledge through structured teaching,
+          concept development, guided practice, and
+          progressively challenging learning.
+        </p>
+        <div class="card-footer">
+          <span>Building capability</span>
+          <span>02</span>
+        </div>
+      </article>
+
+      <article class="journey-card reveal">
+        <div class="card-symbol">III</div>
+        <h3>Advance</h3>
+        <p>
+          Apply knowledge independently, strengthen reasoning,
+          assess progress, and move toward academic goals
+          with greater confidence.
+        </p>
+        <div class="card-footer">
+          <span>Moving forward</span>
+          <span>03</span>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+
 </section>
 
-<section class="articles section" id="articles">
-<div class="sectionhead">
-<div><div class="kicker">04 / THE STUDY JOURNAL</div><h2>Study smarter.<br><em>Build momentum.</em></h2></div>
-<p>Practical ideas to help students approach learning with intention and confidence.</p>
-</div>
+<!-- STATEMENT -->
 
-<div class="articlegrid">
+<section class="statement">
 
-<article>
-<span class="article-no">01 / STUDY STRATEGY</span>
-<h3>Why rereading isn't the same as remembering</h3>
-<p>Retrieval practice—trying to recall information without looking—helps reveal what you know and what still needs work.</p>
-<details><summary>Read the insight</summary><p>After reviewing a topic, close your notes and explain it from memory. Write down what you recall, check your gaps and repeat. Short recall sessions spaced over time are often more useful than one long rereading session.</p></details>
-</article>
+  <div class="container statement-inner reveal">
 
-<article>
-<span class="article-no">02 / EXAM PREPARATION</span>
-<h3>Build an exam plan backwards</h3>
-<p>Start with the test date and break the syllabus into realistic blocks.</p>
-<details><summary>Read the insight</summary><p>List the topics, rank them by difficulty and importance, then schedule practice and review. Reserve time for mixed questions and a final check of recurring errors. A plan should be realistic enough to follow, not impressive enough to abandon.</p></details>
-</article>
+    <div class="statement-mark">“</div>
 
-<article>
-<span class="article-no">03 / MATHEMATICS</span>
-<h3>What to do when a maths problem feels impossible</h3>
-<p>Stop guessing the next step. Find the first step you don't understand.</p>
-<details><summary>Read the insight</summary><p>Identify the question's givens, write down what you need to find, and recall the relevant rule. If you're stuck, work through a simpler example. Then return to the original problem and explain each step in your own words.</p></details>
-</article>
+    <h2>
+      The goal is not simply
+      to know more.
+      <span>It is to become capable of more.</span>
+    </h2>
 
-<article>
-<span class="article-no">04 / LEARNING HABITS</span>
-<h3>Turn mistakes into a revision map</h3>
-<p>Every mistake can reveal a pattern worth practicing.</p>
-<details><summary>Read the insight</summary><p>Keep an error log: the question, what went wrong, the correct reasoning and one similar question to retry later. Review this log before the next test. The goal isn't to collect errors—it's to stop repeating them.</p></details>
-</article>
+    <div class="gold-line"></div>
 
-<article>
-<span class="article-no">05 / FOCUS & ROUTINE</span>
-<h3>A focused 25-minute study sprint</h3>
-<p>Make one session about one clearly defined task.</p>
-<details><summary>Read the insight</summary><p>Choose one goal, remove distractions, work for 25 minutes and take a short break. At the end, note what you completed and what comes next. Adjust the interval if another rhythm works better for you.</p></details>
-</article>
+    <p>
+      A meaningful education empowers students to think
+      independently, approach challenges with confidence,
+      and carry knowledge beyond the classroom.
+    </p>
 
-</div>
+  </div>
+
 </section>
 
-<section class="about section" id="about">
-<div class="aboutbox">
-<div class="kicker">OUR COMMITMENT</div>
-<h2>Support that starts<br>with <em>your real needs.</em></h2>
-<p>We believe tutoring should help students understand, not simply memorize. Our sessions are designed to be focused, approachable and goal-oriented—without promising instant results or guaranteed grades.</p>
-<div class="aboutpillars">
-<div><b>01</b><span>Clear explanations</span></div>
-<div><b>02</b><span>Focused practice</span></div>
-<div><b>03</b><span>Progress you can review</span></div>
-</div>
-</div>
+<!-- ABOUT -->
+
+<section class="section about" id="about">
+
+  <div class="container about-grid">
+
+    <div class="about-visual reveal">
+
+      <div class="about-logo">
+        <div class="big-letter">A</div>
+        <p>Asterbridge Learning</p>
+      </div>
+
+    </div>
+
+    <div class="about-copy reveal">
+
+      <div class="eyebrow">About Asterbridge</div>
+
+      <h2>
+        Education with<br>
+        <span>perspective.</span>
+      </h2>
+
+      <p>
+        Asterbridge Learning is an educational initiative founded
+        on the belief that knowledge becomes truly valuable
+        when students understand it, apply it, and grow through it.
+      </p>
+
+      <div class="about-points">
+
+        <div class="about-point">
+          <div class="point">✦</div>
+          <p>
+            A thoughtful approach to teaching, with emphasis on
+            conceptual clarity and individual development.
+          </p>
+        </div>
+
+        <div class="about-point">
+          <div class="point">✦</div>
+          <p>
+            Structured learning designed to support academic
+            objectives and examination requirements.
+          </p>
+        </div>
+
+        <div class="about-point">
+          <div class="point">✦</div>
+          <p>
+            An environment that values curiosity, discipline,
+            independent thought, and meaningful progress.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
-<section class="contact section" id="contact">
-<div class="sectionhead">
-<div><div class="kicker">CONTACT</div><h2>Let's find your<br><em>starting point.</em></h2></div>
-<p></p>
-</div>
+<!-- CONTACT -->
 
-<div class="contactbox">
-<div>
-<h3>Ask us a question</h3>
-<p>For a quick enquiry, registration request, course-fit question or schedule enquiry.</p>
-<p class="smallnote"></p>
-</div>
+<section class="section contact" id="contact">
 
-<form id="contact-form" class="contactform">
-<label>Name (parent/guardian if student is under 18)
-<input name="name" required autocomplete="name" placeholder="Name">
-</label>
+  <div class="container contact-grid">
 
-<label>Email
-<input name="email" type="email" required autocomplete="email" placeholder="Email address">
-</label>
+    <div class="contact-copy reveal">
 
-<div class="two">
-<label>Province / territory
-<select name="province">
-<option value="">Select</option>
-<option>Alberta</option>
-<option>British Columbia</option>
-<option>Manitoba</option>
-<option>New Brunswick</option>
-<option>Newfoundland and Labrador</option>
-<option>Northwest Territories</option>
-<option>Nova Scotia</option>
-<option>Nunavut</option>
-<option>Ontario</option>
-<option>Prince Edward Island</option>
-<option>Quebec</option>
-<option>Saskatchewan</option>
-<option>Yukon</option>
-</select>
-</label>
+      <div class="eyebrow">Begin your journey</div>
 
-<label>Grade / level
-<input name="grade" placeholder="e.g. Grade 10">
-</label>
-</div>
+      <h2>
+        Every great journey
+        <span>begins somewhere.</span>
+      </h2>
 
-<label>Subject
-<select name="subject" required>
-<option value="">Select subject</option>
-<option>Mathematics</option>
-<option>Biology</option>
-<option>Chemistry</option>
-<option>Physics</option>
-<option>English / writing</option>
-<option>SAT / AP</option>
-<option>Multiple subjects</option>
-</select>
-</label>
+      <p>
+        Tell us a little about your academic goals, the subjects
+        you wish to explore, or the support you are looking for.
+        We will get in touch to discuss the next step.
+      </p>
 
-<label>Program / request
-<select name="program" id="program">
-<option>General enquiry</option>
-<option>30-day assessment and plan — $100</option>
-<option>One-to-one exam-oriented tutoring — $20/hour</option>
-<option>30-day exam-prep crash course — $320</option>
-<option>Custom weak-concept support / proofreading — $25/hour</option>
-</select>
-</label>
+      <div class="contact-note">
+        Thoughtful learning.<br>
+        Meaningful progress.<br>
+        A future without boundaries.
+      </div>
 
-<label>Message
-<textarea name="message" rows="4" placeholder="What are your goals, topic priorities and preferred schedule?"></textarea>
-</label>
+    </div>
 
-<button class="btn primary wide" type="submit">Send enquiry ↗</button>
-<p class="smallnote" id="form-status">Please avoid sharing sensitive information. A parent or guardian should submit for students under 18.</p>
-</form>
-</div>
+    <div class="contact-form reveal">
+
+      <h3 class="form-heading">Student Enquiry</h3>
+
+      <form id="contactForm">
+
+        <div class="form-grid">
+
+          <div class="form-field">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" required>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="Your email address" required>
+          </div>
+
+          <div class="form-field">
+            <label for="province">Province / Region</label>
+            <input type="text" id="province" name="province" placeholder="Province or region">
+          </div>
+
+          <div class="form-field">
+            <label for="grade">Grade / Level</label>
+            <input type="text" id="grade" name="grade" placeholder="e.g. Grade 12, University">
+          </div>
+
+          <div class="form-field">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Subject of interest">
+          </div>
+
+          <div class="form-field">
+            <label for="program">Program *</label>
+            <select id="program" name="program" required>
+              <option value="">Select a program</option>
+              <option>English Language & Academic Writing</option>
+              <option>Biology & Medical Entrance Preparation</option>
+              <option>Chemistry & Science Preparation</option>
+              <option>Examination Preparation</option>
+              <option>Personalized Academic Support</option>
+              <option>General Enquiry</option>
+            </select>
+          </div>
+
+          <div class="form-field full">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your learning goals, academic requirements, or questions..."></textarea>
+          </div>
+
+        </div>
+
+        <button type="submit" class="btn form-submit" id="submitBtn">
+          Submit Enquiry ↗
+        </button>
+
+        <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+
+        <p class="form-privacy">
+          Your information will be used to respond to your enquiry
+          and provide relevant educational information.
+        </p>
+
+      </form>
+
+    </div>
+
+  </div>
+
 </section>
 
-</main>
+<!-- FOOTER -->
 
-<footer>
-<a class="brand" href="#top"><span class="logo">A<span>✦</span></span><span>ASTERBRIDGE<small>LEARNING</small></span></a>
-<p>Clarity changes everything.</p>
-<div class="footlinks">
-<a href="#classes">Classes</a>
-<a href="#offers">Offers</a>
-<a href="#articles">Articles</a>
-<a href="#contact">Contact</a>
-</div>
-<small>© <span id="year"></span> Asterbridge Learning. Independent online tutoring. <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></small>
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="footer-top">
+
+      <div>
+
+        <a href="#home" class="brand">
+          <div class="brand-symbol"><span>A</span></div>
+          <div class="brand-text">
+            <div class="brand-name">Asterbridge</div>
+            <div class="brand-sub">Learning</div>
+          </div>
+        </a>
+
+        <p class="footer-description">
+          A thoughtful approach to education, academic development,
+          and the pursuit of knowledge beyond boundaries.
+        </p>
+
+      </div>
+
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#programs">Programs</a>
+        <a href="#journey">Learning Journey</a>
+        <a href="#about">About</a>
+        <a href="#contact">Enquiries</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Asterbridge Learning. All rights reserved.</span>
+      <span>Education beyond boundaries.</span>
+    </div>
+
+  </div>
+
 </footer>
 
-<div class="popup" id="promo-popup" aria-hidden="true">
-<button class="close" aria-label="Close">×</button>
-<span class="tag">YOUR NEXT TEST IS A CHANCE TO RESET</span>
-<h2>Don't let a weak topic become your next result.</h2>
-<p>Start by identifying what needs work. Your first step is a focused assessment—not more guesswork.</p>
-<a class="btn primary wide" href="#contact">Explore introductory offers ↗</a>
-<small>Promotional offers subject to availability.</small>
-</div>
-<div class="popup-backdrop" id="popup-backdrop"></div>
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
 
 <script>
-/* Preselect the programme when a visitor clicks a specific offer. */
-document.addEventListener("DOMContentLoaded", function () {
-  const registerLinks = document.querySelectorAll("[data-register]");
-  const programSelect = document.getElementById("program");
+/* ==========================================
+   ASTERBRIDGE LEARNING
+   WEBSITE SCRIPT
+========================================== */
 
-  const programOptions = {
-    assessment: "30-day assessment and plan — $100",
-    tutoring: "One-to-one exam-oriented tutoring — $20/hour",
-    crash: "30-day exam-prep crash course — $320",
-    custom: "Custom weak-concept support / proofreading — $25/hour"
-  };
+/* GOOGLE APPS SCRIPT ENDPOINT */
 
-  registerLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
-      const selectedProgram = this.getAttribute("data-register");
-      if (programSelect && programOptions[selectedProgram]) {
-        programSelect.value = programOptions[selectedProgram];
-      }
-    });
-  });
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwvaj5paFntHpSSF0i2kso40TOS6FC2PqHCn_OKkjjDkHN9fsrBZpQCMV_dc2g-f6pN/exec";
 
-  /* Also select the programme before scrolling for the main hero CTA. */
-  document.querySelectorAll('a[href="#contact"]').forEach(function (link) {
-    link.addEventListener("click", function () {
-      if (this.hasAttribute("data-register")) return;
-      if (this.closest(".hero-buttons")) {
-        if (programSelect) programSelect.value = programOptions.assessment;
-      }
-    });
-  });
+/* YEAR */
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* NAVIGATION */
+
+const navbar = document.getElementById("navbar");
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+const backTop = document.getElementById("backTop");
+
+function handleScroll(){
+
+  const scrollY = window.scrollY;
+
+  navbar.classList.toggle("scrolled",scrollY > 40);
+  backTop.classList.toggle("visible",scrollY > 500);
+
+}
+
+window.addEventListener("scroll",handleScroll,{passive:true});
+handleScroll();
+
+menuBtn.addEventListener("click",()=>{
+
+  const open = navLinks.classList.toggle("open");
+
+  document.body.classList.toggle("menu-open",open);
+  menuBtn.setAttribute("aria-expanded",open);
+  menuBtn.innerHTML = open ? "✕" : "☰";
+
 });
+
+navLinks.querySelectorAll("a").forEach(link=>{
+
+  link.addEventListener("click",()=>{
+
+    navLinks.classList.remove("open");
+    document.body.classList.remove("menu-open");
+    menuBtn.setAttribute("aria-expanded","false");
+    menuBtn.innerHTML = "☰";
+
+  });
+
+});
+
+backTop.addEventListener("click",()=>{
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+/* SCROLL REVEAL */
+
+const revealElements = document.querySelectorAll(".reveal");
+
+if("IntersectionObserver" in window){
+
+  const revealObserver = new IntersectionObserver((entries,observer)=>{
+
+    entries.forEach(entry=>{
+
+      if(entry.isIntersecting){
+
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+
+      }
+
+    });
+
+  },{threshold:.12});
+
+  revealElements.forEach(element=>revealObserver.observe(element));
+
+}else{
+
+  revealElements.forEach(element=>element.classList.add("visible"));
+
+}
+
+/* PROGRAM AUTO-SELECTION */
+
+document.querySelectorAll("[data-program]").forEach(item=>{
+
+  item.addEventListener("click",()=>{
+
+    const program = item.getAttribute("data-program");
+    const select = document.getElementById("program");
+
+    if(select){
+
+      select.value = program;
+
+    }
+
+  });
+
+});
+
+/* 3D CARD INTERACTION */
+
+const cards = document.querySelectorAll(".journey-card");
+
+const isTouchDevice = window.matchMedia("(hover: none)").matches;
+
+if(!isTouchDevice){
+
+  cards.forEach(card=>{
+
+    card.addEventListener("mousemove",event=>{
+
+      const rect = card.getBoundingClientRect();
+
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      const centerX = rect.width/2;
+      const centerY = rect.height/2;
+
+      const rotateX = ((y-centerY)/centerY)*-5;
+      const rotateY = ((x-centerX)/centerX)*5;
+
+      card.style.transform =
+        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+    });
+
+    card.addEventListener("mouseleave",()=>{
+      card.style.transform = "perspective(900px) rotateX(0) rotateY(0)";
+    });
+
+  });
+
+}
+
+/* PARTICLE BACKGROUND */
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+let animationFrame;
+let canvasWidth;
+let canvasHeight;
+
+function resizeCanvas(){
+
+  canvasWidth = canvas.width = canvas.offsetWidth;
+  canvasHeight = canvas.height = canvas.offsetHeight;
+
+  const count = Math.min(100,Math.floor(canvasWidth/12));
+
+  particles = [];
+
+  for(let i=0;i<count;i++){
+
+    particles.push({
+      x:Math.random()*canvasWidth,
+      y:Math.random()*canvasHeight,
+      size:Math.random()*1.5+.3,
+      speed:Math.random()*.25+.05,
+      opacity:Math.random()*.45+.1
+    });
+
+  }
+
+}
+
+function drawParticles(){
+
+  ctx.clearRect(0,0,canvasWidth,canvasHeight);
+
+  particles.forEach(p=>{
+
+    p.y -= p.speed;
+
+    if(p.y < 0){
+      p.y = canvasHeight;
+      p.x = Math.random()*canvasWidth;
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle = `rgba(200,169,106,${p.opacity})`;
+    ctx.fill();
+
+  });
+
+  animationFrame = requestAnimationFrame(drawParticles);
+
+}
+
+resizeCanvas();
+drawParticles();
+
+window.addEventListener("resize",resizeCanvas);
+
+/* CONTACT FORM */
+
+const contactForm = document.getElementById("contactForm");
+const formMessage = document.getElementById("formMessage");
+const submitBtn = document.getElementById("submitBtn");
+
+contactForm.addEventListener("submit",async function(event){
+
+  event.preventDefault();
+
+  if(!contactForm.checkValidity()){
+    contactForm.reportValidity();
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.style.opacity = ".6";
+  submitBtn.textContent = "Submitting...";
+
+  formMessage.className = "form-message";
+  formMessage.style.display = "none";
+
+  const formData = new FormData(contactForm);
+
+  /* Apps Script expects these exact parameter names */
+
+  formData.append("source","Website");
+
+  const payload = new URLSearchParams();
+
+  for(const [key,value] of formData.entries()){
+    payload.append(key,value);
+  }
+
+  try{
+
+    /*
+      no-cors is used for the Apps Script cross-origin request.
+      The browser cannot read the server response in no-cors mode.
+    */
+
+    await fetch(SCRIPT_URL,{
+      method:"POST",
+      mode:"no-cors",
+      body:payload
+    });
+
+    formMessage.textContent =
+      "Your enquiry has been submitted. Thank you for contacting Asterbridge Learning. We look forward to connecting with you.";
+
+    formMessage.className = "form-message success show";
+    formMessage.style.display = "block";
+
+    contactForm.reset();
+
+  }catch(error){
+
+    formMessage.textContent =
+      "We could not send your enquiry at this moment. Please try again or contact us again shortly.";
+
+    formMessage.className = "form-message error show";
+    formMessage.style.display = "block";
+
+  }finally{
+
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = "1";
+    submitBtn.textContent = "Submit Enquiry ↗";
+
+  }
+
+});
+
+/* REDUCE ANIMATION FOR REDUCED-MOTION USERS */
+
+if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+
+  cancelAnimationFrame(animationFrame);
+
+  ctx.clearRect(0,0,canvasWidth,canvasHeight);
+
+}
 </script>
 
 </body>
